@@ -292,3 +292,57 @@ def garment(gid):
 def title(gid):
     g = GARMENTS[gid]
     return "%s %s" % (g["brand"], g["name"])
+
+
+# --------------------------------------------------------------------------
+# Presentation
+# --------------------------------------------------------------------------
+# Photography is kept out of the garment records above, which hold measurements
+# only. Images are from Unsplash and are illustrative of the category; they are
+# not photographs of the specific garments described here.
+
+IMAGES = {
+    "g_biba_kurta":        ("photo-1766994063823-ed214f883548", "woman in a floral print navy kurta"),
+    "g_mh_shirtdress":     ("photo-1760287363750-1c888c75578f", "blue button-up shirt dress"),
+    "g_hm_ribbed":         ("photo-1761121317492-57feee4fc674", "fitted red ribbed top"),
+    "g_zara_blazer":       ("photo-1590588503756-08a4b2be5eb9", "white structured blazer"),
+    "g_levis_711":         ("photo-1714143136372-ddaf8b606da7", "blue skinny jeans on a white background"),
+    "g_w_palazzo":         ("photo-1762331224129-783a3ea1fc3f", "woman in solid black wide trousers"),
+    "w_levis_314":         ("photo-1602293589930-45aad59ba3ab", "blue straight jeans on a hanger"),
+    "w_only_wideleg":      ("photo-1475178626620-a4d074967452", "woman wearing wide leg jeans"),
+    "w_vh_trousers":       ("photo-1594938252461-e42450664907", "tapered formal trousers with a belt"),
+    "w_w_palazzo2":        ("photo-1781021110763-4c822884316d", "woman in printed flared trousers"),
+    "w_libas_anarkali":    ("photo-1768478701597-bfcb51cd6cc2", "woman in a patterned anarkali kurta"),
+    "w_hm_oversized":      ("photo-1596755094514-f87e34085b2c", "oversized poplin shirt on a hanger"),
+    "w_zara_midi":         ("photo-1704775983177-8ae543524081", "woman in a dark ribbed midi dress"),
+    "w_anouk_lehenga":     ("photo-1767955694884-d4bf352c23c2", "ornate yellow and maroon lehenga"),
+    "g_roadster_puffer":   ("photo-1578964046312-69d266a3e739", "black hooded puffer jacket"),
+    "g_vh_formal_shirt":   ("photo-1770058428099-f2d64ab34006", "light blue collared formal shirt"),
+    "g_allen_solly_shirt": ("photo-1776838103951-993ff1ffc916", "tan collared slim shirt on a hanger"),
+    "g_hrx_tshirt":        ("photo-1571455786673-9d9d6c194f90", "black crew neck training tee"),
+    "g_levis_505":         ("photo-1605518215584-5ba74df5dfd8", "folded blue denim jeans"),
+    "w_hrx_windcheater":   ("photo-1571867424485-369464ed33cc", "lightweight colour block windcheater"),
+    "w_zara_slimshirt":    ("photo-1758600588319-fa4097ee5208", "man in a slim blue textured shirt"),
+    "w_mh_casual_shirt":   ("photo-1782227282777-31e421d02eaf", "checked flannel shirts on a rail"),
+    "w_us_polo_shirt":     ("photo-1781145822880-ab30339ac274", "man in a white oxford shirt"),
+    "w_levis_512":         ("photo-1629244032690-1c243449f90a", "man in slim blue denim jeans"),
+    "w_vh_chinos":         ("photo-1591078771377-d06325f68465", "man in slim grey chinos"),
+    "w_hm_overshirt":      ("photo-1545273072-c541efad6ba6", "relaxed grey long sleeve overshirt"),
+}
+
+FALLBACK_IMAGE = ("photo-1523381294911-8d3cead13475", "clothing on a rail")
+
+
+def image(gid, w=600, h=800):
+    pid, alt = IMAGES.get(gid, FALLBACK_IMAGE)
+    url = ("https://images.unsplash.com/%s?w=%d&h=%d&fit=crop&crop=entropy&q=80"
+           % (pid, w, h))
+    return url, alt
+
+
+def pricing(gid):
+    """A stable list price and discount, so the storefront reads like a storefront."""
+    price = GARMENTS[gid]["price"]
+    pct = 30 + (sum(ord(c) for c in gid) % 4) * 10
+    mrp = int(round(price / (1.0 - pct / 100.0) / 10.0) * 10) - 1
+    return price, mrp, pct

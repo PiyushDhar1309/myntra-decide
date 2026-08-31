@@ -157,11 +157,15 @@ turn it on, uncomment `google-generativeai` in `requirements.txt` and set
 | `catalog.py` | Seeded garments, past orders and wishlists for two shoppers |
 | `fit_engine.py` | Envelopes, verdicts, confidence, the unlock ranking |
 | `narrate.py` | Deterministic sentences, plus the optional Gemini layer |
+| `styles.py` | Stylesheet, product imagery, range bars |
 | `app.py` | The Streamlit app |
 | `test_engine.py` | Invariants of the engine |
 
 ---
 
-Case-study prototype. Not affiliated with Myntra. The catalog and order history
-are illustrative; the fit engine is real — change the profile and every verdict
-recomputes.
+Case-study prototype. Not affiliated with Myntra, and not endorsed by any brand
+named in the catalog. The catalog and order history are illustrative; the fit
+engine is real — change the profile and every verdict recomputes.
+
+Photography from [Unsplash](https://unsplash.com), used under the Unsplash
+licence. Images illustrate the garment category, not the specific garment.

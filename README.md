@@ -146,8 +146,10 @@ streamlit run app.py
 python test_engine.py     # engine invariants
 ```
 
-Set `GEMINI_API_KEY` as an environment variable or in `.streamlit/secrets.toml`
-to turn on the prose layer. Without it the app runs fully, with its own writing.
+The prose layer is off by default and the app is complete without it — every
+verdict, number, bar and explanation is written by the deterministic layer. To
+turn it on, uncomment `google-generativeai` in `requirements.txt` and set
+`GEMINI_API_KEY` as an environment variable or in `.streamlit/secrets.toml`.
 
 | File | |
 |---|---|

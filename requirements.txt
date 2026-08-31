@@ -1,2 +1,6 @@
 streamlit>=1.45
-google-generativeai>=0.8
+
+# Optional. The app runs fully without it, writing its own explanations.
+# To turn on the Gemini prose layer, uncomment the line below and set
+# GEMINI_API_KEY in the Streamlit Cloud secrets panel.
+# google-generativeai>=0.8

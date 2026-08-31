@@ -21,6 +21,33 @@ NAV = [("⌂  Home", "Home"), ("♡  Wishlist", "Wishlist"), ("◍  My fit profi
 CATEGORY_TABS = ["Men", "Women", "Kids", "Home & Living", "Beauty", "Studio"]
 
 
+def go(page):
+    st.session_state.page = page
+
+
+def reset_edits():
+    st.session_state.extra = {}
+    st.session_state.added = {}
+
+
+def apply_measurement(gid, dim, field):
+    st.session_state.extra[(gid, dim)] = float(st.session_state[field])
+
+
+def add_garment():
+    gid = st.session_state.add_gid
+    verdict = st.session_state.add_verdict
+    where = list(st.session_state.add_dims)
+    if verdict != "perfect" and not where:
+        st.session_state.add_error = ("Tell us which measurement is wrong, "
+                                      "or there is nothing to learn from.")
+        return
+    st.session_state.add_error = None
+    st.session_state.added.setdefault(st.session_state.persona, []).append(
+        {"garment": gid, "size": st.session_state.add_size, "verdict": verdict,
+         "dims": where, "note": "Added by you."})
+
+
 def boot():
     st.session_state.setdefault("persona", "ananya")
     st.session_state.setdefault("extra", {})
@@ -59,16 +86,27 @@ def header():
             % "".join('<a class="%s">%s</a>' % ("on" if c == "Women" else "", c)
                       for c in CATEGORY_TABS),
             unsafe_allow_html=True)
+        # Callbacks, never st.rerun() here. st.rerun() would abort the script
+        # before the widgets further down this function had rendered, and
+        # Streamlit discards the stored value of any widget it did not see on a
+        # run - which silently reset the shopper on every navigation.
         for i, (label, page) in enumerate(NAV):
             kind = "primary" if st.session_state.page == page else "secondary"
-            if cols[2 + i].button(label, key="nav_%s" % page, type=kind,
-                                  use_container_width=True):
-                st.session_state.page = page
-                st.rerun()
+            cols[2 + i].button(label, key="nav_%s" % page, type=kind,
+                               use_container_width=True, on_click=go, args=(page,))
 
+    # The shopper switcher and reset sit on the page, not in the sidebar. A
+    # control the demo depends on should never be behind a collapsed panel.
     with st.container(key="mxsearch"):
-        q = st.text_input("Search", placeholder="Search for products, brands and more",
-                          label_visibility="collapsed")
+        c = st.columns([4.5, 1.9, 1.4], vertical_alignment="bottom")
+        q = c[0].text_input("Search", placeholder="Search for products, brands and more",
+                            label_visibility="collapsed")
+        c[1].selectbox("Try it as", list(PERSONAS), key="persona",
+                       format_func=lambda k: "%s · %s" % (PERSONAS[k]["name"],
+                                                          PERSONAS[k]["segment"]))
+        dirty = bool(st.session_state.extra or st.session_state.added)
+        c[2].button("Reset my edits", use_container_width=True, disabled=not dirty,
+                    on_click=reset_edits)
     st.markdown('<div class="mx-rule"></div>', unsafe_allow_html=True)
     return (q or "").strip().lower()
 
@@ -205,14 +243,14 @@ def unlock_block(rv, where):
            u["label"].lower(), why),
         unsafe_allow_html=True)
 
+    field = "measure_%s" % where
     with st.form("unlock_%s" % where, border=False):
         c1, c2 = st.columns([3, 2], vertical_alignment="bottom")
-        val = c1.number_input('%s of your %s, in inches' % (u["label"], ref),
-                              min_value=4.0, max_value=60.0, value=30.5, step=0.5)
-        if c2.form_submit_button("Use this measurement", type="primary",
-                                 use_container_width=True):
-            st.session_state.extra[(src["garment"], u["dim"])] = float(val)
-            st.rerun()
+        c1.number_input('%s of your %s, in inches' % (u["label"], ref),
+                        min_value=4.0, max_value=60.0, value=30.5, step=0.5, key=field)
+        c2.form_submit_button("Use this measurement", type="primary",
+                              use_container_width=True, on_click=apply_measurement,
+                              args=(src["garment"], u["dim"], field))
     return True
 
 
@@ -347,21 +385,16 @@ def page_profile(p, rv):
     options = sorted((gid for gid in GARMENTS if gid not in owned), key=title)
     with st.form("addgarment", border=False):
         c1, c2, c3 = st.columns([4, 1.4, 2.2])
-        gid = c1.selectbox("Garment", options, format_func=title)
-        size = c2.selectbox("Size", list(GARMENTS[gid]["sizes"]))
-        verdict = c3.selectbox("How does it fit?", list(VERDICT_WORDS),
-                               format_func=lambda v: VERDICT_WORDS[v][0])
-        where = st.multiselect("Where, if it is not perfect",
-                               CATEGORIES[GARMENTS[gid]["category"]]["critical"],
-                               format_func=lambda d: DIMENSIONS[d]["label"])
-        if st.form_submit_button("Add to my profile", type="primary"):
-            if verdict != "perfect" and not where:
-                st.warning("Tell us which measurement is wrong, or there is nothing to learn from.")
-            else:
-                st.session_state.added.setdefault(st.session_state.persona, []).append(
-                    {"garment": gid, "size": size, "verdict": verdict,
-                     "dims": list(where), "note": "Added by you."})
-                st.rerun()
+        gid = c1.selectbox("Garment", options, format_func=title, key="add_gid")
+        c2.selectbox("Size", list(GARMENTS[gid]["sizes"]), key="add_size")
+        c3.selectbox("How does it fit?", list(VERDICT_WORDS), key="add_verdict",
+                     format_func=lambda v: VERDICT_WORDS[v][0])
+        st.multiselect("Where, if it is not perfect",
+                       CATEGORIES[GARMENTS[gid]["category"]]["critical"], key="add_dims",
+                       format_func=lambda d: DIMENSIONS[d]["label"])
+        st.form_submit_button("Add to my profile", type="primary", on_click=add_garment)
+    if st.session_state.get("add_error"):
+        st.warning(st.session_state.add_error)
 
     st.markdown('<div class="mx-sec">What we now know about your body</div>'
                 '<div class="mx-note">Not your measurements — the <i>garment</i> measurements '
@@ -389,25 +422,8 @@ def page_profile(p, rv):
 
 # --------------------------------------------------------------------------
 
-def sidebar():
-    with st.sidebar:
-        st.markdown("**Try it as**")
-        st.radio("Shopper", list(PERSONAS), key="persona",
-                 format_func=lambda k: "%s · %s" % (PERSONAS[k]["name"], PERSONAS[k]["segment"]))
-        st.caption(PERSONAS[st.session_state.persona]["blurb"])
-        st.divider()
-        if st.session_state.extra or st.session_state.added:
-            if st.button("Reset what I've added", use_container_width=True):
-                st.session_state.extra = {}
-                st.session_state.added = {}
-                st.rerun()
-        st.caption("Two shoppers from the user research: a petite one who stalls on length, "
-                   "and a tall, broad one who stalls on chest, sleeve and fabric.")
-
-
 def main():
     boot()
-    sidebar()
     query = header()
     p = persona()
     rv = fe.review_wishlist(p, dict(st.session_state.extra))

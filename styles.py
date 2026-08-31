@@ -71,8 +71,10 @@ html, body, [class*="css"], .stApp, button, input { font-family: 'Assistant', -a
 .stApp { background: #fff; }
 .block-container { max-width: 1000px; padding-top: .6rem; padding-bottom: 4rem; }
 #MainMenu, footer { visibility: hidden; height: 0; }
-header[data-testid="stHeader"] { background: transparent; height: 0; }
-section[data-testid="stSidebar"] { border-right: 1px solid #eaeaec; }
+/* Faded, never zero-height: the collapsed-sidebar control lives in here, and
+   collapsing the header to nothing takes that control with it. */
+header[data-testid="stHeader"] { background: transparent; }
+header[data-testid="stHeader"] [data-testid="stToolbar"] { display: none; }
 
 /* ---------- storefront header ---------- */
 .mx-logo { font-weight: 800; font-size: 25px; letter-spacing: .01em; color: #282c3f; line-height: 1; }
@@ -98,6 +100,12 @@ section[data-testid="stSidebar"] { border-right: 1px solid #eaeaec; }
 .st-key-mxsearch input { background:#f5f5f6 !important; border:1px solid #f5f5f6 !important;
     border-radius:4px !important; font-size:14px !important; padding:11px 14px !important; }
 .st-key-mxsearch input::placeholder { color:#94969f; }
+.st-key-mxsearch div[data-baseweb="select"] > div { background:#f5f5f6 !important;
+    border-color:#f5f5f6 !important; border-radius:4px !important; }
+.st-key-mxsearch button { border:1px solid #eaeaec !important; background:#fff !important;
+    color:#282c3f !important; font-size:12.5px !important; font-weight:700 !important; }
+.st-key-mxsearch label { font-size:11px !important; color:#94969f !important;
+    font-weight:700 !important; letter-spacing:.06em; text-transform:uppercase; }
 
 /* ---------- hero ---------- */
 .mx-hero { border:1px solid #eaeaec; border-radius:10px; padding:24px 26px; margin-bottom:6px;

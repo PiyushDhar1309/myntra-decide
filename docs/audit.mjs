@@ -262,6 +262,46 @@ check("the two-at-a-time button is a filled button, not a ghost", !!q(".cmpbar .
 check("and a card explains what it does", !!q(".tip") && txt().includes("Two at a time is easy"));
 sweep("compare");
 
+head("KEEPING MORE THAN ONE");
+click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
+click("[data-cmpsub]");
+{
+  const btns = all("#screen .pickbtn").length;
+  click(all("#screen .pickbtn")[0]);
+  click(all("#screen .pickbtn")[1]);
+  check("two can be picked at once", n(".pickbtn.on") === 2, "got " + n(".pickbtn.on"));
+  check("the bar counts them", txt().includes("2 picked"));
+  click(all("#screen .pickbtn")[1]);
+  check("and un-picked again", n(".pickbtn.on") === 1);
+  click(all("#screen .pickbtn")[1]);
+  click('[data-act="donepicks"]');
+  check("keeping two still asks about the rest",
+        $("sheet").textContent.includes(`Remove the other ${btns - 2}`),
+        $("sheet").textContent.slice(0, 70));
+  check("and offers to bag both", $("sheet").textContent.includes("Move all 2 to bag"));
+  click('[data-act="bagpicked"]');
+  check("bagging both works", $("topbar").textContent.includes("2"));
+}
+
+head("KEEPING EVERYTHING IS NOT A DECISION");
+click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
+click("[data-cmpsub]");
+{
+  const btns = all("#screen .pickbtn");
+  btns.forEach((b, i) => click(all("#screen .pickbtn")[i]));
+  check("picking every item is allowed", n(".pickbtn.on") === btns.length);
+  check("but the bar says nothing was decided", txt().includes("nothing decided yet"));
+  click('[data-act="donepicks"]');
+  check("and the sheet says so plainly", $("sheet").textContent.includes("You kept all of them"));
+  check("refusing to call it decided", $("sheet").textContent.includes("don't count this one as decided"));
+  check("with nothing to remove offered", !$("sheet").querySelector('[data-act="removeothers"]'));
+  click('[data-act="keepall"]');
+}
+// Put the collection comparison back, since the sections below start from it.
+click('[data-tab="wishlist"]'); click('[data-wtab="cols"]');
+click('.colcard[data-col="c1"]');
+click('[data-act="compare"]');
+
 head("TOURNAMENT");
 click('[data-act="tournament"]');
 check("tournament opens two at a time", n(".vscard") === 2);
@@ -278,7 +318,10 @@ check("reopening restores all six", n(".grid:not(.parked) .pc") === 6, "got " + 
 head("PICK DIRECTLY FROM THE TABLE");
 click('[data-act="compare"]');
 click("#screen .pickbtn");
-check("picking resolves it", txt().includes("You picked one"));
+check("picking marks the column rather than ending it", !!q(".pickbtn.on") && !!q(".pickbar"));
+check("and invites another", $("screen").textContent.includes("Tap Pick on another"));
+click('[data-act="donepicks"]');
+check("Done resolves it", txt().includes("You picked one"));
 check("five are parked", txt().includes("Parked (5)"));
 click('[data-act="unpark"]');
 check("moving them back reopens the decision", n(".grid:not(.parked) .pc") === 6 && !!q('[data-act="compare"]'));
@@ -386,6 +429,7 @@ check("comparing what was picked", !!q(".cmp") && all("#screen .cmp thead th").l
 
 head("PICK, THEN BE ASKED ABOUT THE REST");
 click("#screen .pickbtn");
+click('[data-act="donepicks"]');
 check("it asks before removing anything", $("sheet").textContent.includes("Remove the other 2"));
 check("and explains why", $("sheet").textContent.includes("decision stays open"));
 click('[data-act="keepall"]');
@@ -395,6 +439,7 @@ const picks2 = all("#screen .pc").slice(0, 3).map(el => el.dataset.toggle);
 picks2.forEach(id => click(`#screen .pc[data-toggle="${id}"]`));
 click('[data-act="docompare"]');
 click("#screen .pickbtn");
+click('[data-act="donepicks"]');
 click('[data-act="removeothers"]');
 check("removing drops exactly the losers", n(".pc") === wishN - 2, `${n(".pc")} vs ${wishN - 2}`);
 check("selection mode is over", !q(".selbar"));

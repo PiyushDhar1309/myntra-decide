@@ -27,7 +27,7 @@ const state = {
   cat: null, sub: null, sort: "recommended", tab: "items",
   collection: null, cmpIds: [], cmpAll: false, tour: null,
   query: "", dismissed: [], introSeen: false,
-  selecting: false, selected: [], cmpFrom: null, pendingPick: null, tips: [],
+  selecting: false, selected: [], cmpFrom: null, pendingPick: null, tips: [], picked: [],
   coach: null,
 };
 
@@ -362,14 +362,18 @@ function compareScreen() {
   const { differs } = de.diff(ids);
   const shown = state.cmpAll ? differs : differs.slice(0, 4);
 
-  const head = ids.map(id => `<th><img class="ph" src="${photo(id, 140, 187)}" alt="">
+  const on = id => state.picked.includes(id);
+  const head = ids.map(id => `<th class="${on(id) ? "picked" : ""}">
+    <img class="ph" src="${photo(id, 140, 187)}" alt="">
     <div class="bname">${esc(P(id).brand)}</div>
-    <button class="pickbtn" data-pick="${id}">Pick</button></th>`).join("");
+    <button class="pickbtn ${on(id) ? "on" : ""}" data-pick="${id}">${
+      on(id) ? "\u2713 Picked" : "Pick"}</button></th>`).join("");
 
   const body = shown.map(d => {
     const winners = de.bestOn(ids, d.attr);
     return `<tr><td class="rowlab">${d.attr.label}</td>${ids.map(id =>
-      `<td class="${winners.includes(id) ? "win" : ""}">${esc(d.values[id])}</td>`).join("")}</tr>`;
+      `<td class="${winners.includes(id) ? "win " : ""}${on(id) ? "pickedcol" : ""}">${
+        esc(d.values[id])}</td>`).join("")}</tr>`;
   }).join("");
 
   return `<div class="cmphead">
@@ -393,10 +397,22 @@ function compareScreen() {
         <p>Picking one out of ${ids.length} is hard — that's why the list has sat there. Two at a
         time is easy. ${ids.length - 1} quick either-or picks and you're done.</p></div>
     </div>
-    <div class="cmpbar">
-      <button class="tourbtn" data-act="tournament">
-        <span class="ms">compare_arrows</span>Compare two at a time</button>
-    </div>`;
+    ${state.picked.length ? `<div class="pickbar">
+        <div class="top">
+          <div class="thumbs">${state.picked.map(i => `<img src="${photo(i, 90, 120)}" alt="">`).join("")}</div>
+          <div class="n">${state.picked.length} picked<small>${
+            state.picked.length === ids.length ? "That's all of them — nothing decided yet"
+                                               : "Tap Pick on another to add it"}</small></div>
+        </div>
+        <div class="acts">
+          <button class="bagb" data-act="bagpicked">Move to bag</button>
+          <button class="doneb" data-act="donepicks">Done</button>
+        </div>
+      </div>`
+      : `<div class="cmpbar">
+        <button class="tourbtn" data-act="tournament">
+          <span class="ms">compare_arrows</span>Compare two at a time</button>
+      </div>`}`;
 }
 
 function tournamentScreen() {
@@ -575,25 +591,38 @@ function itemSheet(id) {
 // a collection, which only worked if a collection already existed.
 function removeOthersSheet() {
   const { keep, others } = state.pendingPick;
+  const kept = keep.length;
+  const row = id => `<div style="display:flex;gap:11px;align-items:center;padding:9px 0">
+    <img src="${photo(id, 110, 147)}" alt="" style="width:44px;border-radius:4px">
+    <div style="flex:1;min-width:0"><div class="brand">${esc(P(id).brand)}</div>
+      <div class="pname">${esc(P(id).name)}</div></div>
+    <div style="font-size:12.5px;font-weight:700">${rupees(P(id).price)}</div></div>`;
+
+  // Keeping everything is not a decision, and the product should not pretend it
+  // is. The metric does not count it either.
+  const nothingCut = others.length === 0;
+
   return `<div class="handle"></div>
     <div style="padding:6px 16px 4px">
-      <div class="sec">You picked</div>
-      <div style="display:flex;gap:12px;align-items:center;margin-top:11px">
-        <img src="${photo(keep, 120, 160)}" alt="" style="width:52px;border-radius:4px">
-        <div><div class="brand">${esc(P(keep).brand)}</div>
-          <div class="pname">${esc(P(keep).name)}</div>${priceHTML(keep)}</div>
-      </div>
-      <div style="font-size:14px;font-weight:800;margin-top:20px">Remove the other ${others.length} from your wishlist?</div>
-      <div style="font-size:12.5px;color:var(--sec);margin-top:5px;line-height:1.6">You were choosing
-        between them, so keeping them means the decision stays open. Nothing is deleted from the
-        store — you can save them again any time.</div>
-      <div style="display:flex;gap:9px;margin-top:10px;overflow-x:auto;padding:4px 0">${
-        others.map(i => `<img src="${photo(i, 90, 120)}" alt="" style="width:44px;border-radius:4px;flex:none">`).join("")}</div>
-      <div style="display:flex;gap:9px;margin-top:16px">
-        <button class="btn ghost" style="flex:1" data-act="keepall">Keep them</button>
-        <button class="btn" style="flex:1" data-act="removeothers">Remove ${others.length}</button>
-      </div>
-      <button class="btn ghost wide" style="margin-top:9px" data-act="bag" data-g="${keep}">Move to bag</button>
+      <div class="sec">You kept ${kept === 1 ? "this one" : `these ${kept}`}</div>
+      ${keep.map(row).join("")}
+      ${nothingCut
+        ? `<div class="keptall"><b>You kept all of them</b>
+             <p>Which is fine — but the decision is still open and your wishlist is the same size
+             it was. We don't count this one as decided.</p></div>
+           <div style="margin-top:16px"><button class="btn wide" data-act="keepall">Back to it</button></div>`
+        : `<div style="font-size:14px;font-weight:800;margin-top:18px">Remove the other ${others.length} from your wishlist?</div>
+           <div style="font-size:12.5px;color:var(--sec);margin-top:5px;line-height:1.6">You were
+             choosing between them, so keeping them means the decision stays open. Nothing is
+             deleted from the store — you can save them again any time.</div>
+           <div style="display:flex;gap:9px;margin-top:10px;overflow-x:auto;padding:4px 0">${
+             others.map(i => `<img src="${photo(i, 90, 120)}" alt="" style="width:42px;border-radius:4px;flex:none">`).join("")}</div>
+           <div style="display:flex;gap:9px;margin-top:16px">
+             <button class="btn ghost" style="flex:1" data-act="keepall">Keep them</button>
+             <button class="btn" style="flex:1" data-act="removeothers">Remove ${others.length}</button>
+           </div>`}
+      <button class="btn ghost wide" style="margin-top:9px" data-act="bagpicked">Move ${
+        kept === 1 ? "it" : `all ${kept}`} to bag</button>
     </div>`;
 }
 
@@ -923,7 +952,11 @@ document.addEventListener("click", ev => {
     state.bag[i].qty = Math.max(1, state.bag[i].qty + delta);
     render(); return;
   }
-  if (d.pick) { resolve(d.pick); return; }
+  if (d.pick) {
+    const i = state.picked.indexOf(d.pick);
+    if (i >= 0) state.picked.splice(i, 1); else state.picked.push(d.pick);
+    render(); return;
+  }
   if (d.win) {
     // Each round consumes exactly one challenger from the pool, whether or not
     // it won. Filtering the winner out as well would silently drop a contestant.
@@ -936,7 +969,7 @@ document.addEventListener("click", ev => {
   }
 
   switch (d.act) {
-    case "back": back(); break;
+    case "back": state.picked = []; back(); break;
     case "go-wishlist": state.tab = "items"; go("wishlist"); break;
     case "orders": go("orders"); break;
     case "search": state.query = ""; state.sub = null; go("shop"); break;
@@ -947,6 +980,24 @@ document.addEventListener("click", ev => {
     case "hideintro": state.introSeen = true; render(); break;
     case "guide": openSheet(guideSheet()); break;
     case "tour": state.introSeen = true; startTour(); break;
+    case "donepicks":
+      if (!state.picked.length) { toast("Pick at least one"); break; }
+      resolve([...state.picked]); break;
+    case "bagpicked": {
+      const list = state.pendingPick ? state.pendingPick.keep : state.picked;
+      let added = 0;
+      list.forEach(id => {
+        const size = (P(id).sizes.find(x => x.inStock) || {}).label;
+        if (!state.bag.some(b => b.id === id && b.size === size)) {
+          state.bag.push({ id, size, qty: 1 }); added++;
+        }
+      });
+      if (state.pendingPick) { closeSheet(); state.pendingPick = null; state.picked = []; }
+      else state.picked = [];
+      render();
+      toast(added ? `${added} moved to bag` : "Already in your bag");
+      break;
+    }
     case "tournext": state.coach++; applyTourStep(); break;
     case "tourskip": endTour(); toast("Have a look around. Tap ? any time."); break;
     case "startsel": state.selecting = true; state.selected = []; render(); break;
@@ -1027,19 +1078,22 @@ document.addEventListener("click", ev => {
 // Picking a winner ends the decision. The others are parked inside the
 // collection - kept, not deleted - because elimination only happens when it
 // does not feel like loss.
-function resolve(id) {
-  const others = state.cmpIds.filter(x => x !== id);
+// Finish a comparison with one or more keepers. Nothing is removed without being
+// asked, and keeping everything is treated as what it is - not a decision.
+function resolve(keep) {
+  const kept = Array.isArray(keep) ? keep : [keep];
+  const others = state.cmpIds.filter(x => !kept.includes(x));
   state.tour = null;
+  state.picked = [];
 
   if (state.cmpFrom === "collection") {
     const c = collection(state.collection);
-    if (c) { c.parked = [...c.parked, ...others]; c.items = [id]; c.decided = id; }
+    if (c) { c.parked = [...c.parked, ...others]; c.items = [...kept]; c.decided = kept[0]; }
     go("collection");
-    toast("Decided. The rest are parked, not deleted.");
+    toast(others.length ? "Decided. The rest are parked, not deleted." : "Kept all of them.");
     return;
   }
-  // From the wishlist: ask before removing anything.
-  state.pendingPick = { keep: id, others };
+  state.pendingPick = { keep: kept, others };
   state.selecting = false; state.selected = [];
   go("wishlist");
   openSheet(removeOthersSheet());

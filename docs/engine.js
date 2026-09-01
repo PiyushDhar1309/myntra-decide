@@ -367,6 +367,32 @@ function measurableSource(persona, key, dim, extra) {
   return { garment: e.garment, size: e.size, unresolved: e.unresolved, verdict: e.verdict };
 }
 
+// Which size to recommend, for any garment, whether or not it is saved.
+//
+// Ranking is the same as recommend(): fewest failures first, then confidence,
+// then fewest unmeasured dimensions. What it adds is honesty about the strength
+// of the recommendation, because "size 26" said flatly is a promise the
+// evidence may not support - and when every size crosses a limit this shopper
+// has already hit, the useful answer is that none of them work.
+export function bestSize(gid, ctx) {
+  const sizes = Object.keys(GARMENTS[gid].sizes);
+  const all = {};
+  for (const s of sizes) all[s] = judge(gid, s, ctx);
+  const rank = j => [j.fails.length, -j.confidence, j.blocked.length];
+  const sorted = sizes.slice().sort((a, b) => {
+    const x = rank(all[a]), y = rank(all[b]);
+    for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] - y[i];
+    return 0;
+  });
+  const size = sorted[0], judgement = all[size];
+  return {
+    size, judgement, all, sizes,
+    none: judgement.status === WRONG_SIZE,   // every size crosses a known limit
+    sure: judgement.status === FITS,
+    only: sizes.length === 1,
+  };
+}
+
 // The measurement that would settle one specific garment, for a product page
 // where that garment may not be on the wishlist at all. Returns null when the
 // blocker is the brand's missing data, because that is not the shopper's to fix.

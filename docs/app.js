@@ -169,6 +169,84 @@ function fitExtras(row, rv, p) {
   return alt + (ask ? measureAsk(ask) : "") + gap + foot;
 }
 
+function sentenceList(words) {
+  if (!words.length) return "";
+  const w = words.map((x, i) => i ? x : x[0].toUpperCase() + x.slice(1));
+  return w.length === 1 ? w[0] : w.slice(0, -1).join(", ") + " and " + w[w.length - 1];
+}
+
+// Why we are recommending this size, from the findings themselves.
+//
+// Two sentences at most: what is settled, then the single most important thing
+// that is not. A dimension that is merely flagged still gets said out loud - a
+// midi dress is not a failed mini, but "everything sits inside what fits you"
+// would be a lie while its hem runs seven inches longer than anything she owns.
+function recReason(j, gid, ctx) {
+  if (j.status === fe.WRONG_SIZE) {
+    const f = j.fails[0];
+    const ev = fe.decidingEvidence(gid, f, ctx);
+    return `The ${f.label.toLowerCase()} runs ${fe.inches(f.delta)} past what has worked on you`
+      + (ev ? `, set by your ${title(ev.garment)}.` : ".");
+  }
+
+  const settled = j.findings
+    .filter(f => f.code === fe.OK || f.code === fe.CLEARS || f.code === fe.INTENDED)
+    .map(f => f.label.toLowerCase());
+  const flagged = j.findings.filter(f => f.code === fe.SNUG || f.code === fe.ROOMY);
+  const blocked = j.blocked[0];
+
+  let caveat = "";
+  if (blocked) {
+    caveat = blocked.code === fe.UNPUBLISHED
+      ? `${GARMENTS[gid].brand} does not publish the ${blocked.label.toLowerCase()}.`
+      : `The ${blocked.label.toLowerCase()} is still unknown.`;
+  } else if (flagged.length) {
+    const f = flagged[0];
+    const isLength = fe.DIMENSIONS[f.dim].kind === "length";
+    const dir = f.code === fe.ROOMY ? (isLength ? "longer" : "wider")
+                                    : (isLength ? "shorter" : "tighter");
+    const ev = fe.decidingEvidence(gid, f, ctx);
+    caveat = `The ${f.label.toLowerCase()} runs ${fe.inches(f.delta)} ${dir} than `
+      + (ev ? `your ${title(ev.garment)}.` : "anything you own.");
+  }
+
+  if (!settled.length) return caveat || "Nothing you own settles this one yet.";
+  const verb = settled.length === 1 ? "checks out" : "check out";
+  const lead = caveat ? `${sentenceList(settled)} ${verb}.`
+                      : `${sentenceList(settled)} all sit inside what already fits you.`;
+  return caveat ? `${lead} ${caveat}` : lead;
+}
+
+// The recommendation itself. Every product gets one - including the honest
+// answer that no size in the range will work, which is the one a size chart
+// will never give you.
+function recBox(best, shown, gid, ctx) {
+  const j = best.judgement;
+  let icon, colour, tint, headline;
+
+  if (best.none) {
+    [icon, colour, tint] = ["cancel", "var(--red)", "#fdeaea"];
+    headline = best.only ? "This will not fit you" : "No size here will fit you";
+  } else if (best.only) {
+    [icon, colour, tint] = j.status === fe.FITS
+      ? ["check_circle", "var(--green)", "#e6f6f1"] : ["help", "var(--slate)", "#eef1f8"];
+    headline = j.status === fe.FITS ? "This size fits you" : "Only one size, and we cannot be sure";
+  } else if (best.sure) {
+    [icon, colour, tint] = ["check_circle", "var(--green)", "#e6f6f1"];
+    headline = `We recommend size ${best.size}`;
+  } else {
+    [icon, colour, tint] = ["help", "var(--slate)", "#eef1f8"];
+    headline = `Size ${best.size} is your closest fit`;
+  }
+
+  const switchTo = (!best.only && !best.none && shown !== best.size)
+    ? `<span class="sw" data-size="${best.size}">Switch to size ${best.size} →</span>` : "";
+
+  return `<div class="recbox" style="border-color:${colour}33;background:${tint}">
+    <span class="ms" style="color:${colour}">${icon}</span>
+    <div><b>${headline}</b>${esc(recReason(j, gid, ctx))}${switchTo}</div></div>`;
+}
+
 function evaluate(gid, size, ctx) {
   const r = fe.recommend(gid, size, ctx);
   return { gid, size, days: 0, result: r.current, alt: r.alt };
@@ -272,9 +350,11 @@ function wishlistScreen(rv) {
 function productScreen(rv) {
   const p = persona();
   const gid = state.product, g = GARMENTS[gid];
-  const sizes = Object.keys(g.sizes);
-  const size = state.productSize && g.sizes[state.productSize] ? state.productSize : sizes[0];
-  const all = fe.recommend(gid, size, rv.ctx).all;
+  const best = fe.bestSize(gid, rv.ctx);
+  const sizes = best.sizes;
+  // Land on the size we would recommend, unless the shopper arrived with one.
+  const size = state.productSize && g.sizes[state.productSize] ? state.productSize : best.size;
+  const all = best.all;
   const row = evaluate(gid, size, rv.ctx);
   const b = fe.badge(row.result);
   const saved = p.wishlist.some(w => w.garment === gid);
@@ -282,7 +362,10 @@ function productScreen(rv) {
 
   const chips = sizes.map(s => {
     const t = fe.badge(all[s]).tone;
-    return `<button class="szchip${s === size ? " on" : ""}" data-size="${s}">${s}
+    const cls = [s === size ? "on" : "",
+                 (!best.only && !best.none && s === best.size) ? "rec" : "",
+                 all[s].status === fe.WRONG_SIZE ? "dead" : ""].filter(Boolean).join(" ");
+    return `<button class="szchip ${cls}" data-size="${s}">${s}
       <i style="background:${TONE_BG[t]}"></i></button>`;
   }).join("");
 
@@ -296,10 +379,11 @@ function productScreen(rv) {
       <div style="font-size:11.5px;color:var(--green);font-weight:700;margin-top:6px">inclusive of all taxes</div>
     </div>
 
-    <div class="sect"><span class="sec">Select size</span>
+    <div class="sect">
+      <div class="sechead"><span class="sec">Select size</span>
+        <button class="more" data-act="chart" data-g="${gid}">SIZE CHART</button></div>
       <div class="sizes">${chips}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:10px">The dot on each size is what
-        Fit Check makes of it, from clothes you already own.</div>
+      ${recBox(best, size, gid, rv.ctx)}
     </div>
 
     <div class="sect"><span class="sec">Fit check · size ${size}</span>
@@ -490,6 +574,54 @@ function fitSheet(row, rv) {
     ${fitExtras(row, rv, persona())}`;
 }
 
+// The size chart Myntra shows you, with your own proven range along the bottom
+// and every cell coloured by what it means for this body.
+function chartSheet(gid, ctx) {
+  const g = GARMENTS[gid];
+  const best = fe.bestSize(gid, ctx);
+  const dims = fe.CATEGORIES[g.category].critical;
+  const CELL = {
+    [fe.OK]: "#e6f6f1", [fe.CLEARS]: "#e6f6f1", [fe.INTENDED]: "#eef1f8",
+    [fe.SNUG]: "#fdf2e3", [fe.ROOMY]: "#fdf2e3",
+    [fe.FAIL_SMALL]: "#fdeaea", [fe.FAIL_LARGE]: "#fdeaea",
+  };
+
+  const body = best.sizes.map(sz => {
+    const byDim = Object.fromEntries(best.all[sz].findings.map(f => [f.dim, f]));
+    return `<tr><td class="sz">${sz}${sz === best.size && !best.only && !best.none
+        ? ' <span style="color:var(--green);font-size:9px;font-weight:800">BEST</span>' : ""}</td>${
+      dims.map(d => {
+        const f = byDim[d];
+        const v = g.sizes[sz][d];
+        return `<td style="background:${(f && CELL[f.code]) || "transparent"}">${
+          v === undefined ? '<span style="color:var(--muted)">—</span>' : v.toFixed(1)}</td>`;
+      }).join("")}</tr>`;
+  }).join("");
+
+  const mine = dims.map(d => {
+    const e = ctx.env.get(fe.scopeOf(gid, d));
+    if (!e || !e.hasAny) return `<td><span style="color:var(--muted)">—</span></td>`;
+    if (e.bandLo !== null) return `<td>${e.bandLo.toFixed(1)}–${e.bandHi.toFixed(1)}</td>`;
+    if (e.hardHi !== null) return `<td>under ${e.hardHi.toFixed(1)}</td>`;
+    return `<td>over ${e.hardLo.toFixed(1)}</td>`;
+  }).join("");
+
+  return `<div class="handle"></div>
+    <div style="padding:6px 16px 12px">
+      <div class="sec">${esc(g.brand)} · size chart</div>
+      <div style="font-size:11.5px;color:var(--sec);margin-top:6px;line-height:1.6">Garment
+        measurements in inches, not body measurements. The last row is what has already been
+        proven to fit you.</div>
+    </div>
+    <div style="padding:0 16px 8px;overflow-x:auto">
+      <table class="chart"><thead><tr><th style="text-align:left">Size</th>${
+        dims.map(d => `<th>${fe.label(d, g.category)}</th>`).join("")}</tr></thead>
+      <tbody>${body}<tr class="you"><td class="sz">Fits you</td>${mine}</tr></tbody></table>
+    </div>
+    <div class="foot">A dash is a measurement the brand does not publish. We leave it blank
+      rather than estimate it.</div>`;
+}
+
 function personaSheet() {
   return `<div class="handle"></div>
     <div style="padding:6px 16px 4px"><div class="sec">View the prototype as</div></div>
@@ -670,6 +802,7 @@ document.addEventListener("click", ev => {
     case "go-wishlist": go("wishlist"); break;
     case "go-fitprofile": go("fitprofile"); break;
     case "orders": go("orders"); break;
+    case "chart": openSheet(chartSheet(t.dataset.g, rv.ctx)); break;
     case "search": state.query = ""; go("search"); break;
     case "bagpage": go("bag"); break;
     case "soon": toast("Not part of this prototype"); break;

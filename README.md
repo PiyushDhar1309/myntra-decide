@@ -133,11 +133,30 @@ A few rules the engine holds to, each covered by a test:
 Nine screens: home, shop, search, product, wishlist, bag, profile, orders and
 My Fit Profile.
 
-The **product page** is where the engine is most visible. Each size chip carries
-a dot coloured by what Fit Check makes of *that* size, so the Zara dress shows
-red on S and green on M before you tap anything. Below it sit the measurement
-bars, the reason, and either the one measurement that would settle it or a plain
-statement that the brand has not published what it would take.
+The **product page** is where the engine is most visible, and **every product
+gets a size recommendation** - the page opens on the size we would pick, tags it
+*BEST FIT*, and strikes through any size that crosses a limit this body has
+already hit. Below it sit the measurement bars, the reason, and either the one
+measurement that would settle it or a plain statement that the brand has not
+published what it would take.
+
+The recommendation is graded by what the evidence actually supports, which is
+the part a size chart cannot do:
+
+| | |
+|---|---|
+| *"We recommend size S"* | Everything that decides it is settled |
+| *"Size 26 is your closest fit"* | Hedged, and it names what is still missing |
+| *"No size here will fit you"* | Every size crosses a known limit — said plainly rather than pushing the least-bad one |
+
+A caveat is never dropped to make the sentence tidier. The Zara midi is
+recommended in M and still told that its hem runs 7.5" longer than the only
+dress she owns, because a midi is not a failed mini but staying quiet about it
+would be a lie.
+
+The **size chart** is the familiar Myntra one with a difference: the last row is
+the shopper's own proven range, every cell is tinted by what it means for them,
+and a measurement the brand never published shows a dash instead of an estimate.
 
 The **wishlist** is the feature: verdict badges, filters by state, and the
 measurement ask. **Orders** shows where the fit profile came from - what was

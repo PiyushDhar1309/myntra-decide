@@ -108,9 +108,60 @@ check("bottom tab bar is hidden on the product page", $("nav").style.display ===
 check("has a back arrow", !!q('[data-act="back"]'));
 sweep("product");
 
+head("SIZE RECOMMENDATION");
+// Every product must carry one, whatever the evidence supports.
+click('[data-tab="categories"]'); click('.chip[data-cat=""]');
+const shopIds = all("#screen .pc").map(e => e.dataset.open);
+let missing = [], noTag = [];
+for (const gid of shopIds) {
+  click('[data-tab="categories"]'); click('.chip[data-cat=""]');
+  click(`.pc[data-open="${gid}"]`);
+  if (!q(".recbox b")) missing.push(gid);
+  if (n(".szchip") > 1 && !q(".szchip.rec") && !/No size here/.test(txt())) noTag.push(gid);
+}
+check("every product in shop carries a recommendation", missing.length === 0, missing.join(", "));
+check("multi-size products mark a best fit (or say none works)", noTag.length === 0, noTag.join(", "));
+
+click('[data-tab="wishlist"]');
+click('.pc[data-open="w_libas_anarkali"]');
+check("a confident recommendation names the size", /We recommend size S/.test(txt()), txt().slice(0, 80));
+check("and lands on it by default", q(".szchip.on").textContent.trim().startsWith("S"));
+check("best fit is tagged", !!q(".szchip.rec"));
+
+click('[data-tab="wishlist"]');
+click('.pc[data-open="w_w_palazzo2"]');
+check("when nothing fits, it says so", txt().includes("No size here will fit you"));
+check("and every size is struck through", n(".szchip.dead") === n(".szchip"));
+check("no best-fit tag is invented", n(".szchip.rec") === 0);
+
+click('[data-tab="wishlist"]');
+click('.pc[data-open="w_levis_314"]');
+check("an unsure recommendation is hedged, not asserted",
+      /closest fit/.test(txt()) && !/We recommend/.test(txt()), txt().slice(0, 90));
+check("and names what is missing", txt().includes("inseam is still unknown"));
+
+head("SIZE CHART");
+click('[data-act="chart"]');
+check("size chart opens", $("sheet").textContent.includes("size chart"));
+check("it lists every size", [...D.querySelectorAll("#sheet .chart tbody tr")].length === 3);
+check("it ends with the shopper's own proven range", !!q("#sheet .chart tr.you"));
+check("unpublished measurements show a dash, not a guess", $("sheet").textContent.includes("—"));
+check("and it says why", $("sheet").textContent.includes("rather than estimate"));
+click("#scrim");
+
+head("SWITCH TO THE RECOMMENDED SIZE");
+click('[data-tab="wishlist"]');
+click('.pc[data-open="w_zara_midi"]');
+check("saved size S is shown", q(".szchip.on").textContent.trim().startsWith("S"));
+check("with a switch offered", !!q(".recbox .sw"));
+click(".recbox .sw");
+check("switching selects the recommended size", q(".szchip.on").textContent.trim().startsWith("M"));
+check("and the switch prompt is gone", !q(".recbox .sw"));
+
 head("PRODUCT: SIZE CHANGES THE VERDICT");
 click('[data-tab="wishlist"]');
 click('.pc[data-open="w_zara_midi"]');
+click('.szchip[data-size="S"]');
 const sizeS = q(".fitbox .pill").textContent.trim();
 check("size S on the Zara dress is refused", sizeS === "WRONG SIZE", sizeS);
 click('.szchip[data-size="M"]');

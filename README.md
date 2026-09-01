@@ -6,7 +6,7 @@ A working prototype for Part 5 of a product management case study. The business
 question behind it: how do you increase the share of users who purchase at least
 one wishlisted item within 30 days of saving it, **without discounting?**
 
-**→ [Open the live app](https://piyushdhar1309.github.io/myntra-fit-check/)**
+**→ [Open the live app](https://piyushdhar1309.github.io/myntra-decide/)**
 
 ---
 

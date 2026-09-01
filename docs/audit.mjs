@@ -232,6 +232,8 @@ check("states the trade-off", txt().includes("should decide it"));
 check("ticks a winner where winning is meaningful", n(".cmp td.win") > 0);
 click('[data-act="cmpmore"]');
 check("expanding shows every difference", all("#screen .cmp tbody tr").length > 4);
+check("the two-at-a-time button is a filled button, not a ghost", !!q(".cmpbar .tourbtn"));
+check("and a card explains what it does", !!q(".tip") && txt().includes("Two at a time is easy"));
 sweep("compare");
 
 head("TOURNAMENT");
@@ -281,6 +283,7 @@ head("COMPARE STRAIGHT FROM A SUGGESTION");
 click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
 check("the suggestion offers comparison, not filing", !!q("[data-cmpsub]"),
       q(".suggest") ? q(".suggest").textContent.slice(0, 60) : "no suggestion");
+check("and asks rather than announces", /We found \d+ similar items/.test(txt()), txt().slice(0, 80));
 click("[data-cmpsub]");
 check("it goes straight to the comparison", !!q(".cmp"), txt().slice(0, 60));
 check("no collection had to be created first", n(".colcard") === 0);

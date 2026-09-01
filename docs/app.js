@@ -278,8 +278,9 @@ function wishlistScreen() {
   // asked for and a concept people had to learn before they could get value.
   const sugg = de.findClusters(loose()).filter(c => !state.dismissed.includes(c.sub));
   const suggestHTML = state.selecting ? "" : sugg.slice(0, 1).map(c => `<div class="suggest">
-      <div class="t">${c.items.length} of your saved ${c.sub.toLowerCase()} look like one decision</div>
-      <div class="d">${esc(de.sharedLine(c.items))}. See what actually separates them.</div>
+      <div class="t">We found ${c.items.length} similar items in your wishlist</div>
+      <div class="d">${esc(de.sharedLine(c.items))}. Want us to compare them and show you what
+        actually separates them?</div>
       <div class="row"><div class="thumbs">${c.items.slice(0, 5).map(i =>
         `<img src="${photo(i, 100, 133)}" alt="">`).join("")}</div>
         <button class="btn ghost" style="padding:9px 12px" data-dismiss="${c.sub}">Not now</button>
@@ -366,9 +367,15 @@ function compareScreen() {
       or the best rating. Nothing is ticked on fabric, colour or pattern — those are taste, and
       we are not going to pretend otherwise.</div>
     ${disclaimer()}
-    <div style="height:70px"></div>
+    <div class="tip">
+      <span class="ms">compare_arrows</span>
+      <div><b>Still can't choose?</b>
+        <p>Picking one out of ${ids.length} is hard — that's why the list has sat there. Two at a
+        time is easy. ${ids.length - 1} quick either-or picks and you're done.</p></div>
+    </div>
     <div class="cmpbar">
-      <button class="cta-w" data-act="tournament">Too close? Compare two at a time</button>
+      <button class="tourbtn" data-act="tournament">
+        <span class="ms">compare_arrows</span>Compare two at a time</button>
     </div>`;
 }
 

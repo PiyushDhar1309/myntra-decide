@@ -279,8 +279,8 @@ function collectionScreen() {
       : ready ? "You're choosing between these."
       : c.items.length ? `Add ${3 - c.items.length} more to compare them side by side.`
       : "Nothing in here yet."}</div>
-    <div style="padding:0 12px 12px"><button class="btn ghost wide" data-act="additems">
-      + Add items from your wishlist</button></div>
+    <div style="padding:0 12px 12px"><button class="btn ${c.items.length ? "ghost " : ""}wide"
+      data-act="additems">+ Add items</button></div>
     ${c.decided ? `<div class="suggest"><div class="t">Your pick: ${esc(title(c.decided))}</div>
         <div class="d">${rupees(P(c.decided).price)} · arrives in ${P(c.decided).delivery} days</div>
         <div class="row"><div class="thumbs"><img src="${photo(c.decided, 100, 133)}" alt=""></div>
@@ -289,8 +289,8 @@ function collectionScreen() {
       : ready ? `<div style="padding:0 12px 12px"><button class="btn wide" data-act="compare">
           Compare &amp; decide</button></div>` : ""}
     ${c.items.length ? `<div class="grid">${c.items.map(id => card(id, "pc", true)).join("")}</div>`
-      : `<div class="empty" style="padding:30px 26px">Add a few saved items and we'll show you
-         what actually separates them.</div>`}
+      : `<div class="empty" style="padding:30px 26px">Add a few items and we'll show you what
+         actually separates them.</div>`}
     ${c.parked.length ? `<div class="rowhead"><span class="sec">Parked (${c.parked.length})</span></div>
       <div class="sub">Kept, not deleted. Move any of them back whenever you want.</div>
       <div class="grid parked" style="opacity:.62">${c.parked.map(id => card(id)).join("")}</div>
@@ -455,25 +455,44 @@ function newCollectionSheet(addId) {
 // Filling a collection has to be possible from inside it. The only route used
 // to be the moment you first hearted an unsaved item, which meant a collection
 // created after the fact could never be filled.
-function addItemsSheet(cid) {
+function addItemsSheet(cid, query = "") {
   const c = collection(cid);
-  const pool = state.wish.filter(id => !c.parked.includes(id));
-  if (!pool.length) return `<div class="handle"></div>
-    <div class="empty">Nothing saved yet. Heart a few things in Shop first.</div>`;
+  const q = query.trim().toLowerCase();
+  const match = id => !q || (title(id) + " " + P(id).sub + " " + P(id).colour).toLowerCase().includes(q);
+  const skip = id => c.parked.includes(id);
+
+  const mine = state.wish.filter(id => !skip(id) && match(id));
+  let store = Object.keys(PRODUCTS).filter(id => !state.wish.includes(id) && !skip(id) && match(id));
+  if (!q) store = store.slice(0, 12);
+
+  const row = id => {
+    const has = c.items.includes(id);
+    return `<div class="srow" data-toggleitem="${cid}:${id}">
+      <img src="${photo(id, 90, 120)}" alt="" style="width:38px;border-radius:4px">
+      <span><span style="font-weight:800">${esc(P(id).brand)}</span>
+        <span style="color:var(--sec);font-weight:400"> ${esc(P(id).name)}</span>
+        <span style="display:block;font-size:11px;color:var(--muted)">${rupees(P(id).price)}</span></span>
+      <span class="ms" style="color:${has ? "var(--pink)" : "var(--line)"}">${
+        has ? "check_circle" : "radio_button_unchecked"}</span></div>`;
+  };
+
+  const group = (label, ids) => ids.length
+    ? `<div style="padding:14px 16px 4px"><div class="sec">${label}</div></div>${ids.map(row).join("")}`
+    : "";
+
+  const nothing = !mine.length && !store.length
+    ? `<div class="empty" style="padding:34px 24px">Nothing matches “${esc(query)}”.</div>` : "";
+
   return `<div class="handle"></div>
-    <div style="padding:6px 16px 4px"><div class="sec">Add to ${esc(c.name)}</div>
-      <div style="font-size:11.5px;color:var(--muted);margin-top:5px">Tap to add or remove.
-        Items stay in your wishlist either way.</div></div>
-    ${pool.map(id => {
-      const has = c.items.includes(id);
-      return `<div class="srow" data-toggleitem="${cid}:${id}">
-        <img src="${photo(id, 90, 120)}" alt="" style="width:38px;border-radius:4px">
-        <span><span style="font-weight:800">${esc(P(id).brand)}</span>
-          <span style="color:var(--sec);font-weight:400"> ${esc(P(id).name)}</span></span>
-        <span class="ms" style="color:${has ? "var(--pink)" : "var(--line)"}">${
-          has ? "check_circle" : "radio_button_unchecked"}</span></div>`;
-    }).join("")}
-    <div style="padding:14px 16px 0"><button class="btn wide" data-act="closesheet">Done</button></div>`;
+    <div style="padding:6px 16px 0"><div class="sec">Add to ${esc(c.name)}</div>
+      <input class="tin" id="addq" placeholder="Search products" value="${esc(query)}"
+        autocomplete="off" style="margin-top:10px">
+      <div style="font-size:11.5px;color:var(--muted);margin-top:7px">Tap to add or remove. Anything
+        you add is saved to your wishlist too.</div></div>
+    ${group("From your wishlist", mine)}
+    ${group(q ? "More results" : "From the store", store)}
+    ${nothing}
+    <div style="padding:16px"><button class="btn wide" data-act="closesheet">Done</button></div>`;
 }
 
 function itemSheet(id) {
@@ -638,7 +657,7 @@ document.addEventListener("click", ev => {
     const c = collection(cid);
     const had = c.items.includes(pid);
     if (had) c.items = c.items.filter(x => x !== pid);
-    else c.items.push(pid);
+    else { c.items.push(pid); if (!saved(pid)) state.wish.unshift(pid); }
     mark(t.querySelector(".ms"), !had, "check_circle", "radio_button_unchecked");
     render();
     return;
@@ -767,6 +786,12 @@ document.addEventListener("input", ev => {
   if (ev.target.id === "searchfield") {
     state.query = ev.target.value;
     $("screen").innerHTML = shopScreen();
+  }
+  if (ev.target.id === "addq") {
+    const v = ev.target.value, at = ev.target.selectionStart;
+    $("sheet").innerHTML = addItemsSheet(state.collection, v);
+    const f = $("addq");
+    if (f) { f.focus(); f.setSelectionRange(at, at); }
   }
 });
 $("scrim").addEventListener("click", closeSheet);

@@ -92,9 +92,11 @@ input,select{font:inherit}
 .pc{cursor:pointer;min-width:0}
 .shot{position:relative;aspect-ratio:3/4;background:var(--fill);border-radius:5px;overflow:hidden}
 .shot img{width:100%;height:100%;object-fit:cover}
-.heart{position:absolute;top:7px;right:7px;width:26px;height:26px;border-radius:50%;
+.heart,.cardmenu{position:absolute;top:7px;width:26px;height:26px;border-radius:50%;
   background:rgba(255,255,255,.93);display:grid;place-items:center;box-shadow:0 1px 3px rgba(22,27,45,.12)}
-.heart .ms{font-size:15px}
+.heart{right:7px}
+.cardmenu{left:7px}
+.heart .ms,.cardmenu .ms{font-size:15px}
 .oostag{position:absolute;left:0;bottom:0;right:0;background:rgba(255,255,255,.93);
   font-size:10px;font-weight:800;letter-spacing:.05em;padding:4px 7px;color:var(--red)}
 .rail{display:flex;gap:9px;padding:0 12px 4px}

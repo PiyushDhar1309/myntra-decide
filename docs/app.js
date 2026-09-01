@@ -58,10 +58,12 @@ function starsHTML(id) {
 
 function outOfStock(id) { return P(id).sizes.every(s => !s.inStock); }
 
-function card(id, cls = "pc") {
+function card(id, cls = "pc", menu = false) {
   const p = P(id);
   return `<div class="${cls}" data-open="${id}">
     <div class="shot"><img src="${photo(id, 360, 480)}" alt="${esc(p.name)}" loading="lazy">
+      ${menu ? `<button class="cardmenu" data-more="${id}" aria-label="More options">
+        <span class="ms">more_horiz</span></button>` : ""}
       <button class="heart" data-heart="${id}" aria-label="${saved(id) ? "Remove from" : "Add to"} wishlist">
         <span class="ms${saved(id) ? " fill" : ""}" style="color:${saved(id) ? "var(--pink)" : "var(--sec)"}">favorite</span></button>
       ${outOfStock(id) ? '<div class="oostag">OUT OF STOCK</div>' : ""}</div>
@@ -222,7 +224,8 @@ function productScreen() {
     </div>
     ${disclaimer()}
     <div class="ctabar">
-      <button class="cta-w" data-heart="${id}">${saved(id) ? "♥ WISHLISTED" : "♡ WISHLIST"}</button>
+      <button class="cta-w" ${saved(id) ? `data-more="${id}"` : `data-heart="${id}"`}>${
+        saved(id) ? "♥ WISHLISTED" : "♡ WISHLIST"}</button>
       <button class="cta-b" data-act="bag" data-g="${id}">${inBag ? "GO TO BAG" : "ADD TO BAG"}</button>
     </div>`;
 }
@@ -262,7 +265,7 @@ function wishlistScreen() {
 
   return `<div class="wtitle"><h1>Wishlist</h1><span>${items.length} items</span></div>${tabs}
     ${suggestHTML}
-    ${items.length ? `<div class="grid">${items.map(id => card(id)).join("")}</div>`
+    ${items.length ? `<div class="grid">${items.map(id => card(id, "pc", true)).join("")}</div>`
       : `<div class="empty">Nothing saved yet.<br>Tap the heart on anything in Shop.</div>`}
     ${disclaimer()}`;
 }
@@ -273,7 +276,11 @@ function collectionScreen() {
   const ready = c.items.length >= 3;
   return `<div class="wtitle"><h1>${esc(c.name)}</h1><span>${c.items.length} items</span></div>
     <div class="sub">${c.decided ? "You picked one. The rest are parked, not deleted."
-      : ready ? "You're choosing between these." : "Add at least three items to compare them."}</div>
+      : ready ? "You're choosing between these."
+      : c.items.length ? `Add ${3 - c.items.length} more to compare them side by side.`
+      : "Nothing in here yet."}</div>
+    <div style="padding:0 12px 12px"><button class="btn ghost wide" data-act="additems">
+      + Add items from your wishlist</button></div>
     ${c.decided ? `<div class="suggest"><div class="t">Your pick: ${esc(title(c.decided))}</div>
         <div class="d">${rupees(P(c.decided).price)} · arrives in ${P(c.decided).delivery} days</div>
         <div class="row"><div class="thumbs"><img src="${photo(c.decided, 100, 133)}" alt=""></div>
@@ -281,7 +288,9 @@ function collectionScreen() {
           <button class="btn" style="padding:9px 14px" data-act="bag" data-g="${c.decided}">Move to bag</button></div></div>`
       : ready ? `<div style="padding:0 12px 12px"><button class="btn wide" data-act="compare">
           Compare &amp; decide</button></div>` : ""}
-    <div class="grid">${c.items.map(id => card(id)).join("")}</div>
+    ${c.items.length ? `<div class="grid">${c.items.map(id => card(id, "pc", true)).join("")}</div>`
+      : `<div class="empty" style="padding:30px 26px">Add a few saved items and we'll show you
+         what actually separates them.</div>`}
     ${c.parked.length ? `<div class="rowhead"><span class="sec">Parked (${c.parked.length})</span></div>
       <div class="sub">Kept, not deleted. Move any of them back whenever you want.</div>
       <div class="grid parked" style="opacity:.62">${c.parked.map(id => card(id)).join("")}</div>
@@ -443,6 +452,43 @@ function newCollectionSheet(addId) {
     </div>`;
 }
 
+// Filling a collection has to be possible from inside it. The only route used
+// to be the moment you first hearted an unsaved item, which meant a collection
+// created after the fact could never be filled.
+function addItemsSheet(cid) {
+  const c = collection(cid);
+  const pool = state.wish.filter(id => !c.parked.includes(id));
+  if (!pool.length) return `<div class="handle"></div>
+    <div class="empty">Nothing saved yet. Heart a few things in Shop first.</div>`;
+  return `<div class="handle"></div>
+    <div style="padding:6px 16px 4px"><div class="sec">Add to ${esc(c.name)}</div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:5px">Tap to add or remove.
+        Items stay in your wishlist either way.</div></div>
+    ${pool.map(id => {
+      const has = c.items.includes(id);
+      return `<div class="srow" data-toggleitem="${cid}:${id}">
+        <img src="${photo(id, 90, 120)}" alt="" style="width:38px;border-radius:4px">
+        <span><span style="font-weight:800">${esc(P(id).brand)}</span>
+          <span style="color:var(--sec);font-weight:400"> ${esc(P(id).name)}</span></span>
+        <span class="ms" style="color:${has ? "var(--pink)" : "var(--line)"}">${
+          has ? "check_circle" : "radio_button_unchecked"}</span></div>`;
+    }).join("")}
+    <div style="padding:14px 16px 0"><button class="btn wide" data-act="closesheet">Done</button></div>`;
+}
+
+function itemSheet(id) {
+  return `<div class="handle"></div>
+    <div style="padding:6px 16px 4px"><div class="sec">${esc(title(id))}</div></div>
+    <div class="srow" data-act="tocollection" data-g="${id}">
+      <span class="ms">bookmark_add</span><span>Add to collection</span>
+      <span class="ms" style="font-size:18px;color:var(--muted)">chevron_right</span></div>
+    <div class="srow" data-act="bag" data-g="${id}">
+      <span class="ms">shopping_bag</span><span>Move to bag</span></div>
+    <div class="srow" data-heart="${id}">
+      <span class="ms" style="color:var(--red)">delete_outline</span>
+      <span style="color:var(--red)">Remove from wishlist</span></div>`;
+}
+
 function sortSheet() {
   return `<div class="handle"></div>
     <div style="padding:6px 16px 4px"><div class="sec">Sort by</div></div>
@@ -485,6 +531,13 @@ const closeSheet = () => {
   $("sheet").setAttribute("aria-hidden", "true");
   $("scrim").classList.remove("open");
 };
+
+// Flip a row's tick without rebuilding the sheet around it.
+function mark(icon, on, onGlyph, offGlyph) {
+  if (!icon) return;
+  icon.textContent = on ? onGlyph : offGlyph;
+  icon.style.color = on ? "var(--pink)" : "var(--line)";
+}
 
 let undo = null;
 function toast(msg, action) {
@@ -548,7 +601,7 @@ const back = () => { state.page = state.stack.pop() || "home"; render(); };
 document.addEventListener("click", ev => {
   const t = ev.target.closest("[data-tab],[data-act],[data-open],[data-heart],[data-sub],[data-size],"
     + "[data-col],[data-wtab],[data-addto],[data-sort],[data-pick],[data-win],[data-group],"
-    + "[data-dismiss],[data-debag],[data-qty]");
+    + "[data-dismiss],[data-debag],[data-qty],[data-more],[data-toggleitem]");
   if (!t) return;
   const d = t.dataset;
 
@@ -577,12 +630,27 @@ document.addEventListener("click", ev => {
   if (d.size) { state.productSize = d.size; render(); return; }
   if (d.col) { state.collection = d.col; go("collection"); return; }
   if (d.sort) { state.sort = d.sort; closeSheet(); render(); return; }
+  if (d.more) { ev.stopPropagation(); openSheet(itemSheet(d.more)); return; }
+  if (d.toggleitem) {
+    // Toggle the row in place. Rebuilding the sheet on every tap would detach
+    // the rows and throw away the scroll position mid-list.
+    const [cid, pid] = d.toggleitem.split(":");
+    const c = collection(cid);
+    const had = c.items.includes(pid);
+    if (had) c.items = c.items.filter(x => x !== pid);
+    else c.items.push(pid);
+    mark(t.querySelector(".ms"), !had, "check_circle", "radio_button_unchecked");
+    render();
+    return;
+  }
   if (d.addto) {
     const [cid, pid] = d.addto.split(":");
     const c = collection(cid);
-    if (c.items.includes(pid)) c.items = c.items.filter(x => x !== pid);
+    const had = c.items.includes(pid);
+    if (had) c.items = c.items.filter(x => x !== pid);
     else { c.items.push(pid); if (!saved(pid)) state.wish.unshift(pid); }
-    openSheet(addToCollectionSheet(pid)); render();
+    mark(t.querySelector(".ms"), !had, "check_box", "check_box_outline_blank");
+    render();
     return;
   }
   if (d.group) {
@@ -624,6 +692,9 @@ document.addEventListener("click", ev => {
     case "soon": toast("Not part of this prototype"); break;
     case "oos": toast("That size is out of stock"); break;
     case "sort": openSheet(sortSheet()); break;
+    case "additems": openSheet(addItemsSheet(state.collection)); break;
+    case "tocollection": openSheet(addToCollectionSheet(d.g)); break;
+    case "closesheet": closeSheet(); break;
     case "chart": openSheet(chartSheet(state.product)); break;
     case "cmpmore": state.cmpAll = !state.cmpAll; render(); break;
     case "newcol": openSheet(newCollectionSheet(d.g)); break;

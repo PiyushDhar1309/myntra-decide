@@ -40,8 +40,8 @@ const head = s => console.log("\n" + s);
 
 const HANDLED = ["data-tab", "data-act", "data-open", "data-heart", "data-sub", "data-size",
   "data-col", "data-wtab", "data-addto", "data-sort", "data-pick", "data-win", "data-group",
-  "data-dismiss", "data-debag", "data-qty"];
-const INTERACTIVE = ".cat,.pc,.railcard,.chip,.heart,.szchip,.colcard,.srow,.orow,.vscard,.banner,.banner2,#decidecard";
+  "data-dismiss", "data-debag", "data-qty", "data-more", "data-toggleitem"];
+const INTERACTIVE = ".cat,.pc,.railcard,.chip,.heart,.cardmenu,.szchip,.colcard,.srow,.orow,.vscard,.banner,.banner2,#decidecard";
 
 function sweep(where) {
   const suspects = [...D.querySelectorAll("#screen button, #screen " + INTERACTIVE.split(",").join(", #screen "))];
@@ -148,6 +148,49 @@ $("colname").value = "";
 click('[data-act="createcol"]');
 check("an unnamed collection is refused", !$("sheet").classList.contains("open") === false);
 click("#scrim");
+
+head("FILLING A COLLECTION AFTER CREATING IT");
+// The bug this section exists for: a collection could be created and then never
+// filled, because the only route into "add to collection" was the moment you
+// first hearted an unsaved item.
+click('[data-tab="wishlist"]'); click('[data-wtab="cols"]');
+click('[data-act="newcol"]');
+$("colname").value = "Office";
+click('[data-act="createcol"]');
+const fresh = all("#screen .colcard").find(el => el.textContent.includes("Office"));
+check("the new collection exists and is empty", !!fresh && fresh.textContent.includes("0 item"));
+click(fresh);
+check("an empty collection explains itself", txt().includes("Nothing in here yet"));
+check("and offers a way to fill it", !!q('[data-act="additems"]'));
+click('[data-act="additems"]');
+check("the picker lists saved items", $("sheet").querySelectorAll(".srow").length >= 5);
+const rows = [...$("sheet").querySelectorAll("[data-toggleitem]")];
+click(rows[0]); click(rows[1]); click(rows[2]);
+click('[data-act="closesheet"]');
+check("items land in the collection", n(".grid:not(.parked) .pc") === 3,
+      "got " + n(".grid:not(.parked) .pc"));
+check("three is enough to compare", !!q('[data-act="compare"]'));
+click('[data-act="additems"]');
+click([...$("sheet").querySelectorAll("[data-toggleitem]")][0]);
+click('[data-act="closesheet"]');
+check("tapping again removes it", n(".grid:not(.parked) .pc") === 2);
+check("and it warns how many more are needed", txt().includes("Add 1 more"));
+click('[data-act="delcol"]');
+
+head("OTHER ROUTES INTO A COLLECTION");
+click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
+check("wishlist cards carry a menu", n(".cardmenu") > 0);
+click("#screen .cardmenu");
+check("the menu offers collections, bag and removal", $("sheet").textContent.includes("Add to collection")
+  && $("sheet").textContent.includes("Move to bag"));
+click('[data-act="tocollection"]');
+check("it opens the collection picker", $("sheet").textContent.includes("Create new collection"));
+click("#scrim");
+click("#screen .pc");
+check("an already-saved product still opens its menu from the PDP",
+      (click('.ctabar .cta-w'), $("sheet").textContent.includes("Add to collection")));
+click("#scrim");
+click('[data-act="back"]');
 
 head("THE DECISION");
 click('[data-wtab="cols"]');

@@ -28,6 +28,7 @@ const state = {
   collection: null, cmpIds: [], cmpAll: false, tour: null,
   query: "", dismissed: [], introSeen: false,
   selecting: false, selected: [], cmpFrom: null, pendingPick: null, tips: [],
+  coach: null,
 };
 
 const $ = id => document.getElementById(id);
@@ -149,7 +150,7 @@ function homeScreen() {
       <h3>Your wishlist stores items. You're holding decisions.</h3>
       <p>Six saved kurtas aren't six choices — they're one you keep putting off. This adds a way to
       finish it. Everything else here is an ordinary Myntra clone, so you can see it in context.</p>
-      <button class="go" data-act="demo">Show me →</button>
+      <button class="go" data-act="tour">Show me how →</button>
     </div>`;
 
   return `${intro}
@@ -596,6 +597,101 @@ function removeOthersSheet() {
     </div>`;
 }
 
+// A five-step walkthrough that points at the real controls rather than
+// describing them. Each step names the screen it needs, sets up whatever state
+// that screen requires, and the selector to spotlight.
+const TOUR = [
+  { page: "home", sel: "#decidecard",
+    title: "You have more decisions than you think",
+    body: "Seven of your saved items aren't seven choices — they're the same choice, saved over and over. Nothing in a wishlist ever closes one." },
+  { page: "wishlist", sel: '.wbar button[data-act="startsel"]',
+    setup: () => { state.tab = "items"; state.selecting = false; },
+    title: "Pick what you're torn between",
+    body: "Tap this and your wishlist becomes selectable. Choose the ones you keep going back and forth on." },
+  { page: "wishlist", sel: ".suggest",
+    title: "Or take one we've already spotted",
+    body: "We look for saved items that answer the same need at a similar price. Seven black tees, six pairs of jeans — that sort of thing." },
+  { page: "compare", sel: ".cmp",
+    setup: () => {
+      const cl = de.findClusters(loose())[0];
+      if (cl) { state.cmpIds = [...cl.items]; state.cmpAll = false; state.cmpFrom = "wishlist"; }
+    },
+    title: "Only what actually separates them",
+    body: "Near-identical products differ on a dozen things and almost none of them matter. You get the few that do, and a tick on whichever wins each row." },
+  { page: "compare", sel: ".cmpbar .tourbtn",
+    title: "Still can't choose?",
+    body: "Two at a time. One out of seven is hard — six either-or picks is easy. Then we ask what to do with the ones you didn't pick." },
+];
+
+function startTour() {
+  closeSheet();
+  state.coach = 0;
+  applyTourStep();
+}
+
+function applyTourStep() {
+  const step = TOUR[state.coach];
+  if (!step) return endTour();
+  if (step.setup) step.setup();
+  state.page = step.page;
+  render();
+}
+
+function endTour() {
+  state.coach = null;
+  const el = $("coach");
+  if (el) el.remove();
+  render();
+}
+
+// Painted after every render, because the screen underneath is rebuilt each time.
+function paintCoach() {
+  const existing = $("coach");
+  if (state.coach === null) { if (existing) existing.remove(); return; }
+  const step = TOUR[state.coach];
+  const target = step && document.querySelector(step.sel);
+  if (!target) { // nothing to point at — don't strand the reader on a blank overlay
+    state.coach++;
+    return state.coach < TOUR.length ? applyTourStep() : endTour();
+  }
+
+  let box = existing;
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "coach";
+    box.innerHTML = `<div class="veil"></div><div class="spot"></div>
+      <div class="arw"></div><div class="bub"></div>`;
+    document.body.appendChild(box);
+  }
+  try { target.scrollIntoView({ block: "center", behavior: "auto" }); } catch (e) { /* no layout */ }
+
+  const r = target.getBoundingClientRect();
+  const pad = 6;
+  const spot = box.querySelector(".spot");
+  spot.style.cssText = `top:${r.top - pad}px;left:${r.left - pad}px;` +
+    `width:${r.width + pad * 2}px;height:${r.height + pad * 2}px`;
+
+  const bub = box.querySelector(".bub");
+  bub.innerHTML = `<div class="n">STEP ${state.coach + 1} OF ${TOUR.length}</div>
+    <h4>${esc(step.title)}</h4><p>${esc(step.body)}</p>
+    <div class="row"><button class="skip" data-act="tourskip">Skip — let me explore</button>
+      <button class="next" data-act="tournext">${
+        state.coach === TOUR.length - 1 ? "Done" : "Next"}</button></div>`;
+
+  // Below the target if there is room, otherwise above it.
+  const vh = window.innerHeight || 800;
+  const below = r.bottom + 16 + 190 < vh;
+  const top = below ? r.bottom + 16 : Math.max(12, r.top - 16 - bub.offsetHeight);
+  const left = Math.max(12, Math.min((window.innerWidth || 400) - 292, r.left + r.width / 2 - 140));
+  bub.style.top = `${top}px`;
+  bub.style.left = `${left}px`;
+
+  const arw = box.querySelector(".arw");
+  arw.className = "arw " + (below ? "up" : "down");
+  arw.style.top = `${below ? r.bottom + 6 : top + bub.offsetHeight - 1}px`;
+  arw.style.left = `${Math.min(Math.max(r.left + r.width / 2 - 10, left + 14), left + 250)}px`;
+}
+
 function guideSheet() {
   const d = openDecisions();
   return `<div class="handle"></div>
@@ -621,7 +717,7 @@ function guideSheet() {
         <span class="n">${i + 1}</span>
         <div><b>${t}</b><p>${b}</p></div></div>`).join("")}
     <div style="padding:14px 16px 0">
-      <button class="btn wide" data-act="demo">Show me a real one</button></div>
+      <button class="btn wide" data-act="tour">Walk me through it</button></div>
     <div class="foot">Case-study prototype. Nothing here can be bought.</div>`;
 }
 
@@ -722,6 +818,7 @@ function render() {
       <span class="ms${on ? " fill" : ""}">${icon}</span>${lab}</button>`;
   }).join("");
   window.scrollTo(0, 0);
+  paintCoach();
 }
 
 function go(page, push = true) {
@@ -849,16 +946,9 @@ document.addEventListener("click", ev => {
     case "sort": openSheet(sortSheet()); break;
     case "hideintro": state.introSeen = true; render(); break;
     case "guide": openSheet(guideSheet()); break;
-    case "demo": {
-      closeSheet();
-      state.introSeen = true; state.tab = "items";
-      const first = de.findClusters(loose())[0];
-      if (first) {
-        state.cmpIds = [...first.items]; state.cmpAll = false; state.cmpFrom = "wishlist";
-        go("compare");
-      } else go("wishlist");
-      break;
-    }
+    case "tour": state.introSeen = true; startTour(); break;
+    case "tournext": state.coach++; applyTourStep(); break;
+    case "tourskip": endTour(); toast("Have a look around. Tap ? any time."); break;
     case "startsel": state.selecting = true; state.selected = []; render(); break;
     case "cancelsel": state.selecting = false; state.selected = []; render(); break;
     case "docompare":

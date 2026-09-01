@@ -167,6 +167,26 @@ input,select{font:inherit}
 .pc.sel .shot{outline:2px solid var(--pink);outline-offset:-2px;border-radius:5px}
 .pc.sel .tick .ms{color:var(--pink)}
 
+/* coach marks — a spotlight, an arrow and a bubble over the real control */
+#coach{position:fixed;inset:0;z-index:70;pointer-events:none}
+#coach .veil{position:absolute;inset:0;background:rgba(22,27,45,.55);pointer-events:auto}
+#coach .spot{position:absolute;border-radius:10px;box-shadow:0 0 0 3px var(--pink),
+  0 0 0 9999px rgba(22,27,45,.62);transition:top .3s,left .3s,width .3s,height .3s;pointer-events:none}
+#coach .bub{position:absolute;width:280px;max-width:calc(100vw - 32px);background:#fff;
+  border-radius:10px;padding:15px 16px;box-shadow:0 12px 34px rgba(0,0,0,.3);pointer-events:auto;
+  transition:top .3s,left .3s}
+#coach .bub .n{font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--pink)}
+#coach .bub h4{margin:7px 0 0;font-size:15px;font-weight:800;color:var(--ink);line-height:1.35}
+#coach .bub p{margin:5px 0 0;font-size:13px;line-height:1.6;color:var(--sec)}
+#coach .bub .row{display:flex;gap:10px;margin-top:14px;align-items:center}
+#coach .bub .skip{font-size:12.5px;font-weight:700;color:var(--muted);flex:1;text-align:left;padding:6px 0}
+#coach .bub .next{background:var(--pink);color:#fff;border-radius:4px;padding:10px 18px;
+  font-size:13px;font-weight:800}
+#coach .arw{position:absolute;width:0;height:0;border:10px solid transparent;transition:top .3s,left .3s}
+#coach .arw.up{border-bottom-color:#fff}
+#coach .arw.down{border-top-color:#fff}
+@media (prefers-reduced-motion:reduce){ #coach .spot,#coach .bub,#coach .arw{transition:none} }
+
 /* guidance */
 .hint{display:flex;gap:10px;align-items:flex-start;margin:12px;padding:11px 12px;border-radius:8px;
   background:#f4f6fb;border:1px solid #e2e7f2;font-size:12.5px;line-height:1.55;color:var(--sec)}

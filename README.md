@@ -34,7 +34,7 @@ Everything follows from that modelling error:
 ## Where this came from
 
 The [discovery engine](https://github.com/PiyushDhar1309/myntra-wishlist-discovery-engine)
-that preceded this analysed 4,060 rows of real user feedback and found something
+that preceded this analysed more than 5,000 rows of real user feedback and found something
 that reframes the brief: **the gap between saving and buying is frequently
 deliberate waiting, not lost interest.** Users described saving specifically *in
 order to compare before choosing* — one complained that the wishlist size cap

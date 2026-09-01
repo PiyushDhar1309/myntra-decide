@@ -12,13 +12,31 @@ mkdirSync(OUT, { recursive: true });
 
 const URL = process.env.TARGET || "http://localhost:8123/";
 
-// WebKit is preferred for the iOS rig because it is Safari's engine; if it will
-// not launch we still measure at the iPhone viewport under Chromium, which finds
-// geometry bugs but not engine-specific ones.
-const IOS_ENGINE = process.env.NO_WEBKIT ? chromium : webkit;
+// WebKit is Safari's engine, so it is the only way to catch iOS-specific bugs
+// from a desktop. Where it will not start we still measure at the iPhone
+// viewport under Chromium - that finds geometry bugs but not engine ones, and
+// the run says so rather than implying iOS was covered.
+async function iosEngine() {
+  if (process.env.NO_WEBKIT) return { engine: chromium, real: false, why: "NO_WEBKIT set" };
+  try {
+    const b = await webkit.launch({ timeout: 30000 });
+    await b.close();
+    return { engine: webkit, real: true };
+  } catch (e) {
+    return { engine: chromium, real: false, why: e.message.split("\n")[0] };
+  }
+}
+
+const ios = await iosEngine();
+if (!ios.real) {
+  console.log("\n!! Safari's engine is unavailable — " + ios.why);
+  console.log("!! The iOS rows below are Chromium at an iPhone viewport. They catch layout and");
+  console.log("!! overflow bugs, but NOT WebKit-specific ones. Verify on a real device.\n");
+}
 const RIGS = [
-  { name: "ios",     engine: IOS_ENGINE, device: devices["iPhone 13"] },
-  { name: "android", engine: chromium,   device: devices["Pixel 5"] },
+  { name: ios.real ? "ios (webkit)" : "ios (chromium at iPhone size)", engine: ios.engine,
+    device: devices["iPhone 13"] },
+  { name: "android", engine: chromium, device: devices["Pixel 5"] },
 ];
 
 // Each stop: a label, the clicks to get there, and a moment to settle.

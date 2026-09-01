@@ -156,6 +156,13 @@ content still hidden behind a fixed bar once scrolled to the end, clipped text,
 tap targets under 28px, and icon fonts failing to load. It writes a screenshot
 of every screen.
 
+It runs the iOS rig under **WebKit**, Safari's own engine, which is the only way
+to catch iOS-specific bugs from a desktop. Where WebKit will not start — its
+Playwright build is incompatible with some macOS versions and hangs on launch —
+the run says so and falls back to Chromium at an iPhone viewport, which finds
+layout bugs but not engine ones. Anything Safari-specific still needs a real
+device.
+
 Three sweeps run on **every** screen: **no dead controls** (every button
 resolves to a handler — a control that looks live and does nothing is the first
 thing a reviewer finds), **no unconstrained images**, and **the disclaimer is

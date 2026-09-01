@@ -18,7 +18,8 @@ const state = {
   product: null, productSize: null,
   cat: null, sub: null, sort: "recommended", tab: "items",
   collection: null, cmpIds: [], cmpAll: false, tour: null,
-  query: "", dismissed: [], legacy: false,
+  query: "", dismissed: [], introSeen: false,
+  selecting: false, selected: [], cmpFrom: null, pendingPick: null,
 };
 
 const $ = id => document.getElementById(id);
@@ -60,6 +61,17 @@ function outOfStock(id) { return P(id).sizes.every(s => !s.inStock); }
 
 function card(id, cls = "pc", menu = false) {
   const p = P(id);
+  // In selection mode the whole card toggles instead of opening the product.
+  if (state.selecting) {
+    const on = state.selected.includes(id);
+    return `<div class="${cls}${on ? " sel" : ""}" data-toggle="${id}">
+      <div class="shot"><img src="${photo(id, 360, 480)}" alt="${esc(p.name)}" loading="lazy">
+        <div class="tick"><span class="ms${on ? " fill" : ""}">${
+          on ? "check_circle" : "radio_button_unchecked"}</span></div></div>
+      <div class="brand">${esc(p.brand)}</div>
+      <div class="pname">${esc(p.name)}</div>
+      ${priceHTML(id)}</div>`;
+  }
   return `<div class="${cls}" data-open="${id}">
     <div class="shot"><img src="${photo(id, 360, 480)}" alt="${esc(p.name)}" loading="lazy">
       ${menu ? `<button class="cardmenu" data-more="${id}" aria-label="More options">
@@ -115,7 +127,16 @@ function homeScreen() {
         <div class="go"><span class="ms">chevron_right</span></div></div>
     </div>` : "";
 
-  return `
+  const intro = state.introSeen ? "" : `<div id="intro">
+      <button class="x" data-act="hideintro" aria-label="Dismiss"><span class="ms">close</span></button>
+      <div class="k">PROTOTYPE · WHAT THIS IS</div>
+      <h3>Your wishlist stores items. You're holding decisions.</h3>
+      <p>Six saved kurtas aren't six choices — they're one you keep putting off. This adds a way to
+      finish it. Everything else here is an ordinary Myntra clone, so you can see it in context.</p>
+      <button class="go" data-act="demo">Show me →</button>
+    </div>`;
+
+  return `${intro}
   <div class="cats hs">${CAT_TILES.map(([lab, id]) =>
     `<div class="cat" data-sub="${lab}"><img src="${photo(id, 130, 130)}" alt=""><span>${lab}</span></div>`).join("")}</div>
   <div class="banner" data-act="soon"><h2>END OF<br>SEASON SALE</h2>
@@ -253,21 +274,36 @@ function wishlistScreen() {
       </div>${disclaimer()}`;
   }
 
+  // Suggestions go straight to the comparison. Grouping first was a step nobody
+  // asked for and a concept people had to learn before they could get value.
   const sugg = de.findClusters(loose()).filter(c => !state.dismissed.includes(c.sub));
-  const suggestHTML = sugg.slice(0, 1).map(c => `<div class="suggest">
+  const suggestHTML = state.selecting ? "" : sugg.slice(0, 1).map(c => `<div class="suggest">
       <div class="t">${c.items.length} of your saved ${c.sub.toLowerCase()} look like one decision</div>
-      <div class="d">${esc(de.sharedLine(c.items))}. Group them and compare side by side.</div>
+      <div class="d">${esc(de.sharedLine(c.items))}. See what actually separates them.</div>
       <div class="row"><div class="thumbs">${c.items.slice(0, 5).map(i =>
         `<img src="${photo(i, 100, 133)}" alt="">`).join("")}</div>
         <button class="btn ghost" style="padding:9px 12px" data-dismiss="${c.sub}">Not now</button>
-        <button class="btn" style="padding:9px 14px" data-group="${c.sub}">Group them</button></div>
+        <button class="btn" style="padding:9px 14px" data-cmpsub="${c.sub}">Compare these ${c.items.length}</button></div>
     </div>`).join("");
 
-  return `<div class="wtitle"><h1>Wishlist</h1><span>${items.length} items</span></div>${tabs}
+  const bar = state.selecting ? "" : `<div class="wbar">
+      <button data-act="startsel"><span class="ms">library_add_check</span>Compare items</button>
+      <button data-act="newcol"><span class="ms">create_new_folder</span>New collection</button>
+    </div>`;
+
+  const selbar = state.selecting ? `<div class="selbar">
+      <div class="n">${state.selected.length} selected<small>${
+        state.selected.length < 2 ? "Pick at least two" : "Tap Compare when you're ready"}</small></div>
+      <button class="cx" data-act="cancelsel">Cancel</button>
+      <button class="go" data-act="docompare" ${state.selected.length < 2 ? "disabled" : ""}>Compare</button>
+    </div>` : "";
+
+  return `<div class="wtitle"><h1>${state.selecting ? "Pick items to compare" : "Wishlist"}</h1>
+      <span>${items.length} items</span></div>${state.selecting ? "" : tabs}${bar}
     ${suggestHTML}
     ${items.length ? `<div class="grid">${items.map(id => card(id, "pc", true)).join("")}</div>`
       : `<div class="empty">Nothing saved yet.<br>Tap the heart on anything in Shop.</div>`}
-    ${disclaimer()}`;
+    ${state.selecting ? "" : disclaimer()}${selbar}`;
 }
 
 function collectionScreen() {
@@ -508,6 +544,32 @@ function itemSheet(id) {
       <span style="color:var(--red)">Remove from wishlist</span></div>`;
 }
 
+// Elimination, asked rather than assumed. The old flow parked the losers inside
+// a collection, which only worked if a collection already existed.
+function removeOthersSheet() {
+  const { keep, others } = state.pendingPick;
+  return `<div class="handle"></div>
+    <div style="padding:6px 16px 4px">
+      <div class="sec">You picked</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-top:11px">
+        <img src="${photo(keep, 120, 160)}" alt="" style="width:52px;border-radius:4px">
+        <div><div class="brand">${esc(P(keep).brand)}</div>
+          <div class="pname">${esc(P(keep).name)}</div>${priceHTML(keep)}</div>
+      </div>
+      <div style="font-size:14px;font-weight:800;margin-top:20px">Remove the other ${others.length} from your wishlist?</div>
+      <div style="font-size:12.5px;color:var(--sec);margin-top:5px;line-height:1.6">You were choosing
+        between them, so keeping them means the decision stays open. Nothing is deleted from the
+        store — you can save them again any time.</div>
+      <div style="display:flex;gap:9px;margin-top:10px;overflow-x:auto;padding:4px 0">${
+        others.map(i => `<img src="${photo(i, 90, 120)}" alt="" style="width:44px;border-radius:4px;flex:none">`).join("")}</div>
+      <div style="display:flex;gap:9px;margin-top:16px">
+        <button class="btn ghost" style="flex:1" data-act="keepall">Keep them</button>
+        <button class="btn" style="flex:1" data-act="removeothers">Remove ${others.length}</button>
+      </div>
+      <button class="btn ghost wide" style="margin-top:9px" data-act="bag" data-g="${keep}">Move to bag</button>
+    </div>`;
+}
+
 function sortSheet() {
   return `<div class="handle"></div>
     <div style="padding:6px 16px 4px"><div class="sec">Sort by</div></div>
@@ -592,7 +654,8 @@ const SCREENS = { home: homeScreen, shop: shopScreen, product: productScreen,
 function render() {
   $("topbar").innerHTML = topbar();
   $("screen").innerHTML = (SCREENS[state.page] || homeScreen)();
-  const hideNav = state.page === "product" || state.page === "compare";
+  const hideNav = state.page === "product" || state.page === "compare"
+    || (state.page === "wishlist" && state.selecting);
   $("nav").style.display = hideNav ? "none" : "flex";
   $("screen").style.paddingBottom = hideNav ? "88px" : "76px";
   $("nav").innerHTML = TABS.map(([k, icon, lab]) => {
@@ -620,7 +683,7 @@ const back = () => { state.page = state.stack.pop() || "home"; render(); };
 document.addEventListener("click", ev => {
   const t = ev.target.closest("[data-tab],[data-act],[data-open],[data-heart],[data-sub],[data-size],"
     + "[data-col],[data-wtab],[data-addto],[data-sort],[data-pick],[data-win],[data-group],"
-    + "[data-dismiss],[data-debag],[data-qty],[data-more],[data-toggleitem]");
+    + "[data-dismiss],[data-debag],[data-qty],[data-more],[data-toggleitem],[data-toggle],[data-cmpsub]");
   if (!t) return;
   const d = t.dataset;
 
@@ -642,13 +705,28 @@ document.addEventListener("click", ev => {
     }
     return;
   }
-  if (d.tab) { closeSheet(); state.query = ""; state.sub = null; go(d.tab); return; }
+  if (d.tab) {
+    closeSheet(); state.query = ""; state.sub = null;
+    state.selecting = false; state.selected = [];
+    go(d.tab); return;
+  }
   if (d.wtab) { state.tab = d.wtab; render(); return; }
   if (d.open) { state.product = d.open; state.productSize = null; closeSheet(); go("product"); return; }
   if (d.sub !== undefined && !d.open) { state.sub = d.sub || null; go("shop"); return; }
   if (d.size) { state.productSize = d.size; render(); return; }
   if (d.col) { state.collection = d.col; go("collection"); return; }
   if (d.sort) { state.sort = d.sort; closeSheet(); render(); return; }
+  if (d.toggle) {
+    const i = state.selected.indexOf(d.toggle);
+    if (i >= 0) state.selected.splice(i, 1); else state.selected.push(d.toggle);
+    render(); return;
+  }
+  if (d.cmpsub) {
+    const cl = de.findClusters(loose()).find(c => c.sub === d.cmpsub);
+    if (!cl) return;
+    state.cmpIds = [...cl.items]; state.cmpAll = false; state.cmpFrom = "wishlist";
+    go("compare"); return;
+  }
   if (d.more) { ev.stopPropagation(); openSheet(itemSheet(d.more)); return; }
   if (d.toggleitem) {
     // Toggle the row in place. Rebuilding the sheet on every tap would detach
@@ -711,6 +789,35 @@ document.addEventListener("click", ev => {
     case "soon": toast("Not part of this prototype"); break;
     case "oos": toast("That size is out of stock"); break;
     case "sort": openSheet(sortSheet()); break;
+    case "hideintro": state.introSeen = true; render(); break;
+    case "demo": {
+      state.introSeen = true; state.tab = "items";
+      const first = de.findClusters(loose())[0];
+      if (first) {
+        state.cmpIds = [...first.items]; state.cmpAll = false; state.cmpFrom = "wishlist";
+        go("compare");
+      } else go("wishlist");
+      break;
+    }
+    case "startsel": state.selecting = true; state.selected = []; render(); break;
+    case "cancelsel": state.selecting = false; state.selected = []; render(); break;
+    case "docompare":
+      if (state.selected.length < 2) { toast("Pick at least two"); break; }
+      state.cmpIds = [...state.selected]; state.cmpAll = false; state.cmpFrom = "wishlist";
+      go("compare"); break;
+    case "removeothers": {
+      const { others } = state.pendingPick;
+      state.wish = state.wish.filter(x => !others.includes(x));
+      state.collections.forEach(c => {
+        c.items = c.items.filter(x => !others.includes(x));
+        c.parked = c.parked.filter(x => !others.includes(x));
+      });
+      state.pendingPick = null; closeSheet(); render();
+      toast(`${others.length} removed. Decision closed.`);
+      break;
+    }
+    case "keepall": state.pendingPick = null; closeSheet(); render();
+      toast("Kept. They're still in your wishlist."); break;
     case "additems": openSheet(addItemsSheet(state.collection)); break;
     case "tocollection": openSheet(addToCollectionSheet(d.g)); break;
     case "closesheet": closeSheet(); break;
@@ -727,7 +834,7 @@ document.addEventListener("click", ev => {
     }
     case "compare": {
       const c = collection(state.collection);
-      state.cmpIds = [...c.items]; state.cmpAll = false;
+      state.cmpIds = [...c.items]; state.cmpAll = false; state.cmpFrom = "collection";
       go("compare"); break;
     }
     case "tournament": {
@@ -771,15 +878,21 @@ document.addEventListener("click", ev => {
 // collection - kept, not deleted - because elimination only happens when it
 // does not feel like loss.
 function resolve(id) {
-  const c = collection(state.collection);
-  if (c) {
-    c.parked = [...c.parked, ...c.items.filter(x => x !== id)];
-    c.items = [id];
-    c.decided = id;
-  }
+  const others = state.cmpIds.filter(x => x !== id);
   state.tour = null;
-  go("collection");
-  toast("Decided. The rest are parked, not deleted.");
+
+  if (state.cmpFrom === "collection") {
+    const c = collection(state.collection);
+    if (c) { c.parked = [...c.parked, ...others]; c.items = [id]; c.decided = id; }
+    go("collection");
+    toast("Decided. The rest are parked, not deleted.");
+    return;
+  }
+  // From the wishlist: ask before removing anything.
+  state.pendingPick = { keep: id, others };
+  state.selecting = false; state.selected = [];
+  go("wishlist");
+  openSheet(removeOthersSheet());
 }
 
 document.addEventListener("input", ev => {

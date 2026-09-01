@@ -40,8 +40,10 @@ const head = s => console.log("\n" + s);
 
 const HANDLED = ["data-tab", "data-act", "data-open", "data-heart", "data-sub", "data-size",
   "data-col", "data-wtab", "data-addto", "data-sort", "data-pick", "data-win", "data-group",
-  "data-dismiss", "data-debag", "data-qty", "data-more", "data-toggleitem"];
-const INTERACTIVE = ".cat,.pc,.railcard,.chip,.heart,.cardmenu,.szchip,.colcard,.srow,.orow,.vscard,.banner,.banner2,#decidecard";
+  "data-dismiss", "data-debag", "data-qty", "data-more", "data-toggleitem",
+  "data-toggle", "data-cmpsub"];
+const INTERACTIVE = ".cat,.pc,.railcard,.chip,.heart,.cardmenu,.szchip,.colcard,.srow,.orow,"
+  + ".vscard,.banner,.banner2,#decidecard,.wbar button,.selbar button,#intro .go,#intro .x";
 
 function sweep(where) {
   const suspects = [...D.querySelectorAll("#screen button, #screen " + INTERACTIVE.split(",").join(", #screen "))];
@@ -60,11 +62,15 @@ function sweep(where) {
 }
 
 head("HOME");
+check("opens by saying what this is", !!q("#intro") && txt().includes("holding decisions"));
+check("and offers a way straight into it", !!q('#intro [data-act="demo"]'));
 check("renders", n(".cat") === 6 && txt().includes("SALE"));
 check("leads with the decision card", !!q("#decidecard"));
 check("and counts real decisions", /\d decisions? waiting/.test(txt()), txt().slice(0, 70));
 check("prototype badge in the header", $("topbar").textContent.includes("PROTOTYPE"));
 sweep("home");
+click('#intro .x');
+check("the explainer can be dismissed", !q("#intro"));
 
 head("SHOP, FILTER AND SORT");
 click('[data-tab="shop"]');
@@ -271,20 +277,54 @@ click(".toast [data-act='undo-heart']");
 check("undo restores it", n(".pc") === wishN + 1);
 click(`[data-heart="${targetId}"]`);
 
-head("GROUPING A SUGGESTION");
+head("COMPARE STRAIGHT FROM A SUGGESTION");
 click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
-const before = D.querySelectorAll(".colcard").length;
-click("[data-group]");
-check("grouping creates a collection and opens it", !!q('[data-act="compare"]'), txt().slice(0, 60));
-click('[data-tab="wishlist"]'); click('[data-wtab="cols"]');
-check("it appears in collections", n(".colcard") >= 3);
+check("the suggestion offers comparison, not filing", !!q("[data-cmpsub]"),
+      q(".suggest") ? q(".suggest").textContent.slice(0, 60) : "no suggestion");
+click("[data-cmpsub]");
+check("it goes straight to the comparison", !!q(".cmp"), txt().slice(0, 60));
+check("no collection had to be created first", n(".colcard") === 0);
+click('[data-tab="wishlist"]');
 
 head("DISMISSING");
 click('[data-wtab="items"]');
 if (q("[data-dismiss]")) {
+  const sub = q("[data-dismiss]").dataset.dismiss;
   click("[data-dismiss]");
-  check("dismissing hides that suggestion", !q("#screen .suggest") || !txt().includes("look like one decision"));
-} else check("dismissing hides that suggestion", true, "none left to dismiss");
+  // Dismissing one set may reveal the next, so assert that *this* one is gone.
+  check("dismissing hides that particular suggestion",
+        !q(`[data-dismiss="${sub}"]`) && !q(`[data-cmpsub="${sub}"]`), sub);
+} else check("dismissing hides that particular suggestion", true, "none left to dismiss");
+
+head("COMPARE AS A MODE ON THE WISHLIST");
+click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
+check("compare is offered from the wishlist itself", !!q('[data-act="startsel"]'));
+click('[data-act="startsel"]');
+check("selection mode turns cards into pickable tiles", n(".tick") > 3);
+check("and hides the tab bar so the action bar is reachable", $("nav").style.display === "none");
+check("compare is disabled until two are picked", !!q('.selbar .go[disabled]'));
+const picks = all("#screen .pc").slice(0, 3).map(el => el.dataset.toggle);
+picks.forEach(id => click(`#screen .pc[data-toggle="${id}"]`));
+check("picking marks the cards", n(".pc.sel") === 3, "got " + n(".pc.sel"));
+check("the bar counts them", txt().includes("3 selected"));
+click('[data-act="docompare"]');
+check("comparing what was picked", !!q(".cmp") && all("#screen .cmp thead th").length === 4,
+      "cols " + all("#screen .cmp thead th").length);
+
+head("PICK, THEN BE ASKED ABOUT THE REST");
+click("#screen .pickbtn");
+check("it asks before removing anything", $("sheet").textContent.includes("Remove the other 2"));
+check("and explains why", $("sheet").textContent.includes("decision stays open"));
+click('[data-act="keepall"]');
+check("keeping them leaves the wishlist untouched", n(".pc") === wishN, `${n(".pc")} vs ${wishN}`);
+click('[data-act="startsel"]');
+const picks2 = all("#screen .pc").slice(0, 3).map(el => el.dataset.toggle);
+picks2.forEach(id => click(`#screen .pc[data-toggle="${id}"]`));
+click('[data-act="docompare"]');
+click("#screen .pickbtn");
+click('[data-act="removeothers"]');
+check("removing drops exactly the losers", n(".pc") === wishN - 2, `${n(".pc")} vs ${wishN - 2}`);
+check("selection mode is over", !q(".selbar"));
 
 head("PROFILE AND ORDERS");
 click('[data-tab="profile"]');

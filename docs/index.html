@@ -135,6 +135,38 @@ input,select{font:inherit}
   display:grid;place-items:center;box-shadow:0 1px 4px rgba(22,27,45,.14)}
 #decidecard .go .ms{font-size:19px;color:var(--pink)}
 
+/* what-is-this banner — the first thing a reviewer sees */
+#intro{margin:12px;border-radius:12px;padding:16px 17px;color:#fff;
+  background:linear-gradient(135deg,#282c3f 0%,#3c4260 55%,#4a5a80 100%);position:relative}
+#intro .k{font-size:9.5px;font-weight:800;letter-spacing:.14em;opacity:.72}
+#intro h3{margin:8px 0 0;font-size:17px;font-weight:800;line-height:1.35;letter-spacing:-.01em}
+#intro p{margin:6px 0 0;font-size:13px;line-height:1.6;opacity:.85}
+#intro .go{margin-top:13px;display:inline-block;background:#fff;color:#282c3f;border-radius:4px;
+  padding:10px 15px;font-size:13px;font-weight:800}
+#intro .x{position:absolute;top:11px;right:11px;opacity:.6}
+#intro .x .ms{font-size:18px;color:#fff}
+
+/* compare toolbar + selection mode */
+.wbar{display:flex;gap:8px;padding:10px 12px;border-bottom:1px solid var(--hair)}
+.wbar button{flex:1;border:1px solid var(--line);border-radius:4px;padding:10px;font-size:12.5px;
+  font-weight:700;text-align:center;color:var(--ink);background:#fff}
+.wbar button.primary{background:var(--pink);border-color:var(--pink);color:#fff}
+.wbar .ms{font-size:15px;vertical-align:-3px;margin-right:4px}
+.selbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(var(--frame),100%);
+  background:#fff;border-top:1px solid var(--line);display:flex;gap:9px;padding:10px 12px;z-index:41;
+  align-items:center;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+.selbar .n{flex:1;font-size:13px;font-weight:700}
+.selbar .n small{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-top:1px}
+.selbar button{border-radius:4px;padding:11px 16px;font-size:13px;font-weight:800}
+.selbar .go{background:var(--pink);color:#fff}
+.selbar .go[disabled]{background:var(--line);color:var(--muted)}
+.selbar .cx{border:1px solid var(--line);color:var(--ink)}
+.tick{position:absolute;top:7px;left:7px;width:24px;height:24px;border-radius:50%;
+  background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 1px 3px rgba(22,27,45,.14)}
+.tick .ms{font-size:17px;color:var(--line)}
+.pc.sel .shot{outline:2px solid var(--pink);outline-offset:-2px;border-radius:5px}
+.pc.sel .tick .ms{color:var(--pink)}
+
 /* wishlist tabs + collections */
 .tabs{display:flex;border-bottom:1px solid var(--line);padding:0 12px}
 .tabs button{flex:1;padding:12px 0;font-size:13px;font-weight:700;color:var(--muted);

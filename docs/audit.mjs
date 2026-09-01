@@ -179,17 +179,18 @@ check("and it warns how many more are needed", txt().includes("Add 1 more"));
 head("THE PICKER REACHES THE WHOLE CATALOG");
 click('[data-act="additems"]');
 check("it offers items beyond the wishlist", $("sheet").textContent.includes("From the store"));
-const notSaved = "melange_kurta";
+const notSaved = "hm_cardigan";   // melange_kurta is claimed by a later section
 const storeRow = $("sheet").querySelector(`[data-toggleitem$=":${notSaved}"]`)
-  || (() => { const f = $("addq"); f.value = "melange";
+  || (() => { const f = $("addq"); f.value = "cardigan";
        f.dispatchEvent(new dom.window.Event("input", { bubbles: true }));
        return $("sheet").querySelector(`[data-toggleitem$=":${notSaved}"]`); })();
 check("searching inside the picker finds a product", !!storeRow);
 click(storeRow);
 click('[data-act="closesheet"]');
-check("a store item lands in the collection", txt().includes("Melange"));
+check("a store item lands in the collection", txt().includes("Cardigan"));
 click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
 check("and is saved to the wishlist too", !!q(`#screen .pc[data-open="${notSaved}"]`));
+click(`#screen .pc[data-open="${notSaved}"] .heart`);   // restore the wishlist
 click('[data-wtab="cols"]');
 click([...all("#screen .colcard")].find(el => el.textContent.includes("Office")));
 click('[data-act="delcol"]');

@@ -818,10 +818,12 @@ function toast(msg, action) {
 
 function topbar() {
   const bag = state.bag.length;
+  // The wordmark goes home, the way it does on every storefront.
   const left = ROOTS.has(state.page)
-    ? `<span class="logo">MYNTRA<i>.</i></span><span class="proto">PROTOTYPE</span>`
+    ? `<button class="logo" data-tab="home" aria-label="Myntra home">MYNTRA<i>.</i></button>
+       <span class="proto">PROTOTYPE</span>`
     : `<button class="ms topicon" data-act="back">arrow_back</button>
-       <span class="logo" style="font-size:17px">MYNTRA<i>.</i></span>`;
+       <button class="logo" data-tab="home" style="font-size:17px" aria-label="Myntra home">MYNTRA<i>.</i></button>`;
   const mid = state.page === "shop"
     ? `<input id="searchfield" placeholder="Search for products, brands" value="${esc(state.query)}">`
     : `<span class="spacer"></span><button class="ms topicon" data-act="search">search</button>`;
@@ -893,7 +895,7 @@ document.addEventListener("click", ev => {
   }
   if (d.tab) {
     closeSheet(); state.query = ""; state.sub = null;
-    state.selecting = false; state.selected = [];
+    state.selecting = false; state.selected = []; state.picked = [];
     go(d.tab); return;
   }
   if (d.wtab) { state.tab = d.wtab; render(); return; }

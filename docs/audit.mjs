@@ -64,6 +64,7 @@ function sweep(where) {
 head("HOME");
 check("opens by saying what this is", !!q("#intro") && txt().includes("holding decisions"));
 check("help is reachable from any screen", !!q('[data-act="guide"]'));
+check("the wordmark is a link home", !!q('#topbar .logo[data-tab="home"]'));
 check("and offers a way straight into it", !!q('#intro [data-act="tour"]'));
 click('[data-act="guide"]');
 check("the guide explains the whole flow in steps", $("sheet").querySelectorAll(".step").length === 4);
@@ -447,6 +448,20 @@ click('[data-act="donepicks"]');
 click('[data-act="removeothers"]');
 check("removing drops exactly the losers", n(".pc") === wishN - 2, `${n(".pc")} vs ${wishN - 2}`);
 check("selection mode is over", !q(".selbar"));
+
+head("THE WORDMARK GOES HOME");
+click('[data-tab="wishlist"]');
+click('#screen .pc');
+check("on a sub page the wordmark is still a link", !!q('#topbar .logo[data-tab="home"]'));
+click('#topbar .logo');
+check("tapping it lands on home", !!q("#screen .cats"), txt().slice(0, 40));
+click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
+click("[data-cmpsub]");
+click("#screen .pickbtn");
+click('#topbar .logo');
+check("and leaves no half-made picks behind",
+      (click('[data-tab="wishlist"]'), click("[data-cmpsub]"), !q(".pickbtn.on")));
+click('[data-act="back"]');
 
 head("PROFILE AND ORDERS");
 click('[data-tab="profile"]');

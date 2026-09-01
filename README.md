@@ -1,216 +1,134 @@
-# Fit Check
+# Myntra · Decide
 
-**A wishlist that already knows what fits you.**
+**A wishlist that helps you choose, not just store.**
 
 A working prototype for Part 5 of a product management case study. The business
-question behind it: how do you increase the share of users who buy at least one
-wishlisted item within 30 days of saving it, **without discounting?**
-
-It never asks your size.
+question behind it: how do you increase the share of users who purchase at least
+one wishlisted item within 30 days of saving it, **without discounting?**
 
 **→ [Open the live app](https://piyushdhar1309.github.io/myntra-fit-check/)**
 
 ---
 
-## The problem it is built on
+## The insight
+
+> **Myntra models the wishlist as items. Users experience it as decisions.**
+
+When someone saves six black anarkalis, they have not made six decisions. They
+have made **one** — *I want a kurta for this wedding* — and deferred **which**.
+Myntra stores that as six independent intents and treats each as separately
+convertible. It isn't. Until the one decision resolves, **none of the six
+converts.**
+
+Everything follows from that modelling error:
+
+- The wishlist has only two exits: buy, or delete. Deleting feels like
+  discarding something you did work to find, so nobody does it. The list only
+  grows.
+- Every new save divides attention further, so **the probability of any single
+  item converting falls as the list grows**. A wishlist's growth is inversely
+  related to its conversion.
+- No amount of fit confidence, price movement or review volume touches this,
+  because the blocker is not information. It is **choice**.
+
+## Where this came from
 
 The [discovery engine](https://github.com/PiyushDhar1309/myntra-wishlist-discovery-engine)
-that preceded this found that fit uncertainty survives the size chart - users
-consult it and still cannot commit, because a numeric size means something
-different at every brand, and lengths often are not published at all. Fit and
-size appeared in 44% of the rows discussing decision factors.
+that preceded this analysed 4,060 rows of real user feedback and found something
+that reframes the brief: **the gap between saving and buying is frequently
+deliberate waiting, not lost interest.** Users described saving specifically *in
+order to compare before choosing* — one complained that the wishlist size cap
+was getting in the way of exactly that.
 
-Six user interviews sharpened that. Every respondent had a **non-standard body**
-- plus-size, petite or tall - and none could answer the only question that
-matters: *how will this specific garment sit on my specific body?* Their
-workarounds were all evidence-gathering rituals, and all expensive:
+"Increase wishlist conversion" implies decayed intent that needs re-igniting.
+The evidence says intent is intact and **parked on a condition**. Every
+"complete your purchase" nudge is aimed at a problem that is not there.
 
-| | Stuck on | Blocker | Workaround |
-|---|---|---|---|
-| R1 | Anarkali kurta | Fit varies by brand | Scans reviews for "true to size" |
-| R2 | Winter jacket | Chest and sleeve doubt | Buys two sizes, returns one |
-| R3 | Straight jeans | Inseam never published | Reads petite-fashion forums |
-| R4 | Casual shirt | Sleeve and torso length | Buys from two brands only |
-| R5 | Wedding outfit | Fabric behaviour | Hunts Instagram for a similar body |
-| R6 | Slim shirt | No petite-men sizing exists | Leaves for a niche site |
+**Myntra already ships collections** — you can group saved items by hand. That
+is not competition, it is corroboration: the platform saw the need clearly
+enough to build folders, and people use them. But **filing is not deciding.**
+You can put six kurtas in a "Wedding" collection and be no closer to picking
+one. Myntra solved organisation and stopped one step short.
 
-They do not have a **size** problem. They mostly already suspect the right size.
-They have a **proof** problem - no evidence strong enough to commit Rs. 2,000 to.
+## What the product does
 
-## The move
+**Detects the decisions.** Saved items that answer the same need at a comparable
+price are rivals. Three or more of them is a decision, not a list — and the
+wishlist says so: *"6 of your saved kurtas look like one decision."* One tap
+groups them into a collection, feeding Myntra's own feature rather than
+competing with it.
 
-Stop trying to measure the user, and stop asking other shoppers. Use the clothes
-they already own.
-
-A verdict phrased as *"your chest is 43", this garment is 44""* asks someone to
-trust the very thing that has failed them. So the comparison is drawn garment to
-garment instead - against a physical object in their wardrobe they can go and
-touch. It needs no other user on the platform, so there is no cold start, and it
-works for R6, whose body type no sizing data anywhere describes.
-
-**It fills itself in.** Every kept Myntra order is a garment that fits. Every
-order returned for a size reason is a boundary, and the return reason says which
-direction. Existing users start with a full profile at zero effort, from data
-Myntra already holds and no competitor can copy.
-
-## What it computes
-
-The instrument is not a body measurement. It is a **fit envelope**: per scope,
-the range of *garment* measurements proven to work on this body, which already
-bakes in their proportions, their fit preference and their tolerance.
+**Shows what actually separates them.** Near-identical products differ on a
+dozen attributes and almost none of them should decide anything. The comparison
+ranks every difference by weight, leads with the four that matter, and folds the
+rest away:
 
 ```
-YOUR UPPER BODY            derived from 4 garments you own
-  chest    38.0 - 40.3"    35.5" was returned as too tight
-  waist    36.0 - 38.8"
-  shoulder      under 15.5"    15.5" droops on you
-YOUR KURTAS
-  length   43.0 - 45.0"
+6 items, one decision
+All 6 are kurtas, ₹1,799–₹2,699
+They differ on price and delivery. Of 11 differences, these 4 should decide it.
+
+           Libas    Biba     W        Aurelia  Anouk    Sangria
+PRICE      ₹2,099   ₹2,699   ₹1,899   ₹1,799 ✓ ₹2,499   ₹2,299
+DELIVERY   4 days   2 days   3 days   7 days   2 days   5 days
+FABRIC     Rayon    Cotton   Rayon    Crepe    Georgette Cotton
+LENGTH     Calf     Ankle    Calf     Knee     Ankle    Calf
 ```
 
-Every saved item is judged against it, measurement by measurement, and lands in
-one of four states:
+A tick marks the lowest price, fastest delivery, longest returns or best
+rating. **Nothing is ticked on fabric, colour or pattern** — those are taste,
+and the product does not pretend otherwise.
 
-| Badge | Meaning |
-|---|---|
-| **FITS YOU** | Every deciding measurement sits inside the proven range |
-| **LIKELY FITS** | What we can check works; something critical is still unmeasured |
-| **1 MEASURE AWAY** / **NO SIZE DATA** | The measurement that decides it *for this body* is missing |
-| **WRONG SIZE** | It crosses a limit they have already been burned at - usually with a size that clears it |
+**Breaks the deadlock when the table is not enough.** *Compare two at a time*
+turns one impossible six-way choice into five easy binary ones. That is how
+choice overload is actually broken — by shrinking each choice, not by adding
+information to a big one.
 
-### The third state is the product
+**Makes elimination safe.** Picking one **parks** the rest inside the
+collection. Kept, visible, one tap from coming back. People hoard because
+removing feels like loss, so nothing is ever deleted — which is the only reason
+anyone will use it twice.
 
-Every size tool projects false certainty, which is how R3 and R6 got burned and
-left. Saying plainly *"the number that decides this for you does not exist, and
-here is how to get it"* is more useful than a confident guess.
+## Why it fits the brief
 
-So the engine separates two kinds of not-knowing, because they have different
-fixes and conflating them is how a size tool ends up bluffing:
+- **Non-monetary by construction.** Nothing in it goes near price manipulation.
+- **It does not collide with Fit Assist**, which answers *"which size of this
+  one?"* This answers *"which of these six?"* They compose.
+- **The metric's shape favours it.** The goal is *% of users who buy at least
+  one saved item* — a user-level measure. You do not need to convert every item,
+  only to **break one logjam per person**.
 
-- **The brand does not publish it.** Nothing the shopper does will produce that
-  number. The app says so and stops.
-- **Nothing they own pins it down.** They can fix this in thirty seconds - and
-  the app asks for **the single measurement that unlocks the most saved items**,
-  taken off a garment lying flat, which is easier and far more accurate than
-  measuring yourself.
-
-On the seeded profile, one number does this:
-
-```
-before   1 fits - 3 need a measure - 2 wrong size
-              |  measure the inseam of the Levi's 711 you own
-after    3 fits - 0 need a measure - 3 wrong size
-```
-
-Two stalled items become buyable, and one is revealed as a mistake before it
-becomes a return. No discount was involved.
-
-## How it avoids bluffing
-
-**The deterministic layer decides.** Envelopes, deltas, verdicts and confidence
-are computed arithmetic - there is no model in the loop and nothing is inferred.
-Evidence is attributed: every verdict names the garments it was judged against,
-so a reader can check the reasoning against their own wardrobe. And **absence is
-reported, never filled in**.
-
-A few rules the engine holds to, each covered by a test:
-
-- A complaint about the chest does not vouch for the hem. A garment returned for
-  one reason contributes evidence on that dimension only.
-- A cap sleeve is not evidence about a full sleeve, so sleeves are scoped by
-  sleeve style, not just by category.
-- Inseam and rise pool across a body region, because crotch-to-floor does not
-  change with the fabric. Hem and sleeve length do not - those are choices a
-  designer made.
-- Stretch is converted into wearable inches **once**, before anything is
-  compared, so fabric is never charged twice.
-- A relaxed cut is not penalised for a roomy thigh, but is still judged at the
-  waist.
-- Nothing is called a fit while something critical is unmeasured.
-
-## The app
-
-Nine screens: home, shop, search, product, wishlist, bag, profile, orders and
-My Fit Profile.
-
-The **product page** is where the engine is most visible, and **every product
-gets a size recommendation** - the page opens on the size we would pick, tags it
-*BEST FIT*, and strikes through any size that crosses a limit this body has
-already hit. Below it sit the measurement bars, the reason, and either the one
-measurement that would settle it or a plain statement that the brand has not
-published what it would take.
-
-The recommendation is graded by what the evidence actually supports, which is
-the part a size chart cannot do:
+## What is in here
 
 | | |
 |---|---|
-| *"We recommend size S"* | Everything that decides it is settled |
-| *"Size 26 is your closest fit"* | Hedged, and it names what is still missing |
-| *"No size here will fit you"* | Every size crosses a known limit — said plainly rather than pushing the least-bad one |
+| `docs/index.html` | Shell and stylesheet |
+| `docs/decide.js` | Clustering, difference ranking, the tournament |
+| `docs/app.js` | Eleven screens, rendering and interaction |
+| `docs/data.js` | Generated — do not edit by hand |
+| `tools/build_catalog.py` | Builds the catalog, including the decision clusters |
+| `docs/audit.mjs` | 126 checks across every screen, control and flow |
 
-A caveat is never dropped to make the sentence tidier. The Zara midi is
-recommended in M and still told that its hem runs 7.5" longer than the only
-dress she owns, because a midi is not a failed mini but staying quiet about it
-would be a lie.
-
-The **size chart** is the familiar Myntra one with a difference: the last row is
-the shopper's own proven range, every cell is tinted by what it means for them,
-and a measurement the brand never published shows a dash instead of an estimate.
-
-The **wishlist** is the feature: verdict badges, filters by state, and the
-measurement ask. **Orders** shows where the fit profile came from - what was
-kept, and what went back for a size reason.
-
-Saving, unsaving, the bag and adding to your wardrobe all change real state, so
-anything you save from Shop is judged the moment it lands in the wishlist.
-
-## Layout
-
-The deployed app is JavaScript. Python remains the reference implementation and
-keeps the invariant suite, and the catalog is generated across so the two cannot
-drift apart.
-
-| | |
-|---|---|
-| `docs/index.html` | The app shell and stylesheet |
-| `docs/engine.js` | The fit engine, ported from `fit_engine.py` |
-| `docs/app.js` | Screens, rendering and interaction |
-| `docs/audit.mjs` | 118 checks across every screen, control and flow |
-| `docs/data.js` | Generated from `catalog.py` - do not edit by hand |
-| `dims.py` | Dimension vocabulary: what pools with what, and why |
-| `catalog.py` | Seeded garments, past orders and wishlists for two shoppers |
-| `fit_engine.py` | The reference implementation |
-| `tools/gen_data.py` | Regenerates `docs/data.js` and the parity snapshot |
+48 products with descriptions, specifications, multiple sizes with out-of-stock
+states, ratings, reviews, delivery estimates and return windows — plus three
+deliberately seeded decision clusters, because a comparison engine cannot be
+judged on a catalog of unrelated things.
 
 ### Tests
 
 ```bash
-python3 test_engine.py    # 40+ engine invariants
-node docs/parity.mjs      # the JS engine must match Python exactly
-npm install jsdom && node docs/audit.mjs   # 118 checks, headless
+python3 tools/build_catalog.py           # regenerate the catalog
+npm install jsdom && node docs/audit.mjs # 126 checks, headless
 ```
 
-`parity.mjs` replays three scenarios through both engines and compares every
-row, confidence score and unlock. Run `python3 tools/gen_data.py` after changing
-the catalog or the rules.
-
-`audit.mjs` walks all nine screens and drives every flow: opening products,
-changing size, saving and unsaving, the bag, search, category filters, the
-measurement loop, adding a garment, switching shopper, reset, and the empty
-states. Three of its sweeps run on every screen:
-
-- **No dead controls.** Every button and interactive element must resolve to a
-  handler. A control that looks live and does nothing is the first thing a
-  reviewer finds.
-- **No unconstrained images.** Every product photo sits inside a `.shot`, which
-  is the single place image sizing is decided.
-- **The disclaimer is present**, and nothing invents star ratings, review counts
-  or personal details.
+Three sweeps run on **every** screen: **no dead controls** (every button
+resolves to a handler — a control that looks live and does nothing is the first
+thing a reviewer finds), **no unconstrained images**, and **the disclaimer is
+present**.
 
 ### Running it
 
-Any static server, since it is plain ES modules with no build step:
+Plain ES modules, no build step:
 
 ```bash
 cd docs && python3 -m http.server 8000
@@ -218,9 +136,8 @@ cd docs && python3 -m http.server 8000
 
 ---
 
-Case-study prototype. Not affiliated with Myntra, and not endorsed by any brand
-named in the catalog. The catalog and order history are illustrative; the fit
-engine is real - change the profile and every verdict recomputes.
-
-Photography from [Unsplash](https://unsplash.com) under the Unsplash licence,
-illustrating the garment category rather than the specific garment.
+Prototype for a product case study. Not affiliated with Myntra and not endorsed
+by any brand named here. Products, prices, ratings and reviews are sample data
+written for the demo — no real person wrote them, and nothing here can be
+bought. Photography from [Unsplash](https://unsplash.com) illustrates the
+category, not the exact garment.

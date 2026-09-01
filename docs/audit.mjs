@@ -41,7 +41,7 @@ const head = s => console.log("\n" + s);
 const HANDLED = ["data-tab", "data-act", "data-open", "data-heart", "data-sub", "data-size",
   "data-col", "data-wtab", "data-addto", "data-sort", "data-pick", "data-win", "data-group",
   "data-dismiss", "data-debag", "data-qty", "data-more", "data-toggleitem",
-  "data-toggle", "data-cmpsub"];
+  "data-toggle", "data-cmpsub", "data-tip"];
 const INTERACTIVE = ".cat,.pc,.railcard,.chip,.heart,.cardmenu,.szchip,.colcard,.srow,.orow,"
   + ".vscard,.banner,.banner2,#decidecard,.wbar button,.selbar button,#intro .go,#intro .x";
 
@@ -63,7 +63,13 @@ function sweep(where) {
 
 head("HOME");
 check("opens by saying what this is", !!q("#intro") && txt().includes("holding decisions"));
+check("help is reachable from any screen", !!q('[data-act="guide"]'));
 check("and offers a way straight into it", !!q('#intro [data-act="demo"]'));
+click('[data-act="guide"]');
+check("the guide explains the whole flow in steps", $("sheet").querySelectorAll(".step").length === 4);
+check("and counts the real wishlist", /\d+ saved items/.test($("sheet").textContent));
+check("with a way into a live example", !!$("sheet").querySelector('[data-act="demo"]'));
+click("#scrim");
 check("renders", n(".cat") === 6 && txt().includes("SALE"));
 check("leads with the decision card", !!q("#decidecard"));
 check("and counts real decisions", /\d decisions? waiting/.test(txt()), txt().slice(0, 70));
@@ -134,7 +140,7 @@ click('[data-tab="wishlist"]');
 click('[data-wtab="items"]');
 check("wishlist has both tabs", n(".tabs button") === 2);
 const wishN = n(".pc");
-check("seeded with saved items", wishN >= 15, "got " + wishN);
+check("seeded like a real wishlist, not a demo one", wishN >= 50, "got " + wishN);
 check("suggests grouping a detected cluster", !!q(".suggest"), txt().slice(0, 90));
 check("the suggestion names the shared ground", /All \d+ are/.test(txt()));
 sweep("wishlist");
@@ -279,6 +285,18 @@ click(".toast [data-act='undo-heart']");
 check("undo restores it", n(".pc") === wishN + 1);
 click(`[data-heart="${targetId}"]`);
 
+head("A WISHLIST THE SIZE REAL ONES GET");
+click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
+check("holds 50+ items", n(".pc") >= 50, "got " + n(".pc"));
+const names = all("#screen .pname").map(e => e.textContent);
+const tees = names.filter(x => /Crew Tee/.test(x)).length;
+check("including seven near-identical tees", tees >= 7, "got " + tees);
+check("and they are not adjacent duplicates but real separate products",
+      new Set(all("#screen .pc img").map(i => i.src)).size === n(".pc"),
+      "duplicate photos on the wishlist");
+click('[data-tab="home"]');
+check("home counts the decisions found", /[3-9] decisions waiting/.test(txt()), txt().slice(0, 80));
+
 head("COMPARE STRAIGHT FROM A SUGGESTION");
 click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
 check("the suggestion offers comparison, not filing", !!q("[data-cmpsub]"),
@@ -302,6 +320,9 @@ if (q("[data-dismiss]")) {
 head("COMPARE AS A MODE ON THE WISHLIST");
 click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
 check("compare is offered from the wishlist itself", !!q('[data-act="startsel"]'));
+check("a first-time hint says what to do", !!q(".hint") && txt().includes("same decision saved"));
+click("[data-tip]");
+check("and the hint can be sent away for good", !q(".hint"));
 click('[data-act="startsel"]');
 check("selection mode turns cards into pickable tiles", n(".tick") > 3);
 check("and hides the tab bar so the action bar is reachable", $("nav").style.display === "none");
@@ -341,7 +362,7 @@ sweep("orders");
 head("EMPTY STATES");
 click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
 guard = 0;
-while (n(".pc") > 0 && guard++ < 40) click("#screen .pc .heart");
+while (n(".pc") > 0 && guard++ < 120) click("#screen .pc .heart");   // the seeded wishlist is large
 check("the wishlist can be emptied", n(".pc") === 0, "got " + n(".pc"));
 check("and explains itself", txt().includes("Nothing saved yet"));
 click('[data-tab="home"]');

@@ -6,8 +6,16 @@
 import { PRODUCTS, CATEGORIES, CLUSTER_SEEDS, photo, rupees, title } from "./data.js";
 import * as de from "./decide.js";
 
-const SEED_WISH = [...CLUSTER_SEEDS.A, ...CLUSTER_SEEDS.B, ...CLUSTER_SEEDS.C,
-  "saree_kalini", "zara_blazer", "hm_tee", "mango_skirt", "fabindia_kurta"];
+// A wishlist the size real ones actually get. Six decision sets are in here,
+// buried in twenty-odd unrelated saves — so they have to be found rather than
+// handed over, which is the whole job.
+const SEED_WISH = [
+  ...CLUSTER_SEEDS.A, ...CLUSTER_SEEDS.B, ...CLUSTER_SEEDS.C,
+  ...CLUSTER_SEEDS.D, ...CLUSTER_SEEDS.E, ...CLUSTER_SEEDS.F,
+  "saree_kalini", "zara_blazer", "mango_skirt", "fabindia_kurta", "anouk_lehenga",
+  "f00", "f03", "f06", "f09", "f12", "f15", "f18", "f21", "f24", "f27",
+  "f30", "f33", "f36", "f39", "f42", "f45", "f48", "f51",
+];
 
 const state = {
   page: "home", stack: [],
@@ -19,7 +27,7 @@ const state = {
   cat: null, sub: null, sort: "recommended", tab: "items",
   collection: null, cmpIds: [], cmpAll: false, tour: null,
   query: "", dismissed: [], introSeen: false,
-  selecting: false, selected: [], cmpFrom: null, pendingPick: null,
+  selecting: false, selected: [], cmpFrom: null, pendingPick: null, tips: [],
 };
 
 const $ = id => document.getElementById(id);
@@ -94,6 +102,14 @@ function mosaic(items) {
                        : `<div class="fillcell"></div>`);
   }
   return `<div class="mosaic">${cells.join("")}</div>`;
+}
+
+// A one-line hint that appears once and can be sent away for good. Guidance
+// that nags is worse than none.
+function tip(id, text) {
+  if (state.tips.includes(id)) return "";
+  return `<div class="hint"><span class="ms">lightbulb</span><span>${text}</span>
+    <button data-tip="${id}" aria-label="Dismiss"><span class="ms">close</span></button></div>`;
 }
 
 function disclaimer() {
@@ -299,8 +315,11 @@ function wishlistScreen() {
       <button class="go" data-act="docompare" ${state.selected.length < 2 ? "disabled" : ""}>Compare</button>
     </div>` : "";
 
+  const hint = state.selecting ? "" : tip("wish",
+    "Some of these are the same decision saved several times. Tap <b>Compare items</b> to pick them, or use the suggestion below.");
+
   return `<div class="wtitle"><h1>${state.selecting ? "Pick items to compare" : "Wishlist"}</h1>
-      <span>${items.length} items</span></div>${state.selecting ? "" : tabs}${bar}
+      <span>${items.length} items</span></div>${state.selecting ? "" : tabs}${bar}${hint}
     ${suggestHTML}
     ${items.length ? `<div class="grid">${items.map(id => card(id, "pc", true)).join("")}</div>`
       : `<div class="empty">Nothing saved yet.<br>Tap the heart on anything in Shop.</div>`}
@@ -577,6 +596,35 @@ function removeOthersSheet() {
     </div>`;
 }
 
+function guideSheet() {
+  const d = openDecisions();
+  return `<div class="handle"></div>
+    <div style="padding:6px 16px 4px">
+      <div class="sec">How this prototype works</div>
+      <div style="font-size:13px;color:var(--sec);line-height:1.65;margin-top:8px">
+        Everything here is an ordinary Myntra clone — browse it, save things, put them in your bag.
+        One thing is new, and it lives in your wishlist.</div>
+    </div>
+    ${[["Your wishlist is full of repeats",
+        `You have ${state.wish.length} saved items, and ${d.length} of them are really the same
+         decision saved several times over — seven black tees, six pairs of jeans, five white shirts.`],
+       ["Pick the ones you're torn between",
+        `Open Wishlist and tap <b>Compare items</b>, then select them. Or take the suggestion at the
+         top, which finds a set for you.`],
+       ["See what actually separates them",
+        `Near-identical products differ on a dozen things and almost none of them matter. You get the
+         few that do — and if it's still close, two at a time.`],
+       ["Then close the decision",
+        `Pick one, and we ask whether to clear the rest out of your wishlist. Nothing is deleted
+         behind your back.`]]
+      .map(([t, b], i) => `<div class="step">
+        <span class="n">${i + 1}</span>
+        <div><b>${t}</b><p>${b}</p></div></div>`).join("")}
+    <div style="padding:14px 16px 0">
+      <button class="btn wide" data-act="demo">Show me a real one</button></div>
+    <div class="foot">Case-study prototype. Nothing here can be bought.</div>`;
+}
+
 function sortSheet() {
   return `<div class="handle"></div>
     <div style="padding:6px 16px 4px"><div class="sec">Sort by</div></div>
@@ -650,7 +698,8 @@ function topbar() {
   const mid = state.page === "shop"
     ? `<input id="searchfield" placeholder="Search for products, brands" value="${esc(state.query)}">`
     : `<span class="spacer"></span><button class="ms topicon" data-act="search">search</button>`;
-  return `${left}${mid}<button class="ms topicon" data-act="bagpage">shopping_bag${
+  return `${left}${mid}<button class="ms topicon" data-act="guide" aria-label="How this works">help_outline</button>
+    <button class="ms topicon" data-act="bagpage">shopping_bag${
     bag ? `<span class="bagdot">${bag}</span>` : ""}</button>`;
 }
 
@@ -690,7 +739,8 @@ const back = () => { state.page = state.stack.pop() || "home"; render(); };
 document.addEventListener("click", ev => {
   const t = ev.target.closest("[data-tab],[data-act],[data-open],[data-heart],[data-sub],[data-size],"
     + "[data-col],[data-wtab],[data-addto],[data-sort],[data-pick],[data-win],[data-group],"
-    + "[data-dismiss],[data-debag],[data-qty],[data-more],[data-toggleitem],[data-toggle],[data-cmpsub]");
+    + "[data-dismiss],[data-debag],[data-qty],[data-more],[data-toggleitem],[data-toggle],"
+    + "[data-cmpsub],[data-tip]");
   if (!t) return;
   const d = t.dataset;
 
@@ -723,6 +773,7 @@ document.addEventListener("click", ev => {
   if (d.size) { state.productSize = d.size; render(); return; }
   if (d.col) { state.collection = d.col; go("collection"); return; }
   if (d.sort) { state.sort = d.sort; closeSheet(); render(); return; }
+  if (d.tip) { state.tips.push(d.tip); render(); return; }
   if (d.toggle) {
     const i = state.selected.indexOf(d.toggle);
     if (i >= 0) state.selected.splice(i, 1); else state.selected.push(d.toggle);
@@ -797,7 +848,9 @@ document.addEventListener("click", ev => {
     case "oos": toast("That size is out of stock"); break;
     case "sort": openSheet(sortSheet()); break;
     case "hideintro": state.introSeen = true; render(); break;
+    case "guide": openSheet(guideSheet()); break;
     case "demo": {
+      closeSheet();
       state.introSeen = true; state.tab = "items";
       const first = de.findClusters(loose())[0];
       if (first) {

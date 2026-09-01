@@ -11,7 +11,7 @@ sets of near-identical items that a shopper would genuinely be choosing
 between. Everything else is ordinary stock so the wishlist does not look staged.
 """
 
-import json, os, random
+import json, os, random, sys
 
 random.seed(20260901)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -71,6 +71,32 @@ def product(pid, brand, name, cat, sub, colour, price, off, rating, count,
         "desc": desc or f"{colour} {name.lower()} in {fabric.lower()}. {pattern} pattern with {sleeve.lower()} and a {fit.lower()} silhouette. Suited to {occasion.lower()}.",
         "reviews": reviews_for(rating, 3),
     }
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import images as IMGPOOL
+
+_used = set()
+
+def _cycle(name, taken):
+    """Hand out photo ids, never repeating one.
+
+    Prefers the pool matching the product's category so a kurta never shows a
+    pair of jeans. If that pool runs dry it borrows from whatever is still
+    unused elsewhere - a slightly-off photo beats the same photo twice.
+    """
+    def gen():
+        for pid in IMGPOOL.ALL[name]:
+            if pid not in taken and pid not in _used:
+                _used.add(pid)
+                yield pid
+        while True:
+            spare = [p for v in IMGPOOL.ALL.values() for p in v
+                     if p not in taken and p not in _used]
+            if not spare:
+                raise RuntimeError("image pool exhausted - add more ids to tools/images.py")
+            _used.add(spare[0])
+            yield spare[0]
+    return gen()
 
 P = []  # products
 
@@ -159,6 +185,149 @@ for row in REST:
     (pid, brand, name, cat, sub, col, price, off, rat, cnt, fab, pat, slv, ln, fit, occ, wash, ph, dlv, ret, sizes) = row
     P.append(product(pid, brand, name, cat, sub, col, price, off, rat, cnt,
                      fab, pat, slv, ln, fit, occ, wash, [ph], dlv, ret, sizes=sizes))
+
+# Photo ids already spoken for by the hand-written products above.
+_taken = {ph for prod in P for ph in prod["photos"]}
+IMG_ETHNIC  = _cycle("ethnic",  _taken)
+IMG_DRESS   = _cycle("dress",   _taken)
+IMG_WBOTTOM = _cycle("wbottom", _taken)
+IMG_WTOP    = _cycle("wtop",    _taken)
+IMG_JEANS   = _cycle("jeans",   _taken)
+IMG_TEE     = _cycle("tee",     _taken)
+IMG_MSHIRT  = _cycle("mshirt",  _taken)
+IMG_OUTER   = _cycle("outer",   _taken)
+IMG_MBOTTOM = _cycle("mbottom", _taken)
+
+# ------------------------------------------------- CLUSTER D: black crew tees
+# Seven plain tees in one price band. The clearest case the feature has: people
+# genuinely save several of these, they are near-identical, and nothing on a
+# product page tells you which one to pick.
+D = [
+    ("hm_tee_black",    "H&M",         "Regular Fit Crew Tee",   "Black",    699,  40, 4.2, 8410, "100% Cotton",              "Solid", "Short sleeves", "Hip length",   "Regular",   "Machine wash", 3, 30),
+    ("roadster_tee",    "Roadster",    "Pure Cotton Crew Tee",   "Black",    599,  55, 4.0, 6120, "100% Cotton",              "Solid", "Short sleeves", "Hip length",   "Regular",   "Machine wash", 2, 14),
+    ("hrx_tee_black",   "HRX",         "Bio-Wash Crew Tee",      "Jet Black",799,  45, 4.4, 5230, "100% Bio-wash Cotton",     "Solid", "Short sleeves", "Hip length",   "Slim",      "Machine wash", 2, 30),
+    ("levis_tee",       "Levi's",      "Slim Fit Crew Tee",      "Black",   1299,  30, 4.5, 3980, "100% Cotton",              "Solid", "Short sleeves", "Hip length",   "Slim",      "Machine wash", 4, 30),
+    ("puma_tee",        "Puma",        "Essentials Crew Tee",    "Charcoal", 999,  40, 4.3, 4710, "60% Cotton, 40% Polyester","Solid", "Short sleeves", "Hip length",   "Regular",   "Machine wash", 3, 14),
+    ("mh_tee",          "Mast & Harbour","Oversized Crew Tee",   "Black",    899,  50, 3.9, 1890, "100% Cotton",              "Solid", "Short sleeves", "Longline",     "Oversized", "Machine wash", 6, 14),
+    ("uspa_tee",        "U.S. Polo Assn.","Pima Cotton Crew Tee","Black",   1199,  35, 4.6, 2640, "100% Pima Cotton",         "Solid", "Short sleeves", "Hip length",   "Regular",   "Hand wash",    5, 30),
+]
+for pid, brand, name, col, price, off, rat, cnt, fab, pat, slv, ln, fit, wash, dlv, ret in D:
+    P.append(product(pid, brand, name, "Western Wear", "T-Shirts", col, price, off, rat, cnt,
+                     fab, pat, slv, ln, fit, "Casual", wash, [next(IMG_TEE)], dlv, ret,
+                     oos=("XS",) if pid in ("mh_tee", "puma_tee") else ()))
+
+# ------------------------------------------------- CLUSTER E: slim/straight jeans
+E = [
+    ("levis_511",   "Levi's",       "511 Slim Fit Jeans",       "Dark Blue", 3499, 30, 4.5, 6240, "98% Cotton, 2% Elastane", "Slim",     3, 30),
+    ("jack_jeans",  "Jack & Jones", "Slim Tapered Jeans",       "Mid Blue",  2799, 45, 4.2, 3110, "99% Cotton, 1% Elastane", "Slim",     4, 14),
+    ("hm_slim",     "H&M",          "Slim Fit Denim",           "Black",     1999, 50, 3.9, 1740, "100% Cotton",             "Slim",     6, 14),
+    ("roadster_slim","Roadster",    "Straight Fit Jeans",       "Ice Blue",  1699, 60, 4.0, 4520, "98% Cotton, 2% Elastane", "Straight", 3, 14),
+    ("wrangler_jeans","Wrangler",   "Greensboro Straight Jeans","Dark Blue", 2999, 40, 4.3, 2280, "100% Cotton",             "Straight", 5, 30),
+    ("uspa_jeans",  "U.S. Polo Assn.","Regular Fit Jeans",      "Mid Blue",  2499, 45, 4.1, 1960, "99% Cotton, 1% Elastane", "Regular",  4, 30),
+]
+for pid, brand, name, col, price, off, rat, cnt, fab, fit, dlv, ret in E:
+    P.append(product(pid, brand, name, "Western Wear", "Jeans", col, price, off, rat, cnt,
+                     fab, "Solid", "Sleeveless", "Full length", fit, "Casual", "Machine wash",
+                     [next(IMG_JEANS)], dlv, ret, sizes=SIZES_NUM,
+                     oos=("26",) if pid == "hm_slim" else ()))
+
+# ------------------------------------------------- CLUSTER F: white formal shirts
+F = [
+    ("vh_white",    "Van Heusen",     "Slim Fit Formal Shirt",  "White",  2299, 40, 4.4, 3820, "100% Cotton",          "Slim",    2, 30),
+    ("as_white",    "Allen Solly",    "Regular Fit Shirt",      "White",  1999, 50, 4.1, 2410, "Cotton Blend",         "Regular", 4, 14),
+    ("arrow_white", "Arrow",          "Wrinkle-Free Shirt",     "Ivory",  2699, 35, 4.3, 1770, "100% Cotton",          "Slim",    3, 30),
+    ("peter_white", "Peter England",  "Cotton Formal Shirt",    "White",  1499, 55, 3.9, 5140, "65% Poly, 35% Cotton", "Regular", 5, 14),
+    ("zara_white",  "Zara",           "Poplin Shirt",           "White",  2590, 25, 4.2, 1130, "100% Cotton",          "Slim",    4, 14),
+]
+for pid, brand, name, col, price, off, rat, cnt, fab, fit, dlv, ret in F:
+    P.append(product(pid, brand, name, "Western Wear", "Shirts", col, price, off, rat, cnt,
+                     fab, "Solid", "Full sleeves", "Hip length", fit, "Formal", "Machine wash",
+                     [next(IMG_MSHIRT)], dlv, ret, oos=("XS",) if pid == "peter_white" else ()))
+
+CLUSTER_IDS["D"] = [x[0] for x in D]
+CLUSTER_IDS["E"] = [x[0] for x in E]
+CLUSTER_IDS["F"] = [x[0] for x in F]
+
+# ------------------------------------------------- filler stock
+# Ordinary items so the wishlist does not read as six tidy experiments. Attributes
+# vary but nothing here forms a decision set.
+FILLER = [
+    ("Biba", "Printed Straight Kurta", "Ethnic Wear", "Kurtas", "ethnic"),
+    ("W for Woman", "Embroidered Kurta", "Ethnic Wear", "Kurtas", "ethnic"),
+    ("Aurelia", "Cotton A-Line Kurta", "Ethnic Wear", "Kurtas", "ethnic"),
+    ("Libas", "Bandhani Kurta Set", "Ethnic Wear", "Kurta Sets", "ethnic"),
+    ("Anouk", "Silk Blend Kurta Set", "Ethnic Wear", "Kurta Sets", "ethnic"),
+    ("Kalini", "Chiffon Printed Saree", "Ethnic Wear", "Sarees", "ethnic"),
+    ("Mitera", "Cotton Handloom Saree", "Ethnic Wear", "Sarees", "ethnic"),
+    ("Indya", "Sequin Lehenga Set", "Ethnic Wear", "Lehenga", "ethnic"),
+    ("Global Desi", "Tiered Ethnic Dress", "Ethnic Wear", "Co-ords", "ethnic"),
+    ("FabIndia", "Block Print Kurta", "Ethnic Wear", "Kurtas", "ethnic"),
+    ("Melange", "Rayon Straight Kurta", "Ethnic Wear", "Kurtas", "ethnic"),
+    ("W for Woman", "Printed Culottes", "Ethnic Wear", "Palazzos", "wbottom"),
+    ("Aurelia", "Solid Cotton Palazzo", "Ethnic Wear", "Palazzos", "wbottom"),
+    ("Vero Moda", "Satin Cami Top", "Western Wear", "Tops", "wtop"),
+    ("ONLY", "Puff Sleeve Blouse", "Western Wear", "Tops", "wtop"),
+    ("MANGO", "Knit Polo Top", "Western Wear", "Tops", "wtop"),
+    ("H&M", "Rib Knit Bodysuit", "Western Wear", "Tops", "wtop"),
+    ("Zara", "Cropped Cardigan", "Western Wear", "Tops", "wtop"),
+    ("Forever 21", "Graphic Print Tee", "Western Wear", "Tops", "wtop"),
+    ("AND", "Georgette Top", "Western Wear", "Tops", "wtop"),
+    ("Vero Moda", "Wrap Midi Dress", "Western Wear", "Dresses", "dress"),
+    ("MANGO", "Linen Shirt Dress", "Western Wear", "Dresses", "dress"),
+    ("H&M", "Smocked Maxi Dress", "Western Wear", "Dresses", "dress"),
+    ("ONLY", "Denim Pinafore Dress", "Western Wear", "Dresses", "dress"),
+    ("AND", "Belted Sheath Dress", "Western Wear", "Dresses", "dress"),
+    ("Zara", "Ruched Mini Dress", "Western Wear", "Dresses", "dress"),
+    ("MANGO", "Straight Leg Trousers", "Western Wear", "Trousers", "wbottom"),
+    ("Vero Moda", "Paperbag Waist Trousers", "Western Wear", "Trousers", "wbottom"),
+    ("H&M", "Linen Blend Trousers", "Western Wear", "Trousers", "wbottom"),
+    ("Zara", "Cargo Trousers", "Western Wear", "Trousers", "wbottom"),
+    ("ONLY", "Cropped Flare Jeans", "Western Wear", "Jeans", "jeans"),
+    ("Levi's", "Bootcut Jeans", "Western Wear", "Jeans", "jeans"),
+    ("Roadster", "Boyfriend Jeans", "Western Wear", "Jeans", "jeans"),
+    ("H&M", "Barrel Leg Jeans", "Western Wear", "Jeans", "jeans"),
+    ("Zara", "Oversized Blazer", "Western Wear", "Blazers", "outer"),
+    ("MANGO", "Cropped Trench Coat", "Western Wear", "Blazers", "outer"),
+    ("H&M", "Quilted Jacket", "Western Wear", "Blazers", "outer"),
+    ("Roadster", "Corduroy Overshirt", "Western Wear", "Blazers", "outer"),
+    ("HRX", "Hooded Sweatshirt", "Western Wear", "Tops", "outer"),
+    ("Puma", "Track Jacket", "Western Wear", "Blazers", "outer"),
+    ("ONLY", "Pleated Mini Skirt", "Western Wear", "Skirts", "wbottom"),
+    ("MANGO", "Satin Slip Skirt", "Western Wear", "Skirts", "wbottom"),
+    ("Van Heusen", "Checked Formal Shirt", "Western Wear", "Shirts", "mshirt"),
+    ("Arrow", "Linen Casual Shirt", "Western Wear", "Shirts", "mshirt"),
+    ("Allen Solly", "Printed Casual Shirt", "Western Wear", "Shirts", "mshirt"),
+    ("Peter England", "Oxford Casual Shirt", "Western Wear", "Shirts", "mshirt"),
+    ("Jack & Jones", "Denim Shirt", "Western Wear", "Shirts", "mshirt"),
+    ("Van Heusen", "Formal Trousers", "Western Wear", "Trousers", "mbottom"),
+    ("Arrow", "Slim Fit Chinos", "Western Wear", "Trousers", "mbottom"),
+    ("Jack & Jones", "Cargo Joggers", "Western Wear", "Trousers", "mbottom"),
+    ("Puma", "Training Shorts", "Western Wear", "Trousers", "mbottom"),
+    ("HRX", "Everyday Crew Tee", "Western Wear", "T-Shirts", "tee"),
+    ("Puma", "Graphic Crew Tee", "Western Wear", "T-Shirts", "tee"),
+    ("Levi's", "Logo Crew Tee", "Western Wear", "T-Shirts", "tee"),
+]
+COLOURS = ["Navy", "Olive", "Maroon", "Beige", "Teal", "Rust", "Grey", "Cream", "Pink", "Mustard"]
+FABRICS = ["100% Cotton", "Viscose Rayon", "Poly Crepe", "Cotton Blend", "Linen Blend", "Georgette"]
+PATTERNS = ["Solid", "Printed", "Embroidered", "Striped", "Floral"]
+FITS = ["Regular", "Relaxed", "Slim", "A-line", "Straight"]
+
+POOLS = {"ethnic": IMG_ETHNIC, "dress": IMG_DRESS, "wbottom": IMG_WBOTTOM, "wtop": IMG_WTOP,
+         "jeans": IMG_JEANS, "tee": IMG_TEE, "mshirt": IMG_MSHIRT, "outer": IMG_OUTER,
+         "mbottom": IMG_MBOTTOM}
+
+for i, (brand, name, cat, sub, pool) in enumerate(FILLER):
+    price = random.choice([699, 899, 1199, 1499, 1799, 2199, 2599, 2999, 3499, 3999])
+    P.append(product("f%02d" % i, brand, name, cat, sub, random.choice(COLOURS), price,
+                     random.choice([25, 30, 35, 40, 45, 50, 55, 60]),
+                     round(random.uniform(3.7, 4.6), 1), random.randint(280, 6400),
+                     random.choice(FABRICS), random.choice(PATTERNS),
+                     random.choice(["Short sleeves", "Full sleeves", "Three-quarter sleeves", "Sleeveless"]),
+                     random.choice(["Hip length", "Knee length", "Calf length", "Full length"]),
+                     random.choice(FITS), random.choice(["Casual", "Daily", "Workwear", "Festive"]),
+                     random.choice(["Machine wash", "Hand wash", "Dry clean"]),
+                     [next(POOLS[pool])], random.randint(2, 7), random.choice([14, 30]),
+                     sizes=SIZES_NUM if sub in ("Jeans", "Trousers", "Skirts", "Palazzos") else None))
 
 # ---------------------------------------------------------------- emit
 CATS = {}

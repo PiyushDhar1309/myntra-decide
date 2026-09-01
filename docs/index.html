@@ -167,6 +167,20 @@ input,select{font:inherit}
 .pc.sel .shot{outline:2px solid var(--pink);outline-offset:-2px;border-radius:5px}
 .pc.sel .tick .ms{color:var(--pink)}
 
+/* guidance */
+.hint{display:flex;gap:10px;align-items:flex-start;margin:12px;padding:11px 12px;border-radius:8px;
+  background:#f4f6fb;border:1px solid #e2e7f2;font-size:12.5px;line-height:1.55;color:var(--sec)}
+.hint > .ms{font-size:17px;color:var(--slate);flex:none;margin-top:1px}
+.hint > span:nth-child(2){flex:1}
+.hint b{color:var(--ink)}
+.hint button{flex:none;opacity:.5}
+.hint button .ms{font-size:16px;color:var(--sec)}
+.step{display:grid;grid-template-columns:26px 1fr;gap:13px;padding:13px 16px;border-top:1px solid var(--hair)}
+.step .n{width:22px;height:22px;border-radius:50%;background:var(--pink);color:#fff;
+  display:grid;place-items:center;font-size:11px;font-weight:800;margin-top:1px}
+.step b{font-size:14px;color:var(--ink);display:block}
+.step p{margin:4px 0 0;font-size:12.5px;color:var(--sec);line-height:1.6}
+
 /* wishlist tabs + collections */
 .tabs{display:flex;border-bottom:1px solid var(--line);padding:0 12px}
 .tabs button{flex:1;padding:12px 0;font-size:13px;font-weight:700;color:var(--muted);

@@ -3424,6 +3424,5190 @@ export const PRODUCTS = {
     "when": "2 weeks ago"
    }
   ]
+ },
+ "hm_tee_black": {
+  "id": "hm_tee_black",
+  "brand": "H&M",
+  "name": "Regular Fit Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Black",
+  "price": 699,
+  "mrp": 1159,
+  "off": 40,
+  "rating": 4.2,
+  "ratingCount": 8410,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Short sleeves",
+  "length": "Hip length",
+  "fit": "Regular",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 3,
+  "returns": 30,
+  "seller": "H&M Retail",
+  "photos": [
+   "1627225925683-1da7021732ea"
+  ],
+  "desc": "Black regular fit crew tee in 100% cotton. Solid pattern with short sleeves and a regular silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "last month"
+   }
+  ]
+ },
+ "roadster_tee": {
+  "id": "roadster_tee",
+  "brand": "Roadster",
+  "name": "Pure Cotton Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Black",
+  "price": 599,
+  "mrp": 1329,
+  "off": 55,
+  "rating": 4.0,
+  "ratingCount": 6120,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Short sleeves",
+  "length": "Hip length",
+  "fit": "Regular",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 2,
+  "returns": 14,
+  "seller": "Roadster Retail",
+  "photos": [
+   "1571455786673-9d9d6c194f90"
+  ],
+  "desc": "Black pure cotton crew tee in 100% cotton. Solid pattern with short sleeves and a regular silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "L",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "hrx_tee_black": {
+  "id": "hrx_tee_black",
+  "brand": "HRX",
+  "name": "Bio-Wash Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Jet Black",
+  "price": 799,
+  "mrp": 1449,
+  "off": 45,
+  "rating": 4.4,
+  "ratingCount": 5230,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Bio-wash Cotton",
+  "pattern": "Solid",
+  "sleeve": "Short sleeves",
+  "length": "Hip length",
+  "fit": "Slim",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 2,
+  "returns": 30,
+  "seller": "HRX Retail",
+  "photos": [
+   "1759572095384-1a7e646d0d4f"
+  ],
+  "desc": "Jet Black bio-wash crew tee in 100% bio-wash cotton. Solid pattern with short sleeves and a slim silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "last month"
+   }
+  ]
+ },
+ "levis_tee": {
+  "id": "levis_tee",
+  "brand": "Levi's",
+  "name": "Slim Fit Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Black",
+  "price": 1299,
+  "mrp": 1859,
+  "off": 30,
+  "rating": 4.5,
+  "ratingCount": 3980,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Short sleeves",
+  "length": "Hip length",
+  "fit": "Slim",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 4,
+  "returns": 30,
+  "seller": "Levi's Retail",
+  "photos": [
+   "1527719327859-c6ce80353573"
+  ],
+  "desc": "Black slim fit crew tee in 100% cotton. Solid pattern with short sleeves and a slim silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "L",
+    "when": "last month"
+   }
+  ]
+ },
+ "puma_tee": {
+  "id": "puma_tee",
+  "brand": "Puma",
+  "name": "Essentials Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Charcoal",
+  "price": 999,
+  "mrp": 1659,
+  "off": 40,
+  "rating": 4.3,
+  "ratingCount": 4710,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": false
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "60% Cotton, 40% Polyester",
+  "pattern": "Solid",
+  "sleeve": "Short sleeves",
+  "length": "Hip length",
+  "fit": "Regular",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 3,
+  "returns": 14,
+  "seller": "Puma Retail",
+  "photos": [
+   "1661181475147-bbd20ef65781"
+  ],
+  "desc": "Charcoal essentials crew tee in 60% cotton, 40% polyester. Solid pattern with short sleeves and a regular silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "L",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "S",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "mh_tee": {
+  "id": "mh_tee",
+  "brand": "Mast & Harbour",
+  "name": "Oversized Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Black",
+  "price": 899,
+  "mrp": 1799,
+  "off": 50,
+  "rating": 3.9,
+  "ratingCount": 1890,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": false
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Short sleeves",
+  "length": "Longline",
+  "fit": "Oversized",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 6,
+  "returns": 14,
+  "seller": "Mast & Harbour Retail",
+  "photos": [
+   "1562157873-818bc0726f68"
+  ],
+  "desc": "Black oversized crew tee in 100% cotton. Solid pattern with short sleeves and a oversized silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "M",
+    "when": "last month"
+   }
+  ]
+ },
+ "uspa_tee": {
+  "id": "uspa_tee",
+  "brand": "U.S. Polo Assn.",
+  "name": "Pima Cotton Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Black",
+  "price": 1199,
+  "mrp": 1839,
+  "off": 35,
+  "rating": 4.6,
+  "ratingCount": 2640,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Pima Cotton",
+  "pattern": "Solid",
+  "sleeve": "Short sleeves",
+  "length": "Hip length",
+  "fit": "Regular",
+  "occasion": "Casual",
+  "wash": "Hand wash",
+  "delivery": 5,
+  "returns": 30,
+  "seller": "U.S. Polo Assn. Retail",
+  "photos": [
+   "1716951848908-8907bb6c655b"
+  ],
+  "desc": "Black pima cotton crew tee in 100% pima cotton. Solid pattern with short sleeves and a regular silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "M",
+    "when": "last month"
+   }
+  ]
+ },
+ "levis_511": {
+  "id": "levis_511",
+  "brand": "Levi's",
+  "name": "511 Slim Fit Jeans",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Dark Blue",
+  "price": 3499,
+  "mrp": 4999,
+  "off": 30,
+  "rating": 4.5,
+  "ratingCount": 6240,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "98% Cotton, 2% Elastane",
+  "pattern": "Solid",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Slim",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 3,
+  "returns": 30,
+  "seller": "Levi's Retail",
+  "photos": [
+   "1637069585336-827b298fe84a"
+  ],
+  "desc": "Dark Blue 511 slim fit jeans in 98% cotton, 2% elastane. Solid pattern with sleeveless and a slim silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "L",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "jack_jeans": {
+  "id": "jack_jeans",
+  "brand": "Jack & Jones",
+  "name": "Slim Tapered Jeans",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Mid Blue",
+  "price": 2799,
+  "mrp": 5089,
+  "off": 45,
+  "rating": 4.2,
+  "ratingCount": 3110,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "99% Cotton, 1% Elastane",
+  "pattern": "Solid",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Slim",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 4,
+  "returns": 14,
+  "seller": "Jack & Jones Retail",
+  "photos": [
+   "1542272604-787c3835535d"
+  ],
+  "desc": "Mid Blue slim tapered jeans in 99% cotton, 1% elastane. Solid pattern with sleeveless and a slim silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "L",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "hm_slim": {
+  "id": "hm_slim",
+  "brand": "H&M",
+  "name": "Slim Fit Denim",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Black",
+  "price": 1999,
+  "mrp": 3999,
+  "off": 50,
+  "rating": 3.9,
+  "ratingCount": 1740,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": false
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Slim",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 6,
+  "returns": 14,
+  "seller": "H&M Retail",
+  "photos": [
+   "1565084888279-aca607ecce0c"
+  ],
+  "desc": "Black slim fit denim in 100% cotton. Solid pattern with sleeveless and a slim silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "L",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "S",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "roadster_slim": {
+  "id": "roadster_slim",
+  "brand": "Roadster",
+  "name": "Straight Fit Jeans",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Ice Blue",
+  "price": 1699,
+  "mrp": 4249,
+  "off": 60,
+  "rating": 4.0,
+  "ratingCount": 4520,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "98% Cotton, 2% Elastane",
+  "pattern": "Solid",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Straight",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 3,
+  "returns": 14,
+  "seller": "Roadster Retail",
+  "photos": [
+   "1714143136367-7bb68f3f0669"
+  ],
+  "desc": "Ice Blue straight fit jeans in 98% cotton, 2% elastane. Solid pattern with sleeveless and a straight silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "S",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "wrangler_jeans": {
+  "id": "wrangler_jeans",
+  "brand": "Wrangler",
+  "name": "Greensboro Straight Jeans",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Dark Blue",
+  "price": 2999,
+  "mrp": 4999,
+  "off": 40,
+  "rating": 4.3,
+  "ratingCount": 2280,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Straight",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 5,
+  "returns": 30,
+  "seller": "Wrangler Retail",
+  "photos": [
+   "1715758890151-2c15d5d482aa"
+  ],
+  "desc": "Dark Blue greensboro straight jeans in 100% cotton. Solid pattern with sleeveless and a straight silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "S",
+    "when": "last month"
+   }
+  ]
+ },
+ "uspa_jeans": {
+  "id": "uspa_jeans",
+  "brand": "U.S. Polo Assn.",
+  "name": "Regular Fit Jeans",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Mid Blue",
+  "price": 2499,
+  "mrp": 4539,
+  "off": 45,
+  "rating": 4.1,
+  "ratingCount": 1960,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "99% Cotton, 1% Elastane",
+  "pattern": "Solid",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Regular",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 4,
+  "returns": 30,
+  "seller": "U.S. Polo Assn. Retail",
+  "photos": [
+   "1605518215584-5ba74df5dfd8"
+  ],
+  "desc": "Mid Blue regular fit jeans in 99% cotton, 1% elastane. Solid pattern with sleeveless and a regular silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "L",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "M",
+    "when": "last month"
+   }
+  ]
+ },
+ "vh_white": {
+  "id": "vh_white",
+  "brand": "Van Heusen",
+  "name": "Slim Fit Formal Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "White",
+  "price": 2299,
+  "mrp": 3829,
+  "off": 40,
+  "rating": 4.4,
+  "ratingCount": 3820,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Full sleeves",
+  "length": "Hip length",
+  "fit": "Slim",
+  "occasion": "Formal",
+  "wash": "Machine wash",
+  "delivery": 2,
+  "returns": 30,
+  "seller": "Van Heusen Retail",
+  "photos": [
+   "1758600588319-fa4097ee5208"
+  ],
+  "desc": "White slim fit formal shirt in 100% cotton. Solid pattern with full sleeves and a slim silhouette. Suited to formal.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "S",
+    "when": "last month"
+   }
+  ]
+ },
+ "as_white": {
+  "id": "as_white",
+  "brand": "Allen Solly",
+  "name": "Regular Fit Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "White",
+  "price": 1999,
+  "mrp": 3999,
+  "off": 50,
+  "rating": 4.1,
+  "ratingCount": 2410,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Cotton Blend",
+  "pattern": "Solid",
+  "sleeve": "Full sleeves",
+  "length": "Hip length",
+  "fit": "Regular",
+  "occasion": "Formal",
+  "wash": "Machine wash",
+  "delivery": 4,
+  "returns": 14,
+  "seller": "Allen Solly Retail",
+  "photos": [
+   "1770058428099-f2d64ab34006"
+  ],
+  "desc": "White regular fit shirt in cotton blend. Solid pattern with full sleeves and a regular silhouette. Suited to formal.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "S",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "arrow_white": {
+  "id": "arrow_white",
+  "brand": "Arrow",
+  "name": "Wrinkle-Free Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "Ivory",
+  "price": 2699,
+  "mrp": 4149,
+  "off": 35,
+  "rating": 4.3,
+  "ratingCount": 1770,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Full sleeves",
+  "length": "Hip length",
+  "fit": "Slim",
+  "occasion": "Formal",
+  "wash": "Machine wash",
+  "delivery": 3,
+  "returns": 30,
+  "seller": "Arrow Retail",
+  "photos": [
+   "1782786661379-a25b113e33e0"
+  ],
+  "desc": "Ivory wrinkle-free shirt in 100% cotton. Solid pattern with full sleeves and a slim silhouette. Suited to formal.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "L",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "M",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "peter_white": {
+  "id": "peter_white",
+  "brand": "Peter England",
+  "name": "Cotton Formal Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "White",
+  "price": 1499,
+  "mrp": 3329,
+  "off": 55,
+  "rating": 3.9,
+  "ratingCount": 5140,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": false
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "65% Poly, 35% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Full sleeves",
+  "length": "Hip length",
+  "fit": "Regular",
+  "occasion": "Formal",
+  "wash": "Machine wash",
+  "delivery": 5,
+  "returns": 14,
+  "seller": "Peter England Retail",
+  "photos": [
+   "1776838103951-993ff1ffc916"
+  ],
+  "desc": "White cotton formal shirt in 65% poly, 35% cotton. Solid pattern with full sleeves and a regular silhouette. Suited to formal.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "last month"
+   }
+  ]
+ },
+ "zara_white": {
+  "id": "zara_white",
+  "brand": "Zara",
+  "name": "Poplin Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "White",
+  "price": 2590,
+  "mrp": 3449,
+  "off": 25,
+  "rating": 4.2,
+  "ratingCount": 1130,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Solid",
+  "sleeve": "Full sleeves",
+  "length": "Hip length",
+  "fit": "Slim",
+  "occasion": "Formal",
+  "wash": "Machine wash",
+  "delivery": 4,
+  "returns": 14,
+  "seller": "Zara Retail",
+  "photos": [
+   "1781145822880-ab30339ac274"
+  ],
+  "desc": "White poplin shirt in 100% cotton. Solid pattern with full sleeves and a slim silhouette. Suited to formal.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "M",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f00": {
+  "id": "f00",
+  "brand": "Biba",
+  "name": "Printed Straight Kurta",
+  "category": "Ethnic Wear",
+  "sub": "Kurtas",
+  "colour": "Maroon",
+  "price": 699,
+  "mrp": 1749,
+  "off": 60,
+  "rating": 4.4,
+  "ratingCount": 1880,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Striped",
+  "sleeve": "Sleeveless",
+  "length": "Knee length",
+  "fit": "Slim",
+  "occasion": "Workwear",
+  "wash": "Hand wash",
+  "delivery": 5,
+  "returns": 30,
+  "seller": "Biba Retail",
+  "photos": [
+   "1759840278361-f1adc75529a1"
+  ],
+  "desc": "Maroon printed straight kurta in linen blend. Striped pattern with sleeveless and a slim silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "S",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "M",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f01": {
+  "id": "f01",
+  "brand": "W for Woman",
+  "name": "Embroidered Kurta",
+  "category": "Ethnic Wear",
+  "sub": "Kurtas",
+  "colour": "Beige",
+  "price": 2599,
+  "mrp": 5779,
+  "off": 55,
+  "rating": 3.8,
+  "ratingCount": 6389,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Viscose Rayon",
+  "pattern": "Floral",
+  "sleeve": "Full sleeves",
+  "length": "Knee length",
+  "fit": "A-line",
+  "occasion": "Workwear",
+  "wash": "Hand wash",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "W for Woman Retail",
+  "photos": [
+   "1759840278460-df7d859cca06"
+  ],
+  "desc": "Beige embroidered kurta in viscose rayon. Floral pattern with full sleeves and a a-line silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "L",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f02": {
+  "id": "f02",
+  "brand": "Aurelia",
+  "name": "Cotton A-Line Kurta",
+  "category": "Ethnic Wear",
+  "sub": "Kurtas",
+  "colour": "Grey",
+  "price": 1499,
+  "mrp": 2309,
+  "off": 35,
+  "rating": 3.7,
+  "ratingCount": 6175,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Floral",
+  "sleeve": "Sleeveless",
+  "length": "Knee length",
+  "fit": "Straight",
+  "occasion": "Festive",
+  "wash": "Dry clean",
+  "delivery": 5,
+  "returns": 14,
+  "seller": "Aurelia Retail",
+  "photos": [
+   "1759840278478-826c0d0f110e"
+  ],
+  "desc": "Grey cotton a-line kurta in 100% cotton. Floral pattern with sleeveless and a straight silhouette. Suited to festive.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "S",
+    "when": "last month"
+   },
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "L",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f03": {
+  "id": "f03",
+  "brand": "Libas",
+  "name": "Bandhani Kurta Set",
+  "category": "Ethnic Wear",
+  "sub": "Kurta Sets",
+  "colour": "Navy",
+  "price": 1199,
+  "mrp": 1999,
+  "off": 40,
+  "rating": 4.5,
+  "ratingCount": 4837,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Embroidered",
+  "sleeve": "Short sleeves",
+  "length": "Hip length",
+  "fit": "Relaxed",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 6,
+  "returns": 30,
+  "seller": "Libas Retail",
+  "photos": [
+   "1759840278326-73f26ae8c5c7"
+  ],
+  "desc": "Navy bandhani kurta set in linen blend. Embroidered pattern with short sleeves and a relaxed silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f04": {
+  "id": "f04",
+  "brand": "Anouk",
+  "name": "Silk Blend Kurta Set",
+  "category": "Ethnic Wear",
+  "sub": "Kurta Sets",
+  "colour": "Rust",
+  "price": 699,
+  "mrp": 999,
+  "off": 30,
+  "rating": 4.4,
+  "ratingCount": 552,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Poly Crepe",
+  "pattern": "Printed",
+  "sleeve": "Short sleeves",
+  "length": "Knee length",
+  "fit": "Straight",
+  "occasion": "Daily",
+  "wash": "Hand wash",
+  "delivery": 5,
+  "returns": 30,
+  "seller": "Anouk Retail",
+  "photos": [
+   "1649930055986-ca57250a7fd4"
+  ],
+  "desc": "Rust silk blend kurta set in poly crepe. Printed pattern with short sleeves and a straight silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "L",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "S",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f05": {
+  "id": "f05",
+  "brand": "Kalini",
+  "name": "Chiffon Printed Saree",
+  "category": "Ethnic Wear",
+  "sub": "Sarees",
+  "colour": "Olive",
+  "price": 699,
+  "mrp": 1079,
+  "off": 35,
+  "rating": 4.0,
+  "ratingCount": 4438,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Poly Crepe",
+  "pattern": "Solid",
+  "sleeve": "Short sleeves",
+  "length": "Knee length",
+  "fit": "Regular",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "Kalini Retail",
+  "photos": [
+   "1724856605022-106d6dd6e842"
+  ],
+  "desc": "Olive chiffon printed saree in poly crepe. Solid pattern with short sleeves and a regular silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "M",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f06": {
+  "id": "f06",
+  "brand": "Mitera",
+  "name": "Cotton Handloom Saree",
+  "category": "Ethnic Wear",
+  "sub": "Sarees",
+  "colour": "Cream",
+  "price": 2199,
+  "mrp": 2929,
+  "off": 25,
+  "rating": 3.8,
+  "ratingCount": 312,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Printed",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Knee length",
+  "fit": "Regular",
+  "occasion": "Daily",
+  "wash": "Dry clean",
+  "delivery": 5,
+  "returns": 14,
+  "seller": "Mitera Retail",
+  "photos": [
+   "1601571103477-e477a2a61d05"
+  ],
+  "desc": "Cream cotton handloom saree in 100% cotton. Printed pattern with three-quarter sleeves and a regular silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "S",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f07": {
+  "id": "f07",
+  "brand": "Indya",
+  "name": "Sequin Lehenga Set",
+  "category": "Ethnic Wear",
+  "sub": "Lehenga",
+  "colour": "Olive",
+  "price": 699,
+  "mrp": 1399,
+  "off": 50,
+  "rating": 4.2,
+  "ratingCount": 634,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Georgette",
+  "pattern": "Printed",
+  "sleeve": "Sleeveless",
+  "length": "Hip length",
+  "fit": "A-line",
+  "occasion": "Casual",
+  "wash": "Dry clean",
+  "delivery": 6,
+  "returns": 14,
+  "seller": "Indya Retail",
+  "photos": [
+   "1724856604403-60304b28906c"
+  ],
+  "desc": "Olive sequin lehenga set in georgette. Printed pattern with sleeveless and a a-line silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "M",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f08": {
+  "id": "f08",
+  "brand": "Global Desi",
+  "name": "Tiered Ethnic Dress",
+  "category": "Ethnic Wear",
+  "sub": "Co-ords",
+  "colour": "Navy",
+  "price": 899,
+  "mrp": 1379,
+  "off": 35,
+  "rating": 4.4,
+  "ratingCount": 3380,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Striped",
+  "sleeve": "Sleeveless",
+  "length": "Hip length",
+  "fit": "A-line",
+  "occasion": "Workwear",
+  "wash": "Machine wash",
+  "delivery": 6,
+  "returns": 14,
+  "seller": "Global Desi Retail",
+  "photos": [
+   "1733043014211-8d699f6a82b1"
+  ],
+  "desc": "Navy tiered ethnic dress in 100% cotton. Striped pattern with sleeveless and a a-line silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f09": {
+  "id": "f09",
+  "brand": "FabIndia",
+  "name": "Block Print Kurta",
+  "category": "Ethnic Wear",
+  "sub": "Kurtas",
+  "colour": "Navy",
+  "price": 1499,
+  "mrp": 2999,
+  "off": 50,
+  "rating": 4.1,
+  "ratingCount": 4363,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Striped",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Straight",
+  "occasion": "Casual",
+  "wash": "Hand wash",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "FabIndia Retail",
+  "photos": [
+   "1759992878772-e83a691a6d8f"
+  ],
+  "desc": "Navy block print kurta in linen blend. Striped pattern with sleeveless and a straight silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "S",
+    "when": "last month"
+   }
+  ]
+ },
+ "f10": {
+  "id": "f10",
+  "brand": "Melange",
+  "name": "Rayon Straight Kurta",
+  "category": "Ethnic Wear",
+  "sub": "Kurtas",
+  "colour": "Rust",
+  "price": 1499,
+  "mrp": 2499,
+  "off": 40,
+  "rating": 4.1,
+  "ratingCount": 2859,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Georgette",
+  "pattern": "Solid",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Full length",
+  "fit": "Slim",
+  "occasion": "Workwear",
+  "wash": "Dry clean",
+  "delivery": 7,
+  "returns": 30,
+  "seller": "Melange Retail",
+  "photos": [
+   "1764238385987-2ffa021755a1"
+  ],
+  "desc": "Rust rayon straight kurta in georgette. Solid pattern with three-quarter sleeves and a slim silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "S",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f11": {
+  "id": "f11",
+  "brand": "W for Woman",
+  "name": "Printed Culottes",
+  "category": "Ethnic Wear",
+  "sub": "Palazzos",
+  "colour": "Maroon",
+  "price": 1499,
+  "mrp": 2309,
+  "off": 35,
+  "rating": 3.9,
+  "ratingCount": 576,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Viscose Rayon",
+  "pattern": "Solid",
+  "sleeve": "Short sleeves",
+  "length": "Knee length",
+  "fit": "Relaxed",
+  "occasion": "Workwear",
+  "wash": "Hand wash",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "W for Woman Retail",
+  "photos": [
+   "1762343291713-0d7f83e6c2e9"
+  ],
+  "desc": "Maroon printed culottes in viscose rayon. Solid pattern with short sleeves and a relaxed silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "L",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "L",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f12": {
+  "id": "f12",
+  "brand": "Aurelia",
+  "name": "Solid Cotton Palazzo",
+  "category": "Ethnic Wear",
+  "sub": "Palazzos",
+  "colour": "Rust",
+  "price": 2599,
+  "mrp": 6499,
+  "off": 60,
+  "rating": 3.9,
+  "ratingCount": 3158,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Printed",
+  "sleeve": "Short sleeves",
+  "length": "Full length",
+  "fit": "Straight",
+  "occasion": "Workwear",
+  "wash": "Hand wash",
+  "delivery": 7,
+  "returns": 30,
+  "seller": "Aurelia Retail",
+  "photos": [
+   "1763558978011-55404124a148"
+  ],
+  "desc": "Rust solid cotton palazzo in 100% cotton. Printed pattern with short sleeves and a straight silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "M",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f13": {
+  "id": "f13",
+  "brand": "Vero Moda",
+  "name": "Satin Cami Top",
+  "category": "Western Wear",
+  "sub": "Tops",
+  "colour": "Grey",
+  "price": 1499,
+  "mrp": 2729,
+  "off": 45,
+  "rating": 3.8,
+  "ratingCount": 823,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Cotton Blend",
+  "pattern": "Floral",
+  "sleeve": "Full sleeves",
+  "length": "Knee length",
+  "fit": "Straight",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 7,
+  "returns": 30,
+  "seller": "Vero Moda Retail",
+  "photos": [
+   "1760552070057-db7adfeddc39"
+  ],
+  "desc": "Grey satin cami top in cotton blend. Floral pattern with full sleeves and a straight silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "S",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "M",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f14": {
+  "id": "f14",
+  "brand": "ONLY",
+  "name": "Puff Sleeve Blouse",
+  "category": "Western Wear",
+  "sub": "Tops",
+  "colour": "Maroon",
+  "price": 2199,
+  "mrp": 4399,
+  "off": 50,
+  "rating": 4.1,
+  "ratingCount": 1370,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Georgette",
+  "pattern": "Printed",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Slim",
+  "occasion": "Workwear",
+  "wash": "Dry clean",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "ONLY Retail",
+  "photos": [
+   "1704775991298-38b9139fdad9"
+  ],
+  "desc": "Maroon puff sleeve blouse in georgette. Printed pattern with sleeveless and a slim silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "L",
+    "when": "last month"
+   }
+  ]
+ },
+ "f15": {
+  "id": "f15",
+  "brand": "MANGO",
+  "name": "Knit Polo Top",
+  "category": "Western Wear",
+  "sub": "Tops",
+  "colour": "Navy",
+  "price": 3499,
+  "mrp": 6359,
+  "off": 45,
+  "rating": 3.7,
+  "ratingCount": 4911,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Viscose Rayon",
+  "pattern": "Solid",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Hip length",
+  "fit": "A-line",
+  "occasion": "Daily",
+  "wash": "Machine wash",
+  "delivery": 3,
+  "returns": 14,
+  "seller": "MANGO Retail",
+  "photos": [
+   "1760438329056-61190ce87c61"
+  ],
+  "desc": "Navy knit polo top in viscose rayon. Solid pattern with three-quarter sleeves and a a-line silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "M",
+    "when": "last month"
+   }
+  ]
+ },
+ "f16": {
+  "id": "f16",
+  "brand": "H&M",
+  "name": "Rib Knit Bodysuit",
+  "category": "Western Wear",
+  "sub": "Tops",
+  "colour": "Pink",
+  "price": 3999,
+  "mrp": 8889,
+  "off": 55,
+  "rating": 3.7,
+  "ratingCount": 1237,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Georgette",
+  "pattern": "Solid",
+  "sleeve": "Full sleeves",
+  "length": "Knee length",
+  "fit": "Straight",
+  "occasion": "Festive",
+  "wash": "Hand wash",
+  "delivery": 6,
+  "returns": 14,
+  "seller": "H&M Retail",
+  "photos": [
+   "1710340750528-330afc871448"
+  ],
+  "desc": "Pink rib knit bodysuit in georgette. Solid pattern with full sleeves and a straight silhouette. Suited to festive.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "L",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f17": {
+  "id": "f17",
+  "brand": "Zara",
+  "name": "Cropped Cardigan",
+  "category": "Western Wear",
+  "sub": "Tops",
+  "colour": "Rust",
+  "price": 3999,
+  "mrp": 5709,
+  "off": 30,
+  "rating": 4.4,
+  "ratingCount": 4107,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Embroidered",
+  "sleeve": "Sleeveless",
+  "length": "Hip length",
+  "fit": "Slim",
+  "occasion": "Daily",
+  "wash": "Dry clean",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "Zara Retail",
+  "photos": [
+   "1760551937420-f34b764b1256"
+  ],
+  "desc": "Rust cropped cardigan in linen blend. Embroidered pattern with sleeveless and a slim silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "M",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f18": {
+  "id": "f18",
+  "brand": "Forever 21",
+  "name": "Graphic Print Tee",
+  "category": "Western Wear",
+  "sub": "Tops",
+  "colour": "Pink",
+  "price": 1799,
+  "mrp": 2999,
+  "off": 40,
+  "rating": 3.9,
+  "ratingCount": 3858,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Striped",
+  "sleeve": "Sleeveless",
+  "length": "Hip length",
+  "fit": "Straight",
+  "occasion": "Daily",
+  "wash": "Hand wash",
+  "delivery": 4,
+  "returns": 14,
+  "seller": "Forever 21 Retail",
+  "photos": [
+   "1760438449816-633e916dccea"
+  ],
+  "desc": "Pink graphic print tee in 100% cotton. Striped pattern with sleeveless and a straight silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "last month"
+   }
+  ]
+ },
+ "f19": {
+  "id": "f19",
+  "brand": "AND",
+  "name": "Georgette Top",
+  "category": "Western Wear",
+  "sub": "Tops",
+  "colour": "Mustard",
+  "price": 699,
+  "mrp": 1269,
+  "off": 45,
+  "rating": 3.9,
+  "ratingCount": 4939,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Striped",
+  "sleeve": "Sleeveless",
+  "length": "Knee length",
+  "fit": "Straight",
+  "occasion": "Workwear",
+  "wash": "Dry clean",
+  "delivery": 7,
+  "returns": 30,
+  "seller": "AND Retail",
+  "photos": [
+   "1759992878304-9470cac72939"
+  ],
+  "desc": "Mustard georgette top in 100% cotton. Striped pattern with sleeveless and a straight silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "S",
+    "when": "last month"
+   }
+  ]
+ },
+ "f20": {
+  "id": "f20",
+  "brand": "Vero Moda",
+  "name": "Wrap Midi Dress",
+  "category": "Western Wear",
+  "sub": "Dresses",
+  "colour": "Grey",
+  "price": 699,
+  "mrp": 929,
+  "off": 25,
+  "rating": 4.5,
+  "ratingCount": 6136,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Viscose Rayon",
+  "pattern": "Floral",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Hip length",
+  "fit": "Regular",
+  "occasion": "Workwear",
+  "wash": "Hand wash",
+  "delivery": 7,
+  "returns": 30,
+  "seller": "Vero Moda Retail",
+  "photos": [
+   "1759992878326-57546e7ddb0c"
+  ],
+  "desc": "Grey wrap midi dress in viscose rayon. Floral pattern with three-quarter sleeves and a regular silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "L",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "L",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f21": {
+  "id": "f21",
+  "brand": "MANGO",
+  "name": "Linen Shirt Dress",
+  "category": "Western Wear",
+  "sub": "Dresses",
+  "colour": "Grey",
+  "price": 3999,
+  "mrp": 8889,
+  "off": 55,
+  "rating": 4.6,
+  "ratingCount": 3967,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Georgette",
+  "pattern": "Floral",
+  "sleeve": "Sleeveless",
+  "length": "Hip length",
+  "fit": "Relaxed",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 3,
+  "returns": 30,
+  "seller": "MANGO Retail",
+  "photos": [
+   "1763294632366-2c21cf8a8764"
+  ],
+  "desc": "Grey linen shirt dress in georgette. Floral pattern with sleeveless and a relaxed silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "S",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "S",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f22": {
+  "id": "f22",
+  "brand": "H&M",
+  "name": "Smocked Maxi Dress",
+  "category": "Western Wear",
+  "sub": "Dresses",
+  "colour": "Cream",
+  "price": 1199,
+  "mrp": 2659,
+  "off": 55,
+  "rating": 4.0,
+  "ratingCount": 5563,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Floral",
+  "sleeve": "Full sleeves",
+  "length": "Hip length",
+  "fit": "Regular",
+  "occasion": "Workwear",
+  "wash": "Dry clean",
+  "delivery": 5,
+  "returns": 30,
+  "seller": "H&M Retail",
+  "photos": [
+   "1767077280564-6521b1487d83"
+  ],
+  "desc": "Cream smocked maxi dress in linen blend. Floral pattern with full sleeves and a regular silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "last month"
+   }
+  ]
+ },
+ "f23": {
+  "id": "f23",
+  "brand": "ONLY",
+  "name": "Denim Pinafore Dress",
+  "category": "Western Wear",
+  "sub": "Dresses",
+  "colour": "Cream",
+  "price": 2199,
+  "mrp": 3139,
+  "off": 30,
+  "rating": 4.1,
+  "ratingCount": 4805,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Floral",
+  "sleeve": "Sleeveless",
+  "length": "Calf length",
+  "fit": "Regular",
+  "occasion": "Workwear",
+  "wash": "Machine wash",
+  "delivery": 4,
+  "returns": 30,
+  "seller": "ONLY Retail",
+  "photos": [
+   "1768289222720-752e43fe0f01"
+  ],
+  "desc": "Cream denim pinafore dress in linen blend. Floral pattern with sleeveless and a regular silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "L",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f24": {
+  "id": "f24",
+  "brand": "AND",
+  "name": "Belted Sheath Dress",
+  "category": "Western Wear",
+  "sub": "Dresses",
+  "colour": "Olive",
+  "price": 899,
+  "mrp": 1629,
+  "off": 45,
+  "rating": 4.4,
+  "ratingCount": 3916,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Georgette",
+  "pattern": "Printed",
+  "sleeve": "Full sleeves",
+  "length": "Full length",
+  "fit": "Relaxed",
+  "occasion": "Workwear",
+  "wash": "Dry clean",
+  "delivery": 2,
+  "returns": 14,
+  "seller": "AND Retail",
+  "photos": [
+   "1768289222438-ee2993148ad2"
+  ],
+  "desc": "Olive belted sheath dress in georgette. Printed pattern with full sleeves and a relaxed silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "M",
+    "when": "last month"
+   }
+  ]
+ },
+ "f25": {
+  "id": "f25",
+  "brand": "Zara",
+  "name": "Ruched Mini Dress",
+  "category": "Western Wear",
+  "sub": "Dresses",
+  "colour": "Pink",
+  "price": 2199,
+  "mrp": 3659,
+  "off": 40,
+  "rating": 4.4,
+  "ratingCount": 4846,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Poly Crepe",
+  "pattern": "Printed",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Knee length",
+  "fit": "A-line",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 4,
+  "returns": 30,
+  "seller": "Zara Retail",
+  "photos": [
+   "1764764860078-637c358bbfb9"
+  ],
+  "desc": "Pink ruched mini dress in poly crepe. Printed pattern with three-quarter sleeves and a a-line silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "S",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f26": {
+  "id": "f26",
+  "brand": "MANGO",
+  "name": "Straight Leg Trousers",
+  "category": "Western Wear",
+  "sub": "Trousers",
+  "colour": "Teal",
+  "price": 3999,
+  "mrp": 5709,
+  "off": 30,
+  "rating": 3.9,
+  "ratingCount": 2699,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Floral",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Knee length",
+  "fit": "A-line",
+  "occasion": "Casual",
+  "wash": "Hand wash",
+  "delivery": 5,
+  "returns": 14,
+  "seller": "MANGO Retail",
+  "photos": [
+   "1766471524399-267dfbce709f"
+  ],
+  "desc": "Teal straight leg trousers in linen blend. Floral pattern with three-quarter sleeves and a a-line silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "S",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f27": {
+  "id": "f27",
+  "brand": "Vero Moda",
+  "name": "Paperbag Waist Trousers",
+  "category": "Western Wear",
+  "sub": "Trousers",
+  "colour": "Olive",
+  "price": 2199,
+  "mrp": 2929,
+  "off": 25,
+  "rating": 4.0,
+  "ratingCount": 851,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Georgette",
+  "pattern": "Striped",
+  "sleeve": "Sleeveless",
+  "length": "Calf length",
+  "fit": "Relaxed",
+  "occasion": "Workwear",
+  "wash": "Hand wash",
+  "delivery": 5,
+  "returns": 30,
+  "seller": "Vero Moda Retail",
+  "photos": [
+   "1715865871451-e9c1c36201b0"
+  ],
+  "desc": "Olive paperbag waist trousers in georgette. Striped pattern with sleeveless and a relaxed silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "S",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f28": {
+  "id": "f28",
+  "brand": "H&M",
+  "name": "Linen Blend Trousers",
+  "category": "Western Wear",
+  "sub": "Trousers",
+  "colour": "Beige",
+  "price": 1499,
+  "mrp": 1999,
+  "off": 25,
+  "rating": 4.6,
+  "ratingCount": 2708,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Cotton Blend",
+  "pattern": "Striped",
+  "sleeve": "Full sleeves",
+  "length": "Calf length",
+  "fit": "A-line",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 5,
+  "returns": 14,
+  "seller": "H&M Retail",
+  "photos": [
+   "1715865871494-6bba579c2dc0"
+  ],
+  "desc": "Beige linen blend trousers in cotton blend. Striped pattern with full sleeves and a a-line silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "S",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f29": {
+  "id": "f29",
+  "brand": "Zara",
+  "name": "Cargo Trousers",
+  "category": "Western Wear",
+  "sub": "Trousers",
+  "colour": "Mustard",
+  "price": 2199,
+  "mrp": 4399,
+  "off": 50,
+  "rating": 4.1,
+  "ratingCount": 1425,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Viscose Rayon",
+  "pattern": "Printed",
+  "sleeve": "Short sleeves",
+  "length": "Knee length",
+  "fit": "Slim",
+  "occasion": "Workwear",
+  "wash": "Hand wash",
+  "delivery": 3,
+  "returns": 14,
+  "seller": "Zara Retail",
+  "photos": [
+   "1715890292755-1ad3b05d7770"
+  ],
+  "desc": "Mustard cargo trousers in viscose rayon. Printed pattern with short sleeves and a slim silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "last month"
+   }
+  ]
+ },
+ "f30": {
+  "id": "f30",
+  "brand": "ONLY",
+  "name": "Cropped Flare Jeans",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Rust",
+  "price": 1499,
+  "mrp": 2139,
+  "off": 30,
+  "rating": 4.3,
+  "ratingCount": 305,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Viscose Rayon",
+  "pattern": "Striped",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Hip length",
+  "fit": "Relaxed",
+  "occasion": "Workwear",
+  "wash": "Machine wash",
+  "delivery": 3,
+  "returns": 14,
+  "seller": "ONLY Retail",
+  "photos": [
+   "1715865871415-fe8e11e7b4f3"
+  ],
+  "desc": "Rust cropped flare jeans in viscose rayon. Striped pattern with three-quarter sleeves and a relaxed silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f31": {
+  "id": "f31",
+  "brand": "Levi's",
+  "name": "Bootcut Jeans",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Cream",
+  "price": 2599,
+  "mrp": 3709,
+  "off": 30,
+  "rating": 4.2,
+  "ratingCount": 3075,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Viscose Rayon",
+  "pattern": "Solid",
+  "sleeve": "Sleeveless",
+  "length": "Hip length",
+  "fit": "A-line",
+  "occasion": "Casual",
+  "wash": "Dry clean",
+  "delivery": 4,
+  "returns": 14,
+  "seller": "Levi's Retail",
+  "photos": [
+   "1629244032690-1c243449f90a"
+  ],
+  "desc": "Cream bootcut jeans in viscose rayon. Solid pattern with sleeveless and a a-line silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "S",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f32": {
+  "id": "f32",
+  "brand": "Roadster",
+  "name": "Boyfriend Jeans",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Grey",
+  "price": 1199,
+  "mrp": 1709,
+  "off": 30,
+  "rating": 4.2,
+  "ratingCount": 4039,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Striped",
+  "sleeve": "Short sleeves",
+  "length": "Knee length",
+  "fit": "Straight",
+  "occasion": "Festive",
+  "wash": "Machine wash",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "Roadster Retail",
+  "photos": [
+   "1655666730043-b3aee96aa161"
+  ],
+  "desc": "Grey boyfriend jeans in linen blend. Striped pattern with short sleeves and a straight silhouette. Suited to festive.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f33": {
+  "id": "f33",
+  "brand": "H&M",
+  "name": "Barrel Leg Jeans",
+  "category": "Western Wear",
+  "sub": "Jeans",
+  "colour": "Navy",
+  "price": 899,
+  "mrp": 1199,
+  "off": 25,
+  "rating": 3.8,
+  "ratingCount": 2147,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Printed",
+  "sleeve": "Full sleeves",
+  "length": "Hip length",
+  "fit": "Relaxed",
+  "occasion": "Workwear",
+  "wash": "Hand wash",
+  "delivery": 7,
+  "returns": 30,
+  "seller": "H&M Retail",
+  "photos": [
+   "1473966968600-fa801b869a1a"
+  ],
+  "desc": "Navy barrel leg jeans in linen blend. Printed pattern with full sleeves and a relaxed silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "L",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f34": {
+  "id": "f34",
+  "brand": "Zara",
+  "name": "Oversized Blazer",
+  "category": "Western Wear",
+  "sub": "Blazers",
+  "colour": "Grey",
+  "price": 3999,
+  "mrp": 7999,
+  "off": 50,
+  "rating": 4.1,
+  "ratingCount": 5967,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Poly Crepe",
+  "pattern": "Solid",
+  "sleeve": "Full sleeves",
+  "length": "Calf length",
+  "fit": "A-line",
+  "occasion": "Workwear",
+  "wash": "Machine wash",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "Zara Retail",
+  "photos": [
+   "1578964046312-69d266a3e739"
+  ],
+  "desc": "Grey oversized blazer in poly crepe. Solid pattern with full sleeves and a a-line silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "S",
+    "when": "last month"
+   }
+  ]
+ },
+ "f35": {
+  "id": "f35",
+  "brand": "MANGO",
+  "name": "Cropped Trench Coat",
+  "category": "Western Wear",
+  "sub": "Blazers",
+  "colour": "Beige",
+  "price": 2599,
+  "mrp": 4329,
+  "off": 40,
+  "rating": 4.3,
+  "ratingCount": 453,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Printed",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Knee length",
+  "fit": "A-line",
+  "occasion": "Festive",
+  "wash": "Dry clean",
+  "delivery": 4,
+  "returns": 14,
+  "seller": "MANGO Retail",
+  "photos": [
+   "1557418669-db3f781a58c0"
+  ],
+  "desc": "Beige cropped trench coat in linen blend. Printed pattern with three-quarter sleeves and a a-line silhouette. Suited to festive.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "L",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f36": {
+  "id": "f36",
+  "brand": "H&M",
+  "name": "Quilted Jacket",
+  "category": "Western Wear",
+  "sub": "Blazers",
+  "colour": "Navy",
+  "price": 1199,
+  "mrp": 2179,
+  "off": 45,
+  "rating": 4.4,
+  "ratingCount": 4018,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Poly Crepe",
+  "pattern": "Printed",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Calf length",
+  "fit": "Relaxed",
+  "occasion": "Daily",
+  "wash": "Hand wash",
+  "delivery": 4,
+  "returns": 14,
+  "seller": "H&M Retail",
+  "photos": [
+   "1706765779494-2705542ebe74"
+  ],
+  "desc": "Navy quilted jacket in poly crepe. Printed pattern with three-quarter sleeves and a relaxed silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "S",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f37": {
+  "id": "f37",
+  "brand": "Roadster",
+  "name": "Corduroy Overshirt",
+  "category": "Western Wear",
+  "sub": "Blazers",
+  "colour": "Teal",
+  "price": 2199,
+  "mrp": 3659,
+  "off": 40,
+  "rating": 3.7,
+  "ratingCount": 5853,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Poly Crepe",
+  "pattern": "Printed",
+  "sleeve": "Full sleeves",
+  "length": "Full length",
+  "fit": "Regular",
+  "occasion": "Daily",
+  "wash": "Machine wash",
+  "delivery": 2,
+  "returns": 30,
+  "seller": "Roadster Retail",
+  "photos": [
+   "1548624313-0396c75e4b1a"
+  ],
+  "desc": "Teal corduroy overshirt in poly crepe. Printed pattern with full sleeves and a regular silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "M",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f38": {
+  "id": "f38",
+  "brand": "HRX",
+  "name": "Hooded Sweatshirt",
+  "category": "Western Wear",
+  "sub": "Tops",
+  "colour": "Beige",
+  "price": 1799,
+  "mrp": 2999,
+  "off": 40,
+  "rating": 4.2,
+  "ratingCount": 2753,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Embroidered",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Slim",
+  "occasion": "Casual",
+  "wash": "Machine wash",
+  "delivery": 7,
+  "returns": 30,
+  "seller": "HRX Retail",
+  "photos": [
+   "1678884399113-0a2b079a31f5"
+  ],
+  "desc": "Beige hooded sweatshirt in 100% cotton. Embroidered pattern with sleeveless and a slim silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "L",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "last month"
+   }
+  ]
+ },
+ "f39": {
+  "id": "f39",
+  "brand": "Puma",
+  "name": "Track Jacket",
+  "category": "Western Wear",
+  "sub": "Blazers",
+  "colour": "Cream",
+  "price": 899,
+  "mrp": 1279,
+  "off": 30,
+  "rating": 4.0,
+  "ratingCount": 3873,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Floral",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "Straight",
+  "occasion": "Daily",
+  "wash": "Dry clean",
+  "delivery": 2,
+  "returns": 30,
+  "seller": "Puma Retail",
+  "photos": [
+   "1608113562252-b320e7628e17"
+  ],
+  "desc": "Cream track jacket in 100% cotton. Floral pattern with sleeveless and a straight silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "L",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f40": {
+  "id": "f40",
+  "brand": "ONLY",
+  "name": "Pleated Mini Skirt",
+  "category": "Western Wear",
+  "sub": "Skirts",
+  "colour": "Teal",
+  "price": 699,
+  "mrp": 1749,
+  "off": 60,
+  "rating": 4.2,
+  "ratingCount": 6309,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Viscose Rayon",
+  "pattern": "Printed",
+  "sleeve": "Full sleeves",
+  "length": "Knee length",
+  "fit": "Relaxed",
+  "occasion": "Festive",
+  "wash": "Dry clean",
+  "delivery": 5,
+  "returns": 14,
+  "seller": "ONLY Retail",
+  "photos": [
+   "1715532846484-1b10ddf694d0"
+  ],
+  "desc": "Teal pleated mini skirt in viscose rayon. Printed pattern with full sleeves and a relaxed silhouette. Suited to festive.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "L",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "S",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f41": {
+  "id": "f41",
+  "brand": "MANGO",
+  "name": "Satin Slip Skirt",
+  "category": "Western Wear",
+  "sub": "Skirts",
+  "colour": "Teal",
+  "price": 3499,
+  "mrp": 6359,
+  "off": 45,
+  "rating": 3.7,
+  "ratingCount": 4725,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Poly Crepe",
+  "pattern": "Printed",
+  "sleeve": "Full sleeves",
+  "length": "Knee length",
+  "fit": "Regular",
+  "occasion": "Casual",
+  "wash": "Dry clean",
+  "delivery": 4,
+  "returns": 14,
+  "seller": "MANGO Retail",
+  "photos": [
+   "1581655353564-df123a1eb820"
+  ],
+  "desc": "Teal satin slip skirt in poly crepe. Printed pattern with full sleeves and a regular silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f42": {
+  "id": "f42",
+  "brand": "Van Heusen",
+  "name": "Checked Formal Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "Grey",
+  "price": 899,
+  "mrp": 1379,
+  "off": 35,
+  "rating": 3.8,
+  "ratingCount": 6320,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Striped",
+  "sleeve": "Full sleeves",
+  "length": "Knee length",
+  "fit": "A-line",
+  "occasion": "Daily",
+  "wash": "Dry clean",
+  "delivery": 2,
+  "returns": 14,
+  "seller": "Van Heusen Retail",
+  "photos": [
+   "1788131525247-70a00169a2c2"
+  ],
+  "desc": "Grey checked formal shirt in linen blend. Striped pattern with full sleeves and a a-line silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "L",
+    "when": "2 months ago"
+   }
+  ]
+ },
+ "f43": {
+  "id": "f43",
+  "brand": "Arrow",
+  "name": "Linen Casual Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "Pink",
+  "price": 899,
+  "mrp": 1999,
+  "off": 55,
+  "rating": 3.7,
+  "ratingCount": 2117,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Poly Crepe",
+  "pattern": "Floral",
+  "sleeve": "Sleeveless",
+  "length": "Knee length",
+  "fit": "Slim",
+  "occasion": "Casual",
+  "wash": "Hand wash",
+  "delivery": 4,
+  "returns": 30,
+  "seller": "Arrow Retail",
+  "photos": [
+   "1762753674498-73ec49feafc4"
+  ],
+  "desc": "Pink linen casual shirt in poly crepe. Floral pattern with sleeveless and a slim silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "M",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f44": {
+  "id": "f44",
+  "brand": "Allen Solly",
+  "name": "Printed Casual Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "Maroon",
+  "price": 1499,
+  "mrp": 2139,
+  "off": 30,
+  "rating": 3.9,
+  "ratingCount": 4971,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Cotton Blend",
+  "pattern": "Solid",
+  "sleeve": "Sleeveless",
+  "length": "Calf length",
+  "fit": "Relaxed",
+  "occasion": "Workwear",
+  "wash": "Hand wash",
+  "delivery": 6,
+  "returns": 30,
+  "seller": "Allen Solly Retail",
+  "photos": [
+   "1782227282777-31e421d02eaf"
+  ],
+  "desc": "Maroon printed casual shirt in cotton blend. Solid pattern with sleeveless and a relaxed silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "S",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "S",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f45": {
+  "id": "f45",
+  "brand": "Peter England",
+  "name": "Oxford Casual Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "Olive",
+  "price": 699,
+  "mrp": 1159,
+  "off": 40,
+  "rating": 4.4,
+  "ratingCount": 1034,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Georgette",
+  "pattern": "Floral",
+  "sleeve": "Full sleeves",
+  "length": "Calf length",
+  "fit": "Slim",
+  "occasion": "Workwear",
+  "wash": "Machine wash",
+  "delivery": 7,
+  "returns": 30,
+  "seller": "Peter England Retail",
+  "photos": [
+   "1772798921560-c39fc8a5fc6b"
+  ],
+  "desc": "Olive oxford casual shirt in georgette. Floral pattern with full sleeves and a slim silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "L",
+    "when": "last month"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "S",
+    "when": "last month"
+   }
+  ]
+ },
+ "f46": {
+  "id": "f46",
+  "brand": "Jack & Jones",
+  "name": "Denim Shirt",
+  "category": "Western Wear",
+  "sub": "Shirts",
+  "colour": "Teal",
+  "price": 1799,
+  "mrp": 2999,
+  "off": 40,
+  "rating": 3.9,
+  "ratingCount": 4239,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Striped",
+  "sleeve": "Sleeveless",
+  "length": "Full length",
+  "fit": "A-line",
+  "occasion": "Festive",
+  "wash": "Dry clean",
+  "delivery": 6,
+  "returns": 14,
+  "seller": "Jack & Jones Retail",
+  "photos": [
+   "1782786661360-4dcd60cf392d"
+  ],
+  "desc": "Teal denim shirt in 100% cotton. Striped pattern with sleeveless and a a-line silhouette. Suited to festive.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "M",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "S",
+    "when": "last month"
+   }
+  ]
+ },
+ "f47": {
+  "id": "f47",
+  "brand": "Van Heusen",
+  "name": "Formal Trousers",
+  "category": "Western Wear",
+  "sub": "Trousers",
+  "colour": "Olive",
+  "price": 2599,
+  "mrp": 6499,
+  "off": 60,
+  "rating": 3.8,
+  "ratingCount": 2447,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Printed",
+  "sleeve": "Full sleeves",
+  "length": "Calf length",
+  "fit": "Regular",
+  "occasion": "Workwear",
+  "wash": "Dry clean",
+  "delivery": 5,
+  "returns": 14,
+  "seller": "Van Heusen Retail",
+  "photos": [
+   "1704261638154-be3bdfa3efc6"
+  ],
+  "desc": "Olive formal trousers in 100% cotton. Printed pattern with full sleeves and a regular silhouette. Suited to workwear.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "L",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "M",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f48": {
+  "id": "f48",
+  "brand": "Arrow",
+  "name": "Slim Fit Chinos",
+  "category": "Western Wear",
+  "sub": "Trousers",
+  "colour": "Teal",
+  "price": 699,
+  "mrp": 1749,
+  "off": 60,
+  "rating": 4.0,
+  "ratingCount": 3160,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "Linen Blend",
+  "pattern": "Floral",
+  "sleeve": "Short sleeves",
+  "length": "Calf length",
+  "fit": "Relaxed",
+  "occasion": "Daily",
+  "wash": "Machine wash",
+  "delivery": 4,
+  "returns": 30,
+  "seller": "Arrow Retail",
+  "photos": [
+   "1545273072-c541efad6ba6"
+  ],
+  "desc": "Teal slim fit chinos in linen blend. Floral pattern with short sleeves and a relaxed silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 2,
+    "title": "Stitching came loose",
+    "body": "A seam gave way the second time I wore it. Disappointing.",
+    "size": "M",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Fabric is thinner than expected",
+    "body": "Fine for daytime, but you can see through it in strong light. Wear a slip.",
+    "size": "S",
+    "when": "last month"
+   }
+  ]
+ },
+ "f49": {
+  "id": "f49",
+  "brand": "Jack & Jones",
+  "name": "Cargo Joggers",
+  "category": "Western Wear",
+  "sub": "Trousers",
+  "colour": "Navy",
+  "price": 1499,
+  "mrp": 2729,
+  "off": 45,
+  "rating": 3.9,
+  "ratingCount": 6011,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Printed",
+  "sleeve": "Short sleeves",
+  "length": "Hip length",
+  "fit": "Straight",
+  "occasion": "Casual",
+  "wash": "Dry clean",
+  "delivery": 5,
+  "returns": 14,
+  "seller": "Jack & Jones Retail",
+  "photos": [
+   "1591078771377-d06325f68465"
+  ],
+  "desc": "Navy cargo joggers in 100% cotton. Printed pattern with short sleeves and a straight silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "S",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Comfortable all day",
+    "body": "Breathable and easy to move in. Ended up wearing it three times in a fortnight.",
+    "size": "S",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f50": {
+  "id": "f50",
+  "brand": "Puma",
+  "name": "Training Shorts",
+  "category": "Western Wear",
+  "sub": "Trousers",
+  "colour": "Beige",
+  "price": 2199,
+  "mrp": 5499,
+  "off": 60,
+  "rating": 4.5,
+  "ratingCount": 5092,
+  "sizes": [
+   {
+    "label": "26",
+    "inStock": true
+   },
+   {
+    "label": "28",
+    "inStock": true
+   },
+   {
+    "label": "30",
+    "inStock": true
+   },
+   {
+    "label": "32",
+    "inStock": true
+   },
+   {
+    "label": "34",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Embroidered",
+  "sleeve": "Sleeveless",
+  "length": "Calf length",
+  "fit": "Straight",
+  "occasion": "Daily",
+  "wash": "Machine wash",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "Puma Retail",
+  "photos": [
+   "1625178494269-c91109fcc711"
+  ],
+  "desc": "Beige training shorts in 100% cotton. Embroidered pattern with sleeveless and a straight silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Good finish",
+    "body": "Hems and seams are clean, no loose threads. Packaging was decent too.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Colour slightly different",
+    "body": "A shade darker than the listing photos. Still happy with it, but be aware.",
+    "size": "M",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "M",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f51": {
+  "id": "f51",
+  "brand": "HRX",
+  "name": "Everyday Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Teal",
+  "price": 1499,
+  "mrp": 3749,
+  "off": 60,
+  "rating": 4.6,
+  "ratingCount": 5812,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Embroidered",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Hip length",
+  "fit": "Relaxed",
+  "occasion": "Casual",
+  "wash": "Hand wash",
+  "delivery": 7,
+  "returns": 30,
+  "seller": "HRX Retail",
+  "photos": [
+   "1521572163474-6864f9cf17ab"
+  ],
+  "desc": "Teal everyday crew tee in 100% cotton. Embroidered pattern with three-quarter sleeves and a relaxed silhouette. Suited to casual.",
+  "reviews": [
+   {
+    "stars": 5,
+    "title": "Exactly as pictured",
+    "body": "Colour is true to the photos and the stitching is neat. Wore it to a family function and got compliments all evening.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Lovely fabric",
+    "body": "Soft, doesn't cling, and it hasn't lost shape after two washes. Worth the price.",
+    "size": "S",
+    "when": "2 weeks ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "M",
+    "when": "2 weeks ago"
+   }
+  ]
+ },
+ "f52": {
+  "id": "f52",
+  "brand": "Puma",
+  "name": "Graphic Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Mustard",
+  "price": 699,
+  "mrp": 929,
+  "off": 25,
+  "rating": 3.8,
+  "ratingCount": 3385,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "Poly Crepe",
+  "pattern": "Striped",
+  "sleeve": "Full sleeves",
+  "length": "Calf length",
+  "fit": "Relaxed",
+  "occasion": "Festive",
+  "wash": "Dry clean",
+  "delivery": 7,
+  "returns": 14,
+  "seller": "Puma Retail",
+  "photos": [
+   "1574180566232-aaad1b5b8450"
+  ],
+  "desc": "Mustard graphic crew tee in poly crepe. Striped pattern with full sleeves and a relaxed silhouette. Suited to festive.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Creases badly",
+    "body": "Looks great for about an hour, then it's a mess of wrinkles.",
+    "size": "M",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 3,
+    "title": "Nice but runs long",
+    "body": "Lovely piece, though I had to get the length taken up. Factor in alteration time.",
+    "size": "S",
+    "when": "last month"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "3 weeks ago"
+   }
+  ]
+ },
+ "f53": {
+  "id": "f53",
+  "brand": "Levi's",
+  "name": "Logo Crew Tee",
+  "category": "Western Wear",
+  "sub": "T-Shirts",
+  "colour": "Mustard",
+  "price": 3499,
+  "mrp": 4999,
+  "off": 30,
+  "rating": 3.8,
+  "ratingCount": 616,
+  "sizes": [
+   {
+    "label": "XS",
+    "inStock": true
+   },
+   {
+    "label": "S",
+    "inStock": true
+   },
+   {
+    "label": "M",
+    "inStock": true
+   },
+   {
+    "label": "L",
+    "inStock": true
+   },
+   {
+    "label": "XL",
+    "inStock": true
+   }
+  ],
+  "fabric": "100% Cotton",
+  "pattern": "Floral",
+  "sleeve": "Three-quarter sleeves",
+  "length": "Hip length",
+  "fit": "Slim",
+  "occasion": "Daily",
+  "wash": "Machine wash",
+  "delivery": 6,
+  "returns": 14,
+  "seller": "Levi's Retail",
+  "photos": [
+   "1523381294911-8d3cead13475"
+  ],
+  "desc": "Mustard logo crew tee in 100% cotton. Floral pattern with three-quarter sleeves and a slim silhouette. Suited to daily.",
+  "reviews": [
+   {
+    "stars": 2,
+    "title": "Not as shown",
+    "body": "The fabric feels much cheaper in person than it looks online. Returned it.",
+    "size": "S",
+    "when": "2 months ago"
+   },
+   {
+    "stars": 5,
+    "title": "Great for the price",
+    "body": "Was not expecting this quality at this range. Would buy another colour.",
+    "size": "L",
+    "when": "3 weeks ago"
+   },
+   {
+    "stars": 3,
+    "title": "Good, delivery was slow",
+    "body": "No complaints about the product itself. Took longer to arrive than the estimate said.",
+    "size": "L",
+    "when": "3 weeks ago"
+   }
+  ]
  }
 };
 
@@ -3440,7 +8624,9 @@ export const CATEGORIES = {
   "Blazers",
   "Dresses",
   "Jeans",
+  "Shirts",
   "Skirts",
+  "T-Shirts",
   "Tops",
   "Trousers"
  ]
@@ -3467,6 +8653,30 @@ export const CLUSTER_SEEDS = {
   "vero_midi",
   "hm_midi",
   "aki_midi"
+ ],
+ "D": [
+  "hm_tee_black",
+  "roadster_tee",
+  "hrx_tee_black",
+  "levis_tee",
+  "puma_tee",
+  "mh_tee",
+  "uspa_tee"
+ ],
+ "E": [
+  "levis_511",
+  "jack_jeans",
+  "hm_slim",
+  "roadster_slim",
+  "wrangler_jeans",
+  "uspa_jeans"
+ ],
+ "F": [
+  "vh_white",
+  "as_white",
+  "arrow_white",
+  "peter_white",
+  "zara_white"
  ]
 };
 

@@ -29,18 +29,37 @@ const check = (name, cond, extra = "") => {
   else { fails++; console.log("  FAIL " + name + (extra ? "  <- " + extra : "")); }
 };
 
+// Layout guard. jsdom does not lay anything out, so overflow cannot be measured
+// here - but the bug that caused it can be stated structurally: every product
+// photo must sit inside a .shot, which is the single place image sizing is
+// decided. A bare <img> in a card renders at its natural width and bursts the
+// frame.
+const unwrapped = () => [...dom.window.document.querySelectorAll(".pc img, .railcard img")]
+  .filter(i => !i.closest(".shot")).length;
+
 console.log("screens");
 check("home renders", text().includes("FIT CHECK") && count(".cat") === 6);
 check("home names the anchor garment", /Your \w+ (kurta|jacket) fits you/.test(text()), text().slice(0, 90));
 check("home shows no broken images", ![...dom.window.document.querySelectorAll("img")].some(i => !i.src.startsWith("https://")));
+check("home images are all width-constrained", unwrapped() === 0, unwrapped() + " bare");
+{
+  const owned = new Set(["Cotton Anarkali Kurta", "Cotton Shirt Dress", "711 Skinny Jeans"]);
+  const shown = [...dom.window.document.querySelectorAll("#screen .pname")].map(e => e.textContent);
+  check("home does not recommend things she already owns", !shown.some(n => owned.has(n)),
+        shown.filter(n => owned.has(n)).join(", "));
+}
 
 click('[data-tab="wishlist"]');
 check("wishlist renders 8 cards", count(".pc") === 8, "got " + count(".pc"));
 check("wishlist shows the measure strip", !!$("measure"));
 check("badges present", count(".badge") === 8);
+check("wishlist images are all width-constrained", unwrapped() === 0, unwrapped() + " bare");
 
 click('[data-tab="categories"]');
 check("shop renders", text().includes("Shop") && count(".pc") > 4);
+check("shop images are all width-constrained", unwrapped() === 0, unwrapped() + " bare");
+check("shop count matches the grid",
+      text().includes(count(".pc") + " items"), text().slice(0, 40));
 click('[data-tab="profile"]');
 check("profile renders with fit profile card", !!$("fpcard"));
 click('[data-act="go-fitprofile"]');

@@ -55,7 +55,7 @@ function productCard(row, ctx) {
 function browseCard(gid, cls = "") {
   const g = GARMENTS[gid];
   return `<div class="${cls}">
-    <img src="${photo(gid, 320, 427)}" alt="${esc(g.alt)}" loading="lazy">
+    <div class="shot"><img src="${photo(gid, 320, 427)}" alt="${esc(g.alt)}" loading="lazy"></div>
     <div class="brand" style="margin-top:7px">${esc(g.brand)}</div>
     <div class="pname">${esc(g.name)}</div>
     ${priceHTML(gid)}
@@ -89,8 +89,8 @@ function homeScreen(rv) {
   const p = persona();
   const anchor = fe.anchorGarment(p);
   const good = rv.counts[fe.FITS] + rv.counts[fe.LIKELY];
-  const wishIds = new Set(p.wishlist.map(w => w.garment));
-  const others = Object.keys(GARMENTS).filter(g => !wishIds.has(g)).slice(0, 6);
+  const seen = new Set([...p.wishlist.map(w => w.garment), ...p.wardrobe.map(w => w.garment)]);
+  const others = Object.keys(GARMENTS).filter(g => !seen.has(g)).slice(0, 8);
 
   const thumbs = rv.rows.filter(r => r.result.status === fe.FITS || r.result.status === fe.LIKELY)
     .slice(0, 4).map(r => `<img src="${photo(r.gid, 120, 160)}" alt="">`).join("");

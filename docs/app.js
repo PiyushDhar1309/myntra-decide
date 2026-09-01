@@ -402,11 +402,12 @@ function compareScreen() {
           <div class="thumbs">${state.picked.map(i => `<img src="${photo(i, 90, 120)}" alt="">`).join("")}</div>
           <div class="n">${state.picked.length} picked<small>${
             state.picked.length === ids.length ? "That's all of them — nothing decided yet"
-                                               : "Tap Pick on another to add it"}</small></div>
+                                               : "Tap Pick on another, or finish below"}</small></div>
         </div>
         <div class="acts">
           <button class="bagb" data-act="bagpicked">Move to bag</button>
-          <button class="doneb" data-act="donepicks">Done</button>
+          <button class="doneb" data-act="donepicks">Keep ${
+            state.picked.length === 1 ? "this one" : `these ${state.picked.length}`} →</button>
         </div>
       </div>`
       : `<div class="cmpbar">
@@ -838,7 +839,8 @@ function render() {
   const hideNav = state.page === "product" || state.page === "compare"
     || (state.page === "wishlist" && state.selecting);
   $("nav").style.display = hideNav ? "none" : "flex";
-  $("screen").style.paddingBottom = hideNav ? "88px" : "76px";
+  $("screen").style.paddingBottom =
+    (state.page === "compare" && state.picked.length) ? "150px" : hideNav ? "88px" : "76px";
   $("nav").innerHTML = TABS.map(([k, icon, lab]) => {
     const on = k === state.page ||
       (k === "wishlist" && ["collection", "compare", "tournament"].includes(state.page)) ||

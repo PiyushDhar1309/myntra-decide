@@ -271,6 +271,9 @@ click("[data-cmpsub]");
   click(all("#screen .pickbtn")[1]);
   check("two can be picked at once", n(".pickbtn.on") === 2, "got " + n(".pickbtn.on"));
   check("the bar counts them", txt().includes("2 picked"));
+  check("and the finish button says what it will do", txt().includes("Keep these 2"));
+  check("with room left so it does not sit on the table",
+        $("screen").style.paddingBottom === "150px");
   click(all("#screen .pickbtn")[1]);
   check("and un-picked again", n(".pickbtn.on") === 1);
   click(all("#screen .pickbtn")[1]);
@@ -320,6 +323,7 @@ click('[data-act="compare"]');
 click("#screen .pickbtn");
 check("picking marks the column rather than ending it", !!q(".pickbtn.on") && !!q(".pickbar"));
 check("and invites another", $("screen").textContent.includes("Tap Pick on another"));
+check("while naming the action that ends it", txt().includes("Keep this one"));
 click('[data-act="donepicks"]');
 check("Done resolves it", txt().includes("You picked one"));
 check("five are parked", txt().includes("Parked (5)"));

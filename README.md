@@ -52,42 +52,63 @@ one. Myntra solved organisation and stopped one step short.
 
 ## What the product does
 
-**Detects the decisions.** Saved items that answer the same need at a comparable
+**Finds the decisions.** Saved items that answer the same need at a comparable
 price are rivals. Three or more of them is a decision, not a list — and the
-wishlist says so: *"6 of your saved kurtas look like one decision."* One tap
-groups them into a collection, feeding Myntra's own feature rather than
-competing with it.
+wishlist says so: *"We found 7 similar items in your wishlist."* One tap opens
+the comparison. No filing, no folders, no concept to learn first.
 
-**Shows what actually separates them.** Near-identical products differ on a
-dozen attributes and almost none of them should decide anything. The comparison
-ranks every difference by weight, leads with the four that matter, and folds the
-rest away:
+**Or lets you pick them yourself.** *Compare items* turns the wishlist into
+selectable tiles. Choose the ones you keep going back and forth on, and compare
+those. Multi-select is a pattern people already know.
+
+**Shows what actually separates them.** Near-identical products differ on a dozen
+attributes and almost none of them should decide anything. The comparison ranks
+every difference by weight, leads with the four that matter, and folds the rest
+away:
 
 ```
-6 items, one decision
-All 6 are kurtas, ₹1,799–₹2,699
-They differ on price and delivery. Of 11 differences, these 4 should decide it.
+7 items, one decision
+All 7 are t-shirts, ₹599–₹1,299
+They differ on price and delivery. Of 9 differences, these 4 should decide it.
 
-           Libas    Biba     W        Aurelia  Anouk    Sangria
-PRICE      ₹2,099   ₹2,699   ₹1,899   ₹1,799 ✓ ₹2,499   ₹2,299
-DELIVERY   4 days   2 days   3 days   7 days   2 days   5 days
-FABRIC     Rayon    Cotton   Rayon    Crepe    Georgette Cotton
-LENGTH     Calf     Ankle    Calf     Knee     Ankle    Calf
+           H&M      Roadster  HRX      Levi's   Puma     M&H      USPA
+PRICE      ₹699     ₹599 ✓    ₹799     ₹1,299   ₹999     ₹899     ₹1,199
+DELIVERY   3 days   2 days ✓  2 days ✓ 4 days   3 days   6 days   5 days
+FABRIC     Cotton   Cotton    Bio-wash Cotton   Blend    Cotton   Pima
+RETURNS    30 ✓     14        30 ✓     30 ✓     14       14       30 ✓
 ```
 
-A tick marks the lowest price, fastest delivery, longest returns or best
-rating. **Nothing is ticked on fabric, colour or pattern** — those are taste,
+A tick marks the lowest price, fastest delivery, longest returns or best rating.
+**Ties all win** — two items sharing the quickest delivery both get marked,
+because "these two are equally quick" is an answer rather than an absence of one.
+**Nothing is ticked on fabric, colour, pattern or fit**, because those are taste
 and the product does not pretend otherwise.
 
 **Breaks the deadlock when the table is not enough.** *Compare two at a time*
-turns one impossible six-way choice into five easy binary ones. That is how
+turns one impossible seven-way choice into six easy binary ones. That is how
 choice overload is actually broken — by shrinking each choice, not by adding
 information to a big one.
 
-**Makes elimination safe.** Picking one **parks** the rest inside the
-collection. Kept, visible, one tap from coming back. People hoard because
-removing feels like loss, so nothing is ever deleted — which is the only reason
+**Lets you keep more than one.** Pick is a toggle. A black tee and a charcoal one
+is a real answer, and forcing a single winner would destroy a sale to satisfy our
+own metric. The bar counts what you have picked and names what will happen:
+*Keep these 2 →*.
+
+**Makes elimination safe, and asked.** Finishing puts the question plainly:
+*"Remove the other 5 from your wishlist?"* — with **Keep them**, **Remove**, or
+**Move to bag**. Nothing is deleted behind your back, which is the only reason
 anyone will use it twice.
+
+**And refuses to call a non-decision a decision.** Keep every item and the app
+says so: *the decision is still open, your wishlist is the same size it was, and
+we don't count this one as decided.* That matters beyond the copy — counting it
+would let a team satisfy Decision Resolution Rate without any behaviour changing,
+which is precisely what that metric exists to detect.
+
+**Explains itself.** A five-step walkthrough spotlights the real controls with an
+arrow and a caption, moves between screens as it goes, and offers *Skip — let me
+explore* on every step. Reachable from the panel on home or the **?** in the
+header, on any screen.
 
 ## Why it fits the brief
 
@@ -107,18 +128,22 @@ anyone will use it twice.
 | `docs/app.js` | Eleven screens, rendering and interaction |
 | `docs/data.js` | Generated — do not edit by hand |
 | `tools/build_catalog.py` | Builds the catalog, including the decision clusters |
-| `docs/audit.mjs` | 126 checks across every screen, control and flow |
+| `tools/images.py` | Verified photo ids, grouped by what they actually show |
+| `docs/audit.mjs` | 204 checks across every screen, control and flow |
 
-48 products with descriptions, specifications, multiple sizes with out-of-stock
-states, ratings, reviews, delivery estimates and return windows — plus three
-deliberately seeded decision clusters, because a comparison engine cannot be
-judged on a catalog of unrelated things.
+**120 products** with descriptions, specifications, multiple sizes with
+out-of-stock states, ratings, reviews, delivery estimates and return windows.
+The demo wishlist holds **56 items** — the size a heavy wishlister's actually
+reaches — inside which the engine finds **seven decisions covering 39 of them**,
+including seven near-identical black crew tees and nine pairs of jeans. Tees are
+the clearest case the feature has: people genuinely save several, and nothing you
+can see in a photo tells them apart.
 
 ### Tests
 
 ```bash
 python3 tools/build_catalog.py           # regenerate the catalog
-npm install jsdom && node docs/audit.mjs # 126 checks, headless
+npm install jsdom && node docs/audit.mjs # 204 checks, headless
 ```
 
 Three sweeps run on **every** screen: **no dead controls** (every button

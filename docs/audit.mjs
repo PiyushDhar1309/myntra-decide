@@ -240,23 +240,16 @@ check("rows without a meaningful best are left unticked",
       n(".cmp tbody tr") > n(".cmp td.win"));
 click('[data-act="cmpmore"]');
 check("expanding shows every difference", all("#screen .cmp tbody tr").length > 4);
-check("the two-at-a-time button is a filled button, not a ghost", !!q(".cmpbar .tourbtn"));
-check("and a card explains what it does", !!q(".tip") && txt().includes("Two at a time is easy"));
-sweep("compare");
 
-head("TIES ALL WIN");
-// Two items sharing the lowest price used to leave the row blank, which reads as
-// a broken table rather than a considered one.
-click('[data-tab="wishlist"]'); click('[data-wtab="items"]');
-click("[data-cmpsub]");
-click('[data-act="cmpmore"]');
+// Ties: two items sharing the best value used to leave the row blank, which
+// reads as a broken table rather than a considered one. Checked here against the
+// comparison already on screen, so nothing navigates away.
 {
   const rows = all("#screen .cmp tbody tr");
   const tied = rows.find(r => [...r.querySelectorAll("td.win")].length > 1);
   check("a row where several share the best value marks them all", !!tied,
         rows.map(r => r.querySelector(".rowlab").textContent + ":"
           + r.querySelectorAll("td.win").length).join(" "));
-  // Every row that has an objectively better direction must mark something.
   const RANKED = ["Price", "Delivery", "Returns", "Rating"];
   const unmarked = rows.filter(r => RANKED.includes(r.querySelector(".rowlab").textContent.trim())
                                     && !r.querySelector("td.win"))
@@ -264,7 +257,10 @@ click('[data-act="cmpmore"]');
   check("every rankable row marks at least one winner", unmarked.length === 0,
         "unmarked: " + unmarked.join(", "));
 }
-click('[data-act="back"]');
+
+check("the two-at-a-time button is a filled button, not a ghost", !!q(".cmpbar .tourbtn"));
+check("and a card explains what it does", !!q(".tip") && txt().includes("Two at a time is easy"));
+sweep("compare");
 
 head("TOURNAMENT");
 click('[data-act="tournament"]');

@@ -128,6 +128,24 @@ A few rules the engine holds to, each covered by a test:
   waist.
 - Nothing is called a fit while something critical is unmeasured.
 
+## The app
+
+Nine screens: home, shop, search, product, wishlist, bag, profile, orders and
+My Fit Profile.
+
+The **product page** is where the engine is most visible. Each size chip carries
+a dot coloured by what Fit Check makes of *that* size, so the Zara dress shows
+red on S and green on M before you tap anything. Below it sit the measurement
+bars, the reason, and either the one measurement that would settle it or a plain
+statement that the brand has not published what it would take.
+
+The **wishlist** is the feature: verdict badges, filters by state, and the
+measurement ask. **Orders** shows where the fit profile came from - what was
+kept, and what went back for a size reason.
+
+Saving, unsaving, the bag and adding to your wardrobe all change real state, so
+anything you save from Shop is judged the moment it lands in the wishlist.
+
 ## Layout
 
 The deployed app is JavaScript. Python remains the reference implementation and
@@ -139,6 +157,7 @@ drift apart.
 | `docs/index.html` | The app shell and stylesheet |
 | `docs/engine.js` | The fit engine, ported from `fit_engine.py` |
 | `docs/app.js` | Screens, rendering and interaction |
+| `docs/audit.mjs` | 118 checks across every screen, control and flow |
 | `docs/data.js` | Generated from `catalog.py` - do not edit by hand |
 | `dims.py` | Dimension vocabulary: what pools with what, and why |
 | `catalog.py` | Seeded garments, past orders and wishlists for two shoppers |
@@ -150,12 +169,25 @@ drift apart.
 ```bash
 python3 test_engine.py    # 40+ engine invariants
 node docs/parity.mjs      # the JS engine must match Python exactly
-npm install jsdom && node docs/smoke.mjs   # every screen and flow, headless
+npm install jsdom && node docs/audit.mjs   # 118 checks, headless
 ```
 
 `parity.mjs` replays three scenarios through both engines and compares every
 row, confidence score and unlock. Run `python3 tools/gen_data.py` after changing
 the catalog or the rules.
+
+`audit.mjs` walks all nine screens and drives every flow: opening products,
+changing size, saving and unsaving, the bag, search, category filters, the
+measurement loop, adding a garment, switching shopper, reset, and the empty
+states. Three of its sweeps run on every screen:
+
+- **No dead controls.** Every button and interactive element must resolve to a
+  handler. A control that looks live and does nothing is the first thing a
+  reviewer finds.
+- **No unconstrained images.** Every product photo sits inside a `.shot`, which
+  is the single place image sizing is decided.
+- **The disclaimer is present**, and nothing invents star ratings, review counts
+  or personal details.
 
 ### Running it
 

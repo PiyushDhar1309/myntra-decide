@@ -367,6 +367,23 @@ function measurableSource(persona, key, dim, extra) {
   return { garment: e.garment, size: e.size, unresolved: e.unresolved, verdict: e.verdict };
 }
 
+// The measurement that would settle one specific garment, for a product page
+// where that garment may not be on the wishlist at all. Returns null when the
+// blocker is the brand's missing data, because that is not the shopper's to fix.
+export function askForItem(persona, gid, size, ctx, extra = {}) {
+  const r = judge(gid, size, ctx);
+  for (const f of r.blocked) {
+    if (f.code !== UNKNOWN) continue;
+    const key = scopeOf(gid, f.dim);
+    const source = measurableSource(persona, key, f.dim, extra);
+    if (!source) continue;
+    const shared = unlockOpportunities(persona, ctx, extra).find(u => u.key === key);
+    return { key, dim: f.dim, label: label(f.dim), source,
+             count: shared ? shared.count : 0 };
+  }
+  return null;
+}
+
 // Saved items blocked because the wardrobe holds nothing to judge them by.
 // Distinct from an unlock: there is no garment to measure, so the fix is to add
 // one rather than to reach for a tape.

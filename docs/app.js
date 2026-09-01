@@ -298,10 +298,11 @@ function wishlistScreen() {
       <div class="t">We found ${c.items.length} similar items in your wishlist</div>
       <div class="d">${esc(de.sharedLine(c.items))}. Want us to compare them and show you what
         actually separates them?</div>
-      <div class="row"><div class="thumbs">${c.items.slice(0, 5).map(i =>
-        `<img src="${photo(i, 100, 133)}" alt="">`).join("")}</div>
-        <button class="btn ghost" style="padding:9px 12px" data-dismiss="${c.sub}">Not now</button>
-        <button class="btn" style="padding:9px 14px" data-cmpsub="${c.sub}">Compare these ${c.items.length}</button></div>
+      <div class="row"><div class="thumbs">${c.items.slice(0, 6).map(i =>
+        `<img src="${photo(i, 100, 133)}" alt="">`).join("")}</div></div>
+      <div class="acts">
+        <button class="btn ghost" data-dismiss="${c.sub}">Not now</button>
+        <button class="btn" data-cmpsub="${c.sub}">Compare these ${c.items.length}</button></div>
     </div>`).join("");
 
   const bar = state.selecting ? "" : `<div class="wbar">

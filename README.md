@@ -142,9 +142,19 @@ can see in a photo tells them apart.
 ### Tests
 
 ```bash
-python3 tools/build_catalog.py           # regenerate the catalog
-npm install jsdom && node docs/audit.mjs # 204 checks, headless
+npm install                    # jsdom and playwright
+npm test                       # 204 behavioural checks, headless
+npm run ui                     # geometric UI audit in real browsers
+python3 tools/build_catalog.py # regenerate the catalog
 ```
+
+`docs/audit.mjs` proves behaviour but runs under jsdom, which lays nothing out —
+so it cannot see a button sitting on top of a thumbnail. `tools/uiaudit.mjs`
+drives real engines at phone viewports and measures actual boxes: horizontal
+overflow, elements escaping the frame, siblings overlapping inside a row,
+content still hidden behind a fixed bar once scrolled to the end, clipped text,
+tap targets under 28px, and icon fonts failing to load. It writes a screenshot
+of every screen.
 
 Three sweeps run on **every** screen: **no dead controls** (every button
 resolves to a handler — a control that looks live and does nothing is the first

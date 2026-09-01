@@ -1,0 +1,14 @@
+{
+  "name": "myntra-decide",
+  "private": true,
+  "type": "module",
+  "description": "Tooling for the Myntra Decide prototype. The app itself has no dependencies.",
+  "scripts": {
+    "test": "node docs/audit.mjs",
+    "ui": "node tools/uiaudit.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.0",
+    "playwright": "^1.50.0"
+  }
+}

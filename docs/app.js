@@ -367,9 +367,9 @@ function compareScreen() {
     <button class="pickbtn" data-pick="${id}">Pick</button></th>`).join("");
 
   const body = shown.map(d => {
-    const winner = de.bestOn(ids, d.attr);
+    const winners = de.bestOn(ids, d.attr);
     return `<tr><td class="rowlab">${d.attr.label}</td>${ids.map(id =>
-      `<td class="${winner === id ? "win" : ""}">${esc(d.values[id])}</td>`).join("")}</tr>`;
+      `<td class="${winners.includes(id) ? "win" : ""}">${esc(d.values[id])}</td>`).join("")}</tr>`;
   }).join("");
 
   return `<div class="cmphead">

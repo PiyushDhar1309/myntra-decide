@@ -87,16 +87,16 @@ export function diff(ids) {
   return { same, differs };
 }
 
-// Which item wins on a given attribute, where "winning" is meaningful at all.
+// Which items win on a given attribute, where "winning" means anything at all.
+//
+// Ties all win. Suppressing the mark when two items share the lowest price reads
+// as a broken row rather than a considered one - and "these two are equally
+// cheapest" is a real answer, not an absence of one.
 export function bestOn(ids, attr) {
-  if (!attr.best) return null;
-  const pick = attr.best === "min"
-    ? (a, b) => (val(a, attr.key) < val(b, attr.key) ? a : b)
-    : (a, b) => (val(a, attr.key) > val(b, attr.key) ? a : b);
-  const winner = ids.reduce(pick);
-  // A winner nobody else ties with, or it is not worth flagging.
-  const tied = ids.filter(id => val(id, attr.key) === val(winner, attr.key));
-  return tied.length === 1 ? winner : null;
+  if (!attr.best) return [];
+  const values = ids.map(id => val(id, attr.key));
+  const target = attr.best === "min" ? Math.min(...values) : Math.max(...values);
+  return ids.filter(id => val(id, attr.key) === target);
 }
 
 // One line for the top of a decision: what these all are.
@@ -115,7 +115,8 @@ export function tradeoff(ids) {
   if (!differs.length) return "These are the same on everything we can compare.";
   const top = differs.slice(0, 2).map(d => d.attr.label.toLowerCase());
   const cheapest = ids.reduce((a, b) => PRODUCTS[a].price <= PRODUCTS[b].price ? a : b);
-  const fastest = bestOn(ids, ATTRS.find(a => a.key === "delivery"));
+  const quickest = bestOn(ids, ATTRS.find(a => a.key === "delivery"));
+  const fastest = quickest.length === 1 ? quickest[0] : null;
   let s = `They differ on ${top.length === 2 ? `${top[0]} and ${top[1]}` : top[0]}`;
   if (fastest && fastest !== cheapest) {
     s += `. The cheapest is not the fastest — ${PRODUCTS[cheapest].brand} costs least, `

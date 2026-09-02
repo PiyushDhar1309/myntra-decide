@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How We'd Know It Worked</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#fbfbfd; --surface:#f2f3f7; --raised:#ffffff;
+  --ink:#171c2e; --body:#3b415a; --muted:#6b7189;
+  --rule:#dfe2ec; --rule-soft:#eceef4;
+  --signal:#d81e5b; --signal-bg:#fdeef3;
+  --ok:#1f7a68; --ok-bg:#e9f4f1;
+  --warn:#b06a1c; --warn-bg:#fdf3e6; --warn-rule:#e8c99b;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+  --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+  --rule:#2a3047; --rule-soft:#212637;
+  --signal:#ff6b96; --signal-bg:#2b1725;
+  --ok:#5ec4ac; --ok-bg:#12251f;
+  --warn:#d8a05a; --warn-bg:#2a2115; --warn-rule:#5a4526;
+}}
+:root[data-theme="dark"]{
+  --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+  --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+  --rule:#2a3047; --rule-soft:#212637;
+  --signal:#ff6b96; --signal-bg:#2b1725;
+  --ok:#5ec4ac; --ok-bg:#12251f;
+  --warn:#d8a05a; --warn-bg:#2a2115; --warn-rule:#5a4526;
+}
+*{box-sizing:border-box}
+body{background:var(--paper); color:var(--body); margin:0;
+  font-family:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif; font-size:16px; line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:790px; margin:0 auto; padding:60px 26px 96px}
+h1,h2,h3{font-family:'IBM Plex Serif',Georgia,serif; color:var(--ink); text-wrap:balance; margin:0}
+h1{font-size:40px; line-height:1.13; font-weight:600; letter-spacing:-.022em}
+h2{font-size:24px; font-weight:600; line-height:1.3}
+h3{font-size:16px; font-weight:600}
+p{margin:0}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+.lede{font-size:18px; line-height:1.6; margin-top:16px}
+header{border-bottom:1px solid var(--rule); padding-bottom:34px}
+section{padding:44px 0; border-bottom:1px solid var(--rule-soft); display:flex; flex-direction:column; gap:18px}
+section:last-of-type{border-bottom:0}
+
+/* tree */
+.tier{display:flex; flex-direction:column; gap:8px}
+.tier .lab{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--muted)}
+.node{background:var(--raised); border:1px solid var(--rule); border-radius:3px; padding:14px 16px}
+.node .nm{font-weight:700; color:var(--ink); font-size:15.5px}
+.node .df{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted); margin-top:5px; line-height:1.55}
+.node.prime{border-color:var(--signal); background:var(--signal-bg)}
+.node.prime .nm{color:var(--signal)}
+.row3{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+@media (max-width:640px){ .row3{grid-template-columns:1fr} }
+.small{padding:11px 13px}
+.small .nm{font-size:13.5px}
+.small .df{font-size:11.5px; margin-top:3px}
+.down{text-align:center; color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:14px; padding:2px 0}
+
+/* defs */
+.def{border:1px solid var(--rule); border-radius:3px; overflow:hidden}
+.def .hd{background:var(--surface); padding:13px 17px; border-bottom:1px solid var(--rule-soft);
+  display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.def .hd .nm{font-weight:700; color:var(--ink); font-size:16px}
+.def .hd .tag{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em;
+  text-transform:uppercase; padding:2px 7px; border-radius:2px; margin-left:auto}
+.tag.prime{background:var(--signal); color:#fff}
+.tag.lead{background:var(--ok-bg); color:var(--ok)}
+.tag.guard{background:var(--warn-bg); color:var(--warn); border:1px solid var(--warn-rule)}
+.def .bd{padding:15px 17px; display:grid; grid-template-columns:96px 1fr; gap:10px 16px; font-size:14.5px}
+.def .bd dt{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--muted); padding-top:4px}
+.def .bd dd{margin:0; color:var(--body); line-height:1.6}
+.def .bd dd strong{color:var(--ink)}
+.def .bd .formula{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink);
+  background:var(--surface); padding:9px 11px; border-radius:2px; line-height:1.65; overflow-x:auto}
+@media (max-width:620px){ .def .bd{grid-template-columns:1fr; gap:3px 0} .def .bd dt{padding-top:10px} }
+
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse; width:100%; min-width:620px; font-size:13.5px}
+th,td{text-align:left; padding:11px 14px 11px 0; border-bottom:1px solid var(--rule-soft); vertical-align:top}
+th{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); font-weight:500; border-bottom:1px solid var(--rule)}
+td:first-child{color:var(--ink); font-weight:600; padding-right:18px}
+.card{background:var(--surface); border-left:3px solid var(--ink); padding:19px 21px;
+  display:flex; flex-direction:column; gap:9px; font-size:14.5px; line-height:1.62}
+.card.sig{border-left-color:var(--signal); background:var(--signal-bg)}
+.card.warn{border-left-color:var(--warn); background:var(--warn-bg)}
+.card .h{font-weight:700; color:var(--ink); font-size:15px}
+.formula-big{font-family:'IBM Plex Mono',monospace; font-size:13.5px; line-height:2;
+  color:var(--ink); background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+  padding:18px 20px; overflow-x:auto}
+.formula-big .hl{color:var(--signal); font-weight:600}
+.note{font-size:13px; color:var(--muted); line-height:1.6}
+ul.plain{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px; font-size:14.5px}
+ul.plain li::marker{color:var(--muted)}
+footer{margin-top:44px; padding-top:20px; border-top:1px solid var(--rule); font-size:12.5px; color:var(--muted)}
+</style>
+</head>
+<body>
+<nav style="max-width:790px;margin:0 auto;padding:18px 26px 0;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.06em">
+  <a href="./" style="color:#6b7189;text-decoration:none">&larr; ALL SUPPORTING DOCUMENTS</a>
+</nav>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Part 6 · Success metrics</div>
+  <h1 style="margin-top:13px">How we'd know it worked</h1>
+  <p class="lede">One business metric, one product metric we're accountable for, five things that
+  move first, and seven that must not get worse — each defined precisely enough to compute.</p>
+</header>
+
+<section>
+  <div class="eyebrow">The tree</div>
+  <h2>What sits under what</h2>
+  <div class="tier">
+    <span class="lab">Business metric — unchanged, given to us</span>
+    <div class="node"><span class="nm">Wishlist conversion</span>
+      <span class="df">users with ≥1 purchase of a saved item within 30d of that item's save ÷ users who saved anything</span></div>
+    <div class="down">↑ moved by</div>
+    <span class="lab">Product metric — what this team owns</span>
+    <div class="node prime"><span class="nm">Decision resolution rate</span>
+      <span class="df">decision sets resolved within 30d ÷ decision sets formed</span></div>
+    <div class="down">↑ predicted by</div>
+    <span class="lab">Leading indicators — visible in days, not a month</span>
+    <div class="row3">
+      <div class="node small"><span class="nm">Suggestion acceptance</span><span class="df">is our clustering any good</span></div>
+      <div class="node small"><span class="nm">Compare entry</span><span class="df">do they open it</span></div>
+      <div class="node small"><span class="nm">Compare completion</span><span class="df">does it end in a pick</span></div>
+      <div class="node small"><span class="nm">Time to decision</span><span class="df">is it faster than nothing</span></div>
+      <div class="node small"><span class="nm">Park-not-delete rate</span><span class="df">does safe elimination work</span></div>
+      <div class="node small"><span class="nm">Escalation to pairs</span><span class="df">is the table enough</span></div>
+    </div>
+  </div>
+  <p class="note">Guardrails sit beside this tree rather than under it — they are not things we are
+  trying to move, they are the ways this feature could win its own metric while damaging the
+  business.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Business metric</div>
+  <h2>Stated so it can be computed</h2>
+  <div class="def">
+    <div class="hd"><span class="nm">Wishlist conversion</span><span class="tag prime">north star</span></div>
+    <dl class="bd">
+      <dt>Numerator</dt><dd>Users who purchased at least one item that was in their wishlist, where
+        the purchase fell within 30 days of <strong>that item's</strong> save timestamp</dd>
+      <dt>Denominator</dt><dd>Users who added at least one item to their wishlist in the period</dd>
+      <dt>Window</dt><dd>Rolling, per item — the clock starts at each save, not at period start</dd>
+      <dt>Grain</dt><dd><strong>Per user, not per item.</strong> Forty saves and one purchase counts
+        the same as forty saves and six</dd>
+      <dt>Why</dt><dd>Given by the brief. Its grain is the single most important fact in this
+        document: it means we do not need to convert more items, only more people — and every person
+        needs exactly one unblocked purchase</dd>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Product metric</div>
+  <h2>The one number this team is accountable for</h2>
+  <div class="def">
+    <div class="hd"><span class="nm">Decision resolution rate (DRR)</span><span class="tag prime">primary</span></div>
+    <dl class="bd">
+      <dt>Set</dt><dd>Three or more items saved by one user in the same subcategory whose prices sit
+        within roughly 2× of each other. Formed at the moment the third item joins</dd>
+      <dt>Resolved</dt><dd>Within 30 days of formation, either <strong>(a)</strong> one item from the
+        set is purchased, or <strong>(b)</strong> the set is deliberately reduced to two or fewer
+        live items</dd>
+      <dt>Formula</dt><dd class="formula">DRR = sets resolved within 30d ÷ sets formed<br>
+        DCR = sets resolved <em>by purchase</em> ÷ sets formed</dd>
+      <dt>Why two</dt><dd>DRR tells you the <strong>mechanism</strong> works — people can now finish
+        a decision. DCR tells you it <strong>pays</strong>. Reporting only DCR would reward us for
+        pushing purchases; reporting only DRR would let us celebrate helping people buy nothing</dd>
+      <dt>Not resolved</dt><dd>Keeping <strong>every</strong> item in the set. The wishlist is the
+        same size it was, so nothing was decided — and counting it would let this team satisfy DRR
+        without any behaviour changing. The prototype says so on screen rather than quietly
+        recording a win</dd>
+      <dt>Baseline</dt><dd>Computable <strong>retrospectively</strong>, from wishlist tables, before
+        anything ships. The set definition is just a query — so the counterfactual is knowable
+        without an experiment</dd>
+    </dl>
+  </div>
+  <div class="card sig">
+    <span class="h">Why this metric and not "compare views"</span>
+    <p>Engagement with a feature is not the outcome; a comparison screen someone opens and abandons
+    has made things worse, not better. DRR is defined on the <em>user's</em> unit of work — the
+    decision — and it can get worse when we ship badly. A metric that cannot go down is not a
+    metric.</p>
+    <p>Which is also why keeping everything is excluded. The easiest way to make this number look
+    good is to count any completed comparison, and that is exactly the version of it that would let
+    us report success while the wishlist stayed the same size.</p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Leading indicators</div>
+  <h2>What moves before the thirty days are up</h2>
+  <p>DRR takes a month per cohort. These move in days, and each one isolates a different way the
+  feature could be failing — which matters, because "it didn't work" is not an actionable result.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Indicator</th><th>Definition</th><th>What it isolates</th></tr></thead>
+    <tbody>
+      <tr><td>Suggestion acceptance</td><td>Grouping suggestions accepted ÷ shown</td>
+        <td>Whether the clustering is any good. If this is low nothing downstream matters — we are
+          grouping things people were not choosing between</td></tr>
+      <tr><td>Compare entry</td><td>Sets where compare is opened ÷ sets with 3+ items</td>
+        <td>Discovery and intent. Low means they never found it, or did not want it</td></tr>
+      <tr><td>Compare completion</td><td>Compare sessions ending in a pick ÷ sessions started</td>
+        <td>Whether the comparison actually helps. Abandonment here means we surfaced the wrong
+          differences</td></tr>
+      <tr><td>Time to decision</td><td>Median days from set formed to resolved</td>
+        <td>Speed, independent of rate. A feature that resolves the same sets faster still moves the
+          30-day metric</td></tr>
+      <tr><td>Park-not-delete</td><td>Items parked ÷ items removed from sets</td>
+        <td>Whether elimination-without-loss works. If people still delete, the anxiety was not the
+          barrier we thought</td></tr>
+      <tr><td>Escalation to pairs</td><td>Sessions using two-at-a-time ÷ compare sessions</td>
+        <td>Whether the table alone is sufficient. High escalation means the table is not doing its
+          job and should be redesigned</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Guardrails</div>
+  <h2>The ways this could win and still lose</h2>
+  <p>Each of these is a specific, plausible failure — not a generic health check.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Guardrail</th><th>Definition</th><th>The failure it catches</th></tr></thead>
+    <tbody>
+      <tr><td>Items per order</td><td>Mean units per wishlist-sourced order</td>
+        <td><strong>The main one.</strong> We may talk someone out of a second purchase they would
+          have made. Collapsing six to one is only a win if they were never buying two</td></tr>
+      <tr><td>Order value</td><td>Mean value of wishlist-sourced orders</td>
+        <td>The comparison ticks the lowest price. That could systematically steer people cheap and
+          raise conversion while lowering revenue — a real risk created by our own design</td></tr>
+      <tr><td>Wishlist adds</td><td>Items saved per active user per week</td>
+        <td>If a "decide" prompt makes saving feel like homework, people save less — and saving is
+          upstream of every part of this</td></tr>
+      <tr><td>Un-park rate</td><td>Parked items later restored or purchased ÷ parked</td>
+        <td>Regret. High means we pushed people into premature elimination and the park mechanic is
+          a trap rather than a safety net</td></tr>
+      <tr><td>Suggestion dismissal</td><td>Suggestions dismissed ÷ shown</td>
+        <td>Noise. A prompt people reflexively dismiss trains them to ignore the surface</td></tr>
+      <tr><td>Return rate</td><td>Returns ÷ wishlist-sourced orders</td>
+        <td>Expected to <em>fall</em> — fewer buy-two-return-one. If it rises, we are pushing
+          under-considered purchases</td></tr>
+      <tr><td>Revenue per wishlisting user</td><td>Wishlist-sourced revenue ÷ wishlisting users</td>
+        <td>The backstop. Converts the whole argument into money and catches anything the metrics
+          above miss</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Target setting</div>
+  <h2>What we can honestly promise</h2>
+  <p>Not a number picked to sound good. The achievable lift is bounded by two things we can measure
+  before building — how many users actually have an unresolved decision, and how many of those would
+  not have converted anyway.</p>
+  <div class="formula-big">
+Δ(business metric) &nbsp;≤&nbsp; <span class="hl">C</span> × <span class="hl">I</span><br><br>
+<span style="color:var(--muted)">C =</span> share of wishlisting users holding ≥1 unresolved set
+   <em>and</em> no other wishlist purchase in the window<br>
+<span style="color:var(--muted)">I =</span> incremental resolution rate — sets we resolve that would
+   not have resolved unaided
+  </div>
+  <p><strong class="mono">C</strong> comes from the retrospective query. <strong
+  class="mono">I</strong> is the only thing the experiment has to discover, because the unaided
+  resolution rate is already in the historical data. That makes the target a measurement rather
+  than a guess — and it caps the promise honestly: if only 12% of users hold an unresolved set, no
+  amount of good design moves the metric more than 12 points.</p>
+</section>
+
+<section>
+  <div class="eyebrow">The experiment</div>
+  <h2>How we'd actually run it</h2>
+  <ul class="plain">
+    <li><strong>Unit:</strong> the user, not the session or the set — the business metric is
+    per-user, so anything else invites a mismatch between what we test and what we report.</li>
+    <li><strong>Eligibility:</strong> only users with at least one detected set. Diluting the sample
+    with people who have nothing to decide buries a real effect in noise.</li>
+    <li><strong>Primary:</strong> business metric, 30-day window. <strong>Secondary:</strong> DRR
+    and DCR. <strong>Read first:</strong> the six leading indicators.</li>
+    <li><strong>Duration:</strong> at least eight weeks — a 30-day outcome window plus a burn-in for
+    novelty to decay, or we will ship a result that was really curiosity.</li>
+    <li><strong>Stop early if:</strong> items per order or order value degrade beyond a pre-agreed
+    threshold. Set that threshold before launch, not while looking at the dashboard.</li>
+  </ul>
+  <div class="card warn">
+    <span class="h">The result that would make us stop</span>
+    <p>Business metric flat while compare engagement is healthy. That would mean people are using
+    the feature and it is not changing what they buy — the decision was never the binding
+    constraint, and the honest response is to go back to Part 2 and pick a different term rather
+    than iterate on the UI.</p>
+  </div>
+</section>
+
+<footer>
+  Part 6 of a product management case study on wishlist-to-purchase conversion at Myntra.
+  Baselines marked as computable are computable from existing wishlist data; no figures here are
+  invented. Not affiliated with Myntra.
+</footer>
+</div>
+
+</body>
+</html>

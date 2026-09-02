@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Wishlist Walkthrough</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#fbfbfd; --surface:#f2f3f7; --raised:#ffffff;
+  --ink:#171c2e; --body:#3b415a; --muted:#6b7189;
+  --rule:#dfe2ec; --rule-soft:#eceef4;
+  --signal:#d81e5b; --signal-bg:#fdeef3; --signal-rule:#f6c3d4;
+  --ok:#1f7a68; --ok-bg:#e9f4f1;
+  --warn:#b06a1c; --warn-bg:#fdf3e6;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+  --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+  --rule:#2a3047; --rule-soft:#212637;
+  --signal:#ff6b96; --signal-bg:#2b1725; --signal-rule:#5c2a41;
+  --ok:#5ec4ac; --ok-bg:#12251f;
+  --warn:#d8a05a; --warn-bg:#2a2115;
+}}
+:root[data-theme="dark"]{
+  --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+  --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+  --rule:#2a3047; --rule-soft:#212637;
+  --signal:#ff6b96; --signal-bg:#2b1725; --signal-rule:#5c2a41;
+  --ok:#5ec4ac; --ok-bg:#12251f;
+  --warn:#d8a05a; --warn-bg:#2a2115;
+}
+*{box-sizing:border-box}
+body{background:var(--paper); color:var(--body); margin:0;
+  font-family:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif; font-size:16px; line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:780px; margin:0 auto; padding:60px 26px 96px}
+h1,h2,h3{font-family:'IBM Plex Serif',Georgia,serif; color:var(--ink); text-wrap:balance; margin:0}
+h1{font-size:39px; line-height:1.15; font-weight:600; letter-spacing:-.02em}
+h2{font-size:24px; font-weight:600; line-height:1.3}
+h3{font-size:16.5px; font-weight:600}
+p{margin:0}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+.lede{font-size:18px; line-height:1.6; margin-top:16px}
+header{border-bottom:1px solid var(--rule); padding-bottom:34px}
+section{padding:42px 0; border-bottom:1px solid var(--rule-soft); display:flex; flex-direction:column; gap:18px}
+section:last-of-type{border-bottom:0}
+
+.callout{background:var(--surface); border-left:3px solid var(--ink); padding:18px 20px;
+  display:flex; flex-direction:column; gap:9px; font-size:14.5px; line-height:1.6}
+.callout.warn{border-left-color:var(--warn); background:var(--warn-bg)}
+.callout.sig{border-left-color:var(--signal); background:var(--signal-bg)}
+.callout strong{color:var(--ink)}
+
+.crit{display:grid; grid-template-columns:auto 1fr; gap:10px 16px; font-size:14.5px; align-items:baseline}
+.crit .k{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--muted); white-space:nowrap; padding-top:3px}
+.crit .v{color:var(--ink)}
+
+/* interview blocks */
+.blk{border:1px solid var(--rule); border-radius:3px; background:var(--raised); overflow:hidden}
+.blk > .hd{display:flex; align-items:baseline; gap:12px; padding:13px 18px;
+  border-bottom:1px solid var(--rule-soft); background:var(--surface)}
+.blk > .hd .t{font-weight:700; color:var(--ink); font-size:15px}
+.blk > .hd .time{margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted)}
+.blk .bd{padding:16px 18px; display:flex; flex-direction:column; gap:12px}
+.q{display:grid; grid-template-columns:18px 1fr; gap:12px; align-items:start}
+.q .dot{width:5px; height:5px; border-radius:50%; background:var(--signal); margin-top:9px; margin-left:6px}
+.q .txt{font-size:15.5px; color:var(--ink); line-height:1.5}
+.q .why{display:block; font-size:13px; color:var(--muted); margin-top:3px; line-height:1.5}
+.probe{font-size:13.5px; color:var(--muted); padding-left:30px; line-height:1.55}
+.probe b{color:var(--body); font-weight:600}
+
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse; width:100%; min-width:660px; font-size:13.5px}
+th,td{text-align:left; padding:10px 12px 10px 0; border-bottom:1px solid var(--rule-soft); vertical-align:top}
+th{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); font-weight:500; border-bottom:1px solid var(--rule)}
+td:first-child{color:var(--ink); font-weight:600; white-space:nowrap; padding-right:18px}
+tr.example td{background:var(--signal-bg); font-size:13px}
+.codes{display:flex; flex-wrap:wrap; gap:7px}
+.code{font-family:'IBM Plex Mono',monospace; font-size:11.5px; background:var(--surface);
+  border:1px solid var(--rule); border-radius:2px; padding:3px 8px; color:var(--ink)}
+ol.n{list-style:none; counter-reset:s; padding:0; margin:0; display:flex; flex-direction:column; gap:14px}
+ol.n li{counter-increment:s; display:grid; grid-template-columns:24px 1fr; gap:14px}
+ol.n li::before{content:counter(s,decimal-leading-zero); font-family:'IBM Plex Mono',monospace;
+  font-size:11px; color:var(--muted); padding-top:4px}
+ol.n .q2{color:var(--ink); font-weight:600; font-size:14.5px; display:block; margin-bottom:2px}
+ol.n .d{font-size:13.5px; color:var(--muted); line-height:1.55}
+.note{font-size:13px; color:var(--muted); line-height:1.6}
+footer{margin-top:42px; padding-top:20px; border-top:1px solid var(--rule); font-size:12.5px; color:var(--muted)}
+@media print{ body{background:#fff} .wrap{padding:0} section{page-break-inside:avoid} }
+</style>
+</head>
+<body>
+<nav style="max-width:790px;margin:0 auto;padding:18px 26px 0;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.06em">
+  <a href="./" style="color:#6b7189;text-decoration:none">&larr; ALL SUPPORTING DOCUMENTS</a>
+</nav>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Part 3 · Primary research</div>
+  <h1 style="margin-top:13px">The wishlist walkthrough</h1>
+  <p class="lede">A protocol for eight interviews with heavy wishlisters — run against their own
+  wishlist, on their own phone, item by item.</p>
+</header>
+
+<section>
+  <div class="eyebrow">Method</div>
+  <h2>Walk the list, don't discuss it</h2>
+  <p>The whole design rests on one choice: every question is asked about a <em>specific item they
+  can see on their screen</em>, never about shopping in general. Asked abstractly, "do you compare
+  things?" produces an opinion. Asked against the fourth kurta in their list, "why is this one
+  here?" produces evidence.</p>
+  <p>Eight people walking roughly eight items each gives about <strong class="mono">60 item-level
+  observations</strong>, not eight anecdotes — enough to say <em>"19 of 61 saved items sat in a set
+  the person was actively choosing between"</em> rather than <em>"users told us they compare."</em></p>
+
+  <div class="callout warn">
+    <p><strong>The one way to ruin this round:</strong> asking about alternatives too early. If you
+    open with "are you comparing these?", everyone agrees and you have learned nothing. Reason for
+    saving is asked <strong>open</strong>, first. Alternatives come at question 6, after they have
+    already told you in their own words.</p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Segment</div>
+  <h2>Heavy wishlisters</h2>
+  <div class="crit">
+    <span class="k">Include</span><span class="v">30+ items currently saved on Myntra</span>
+    <span class="k">Include</span><span class="v">Added something in the last two weeks — the list is live, not abandoned</span>
+    <span class="k">Include</span><span class="v">No purchase from the wishlist in the last month</span>
+    <span class="k">Exclude</span><span class="v">Fewer than 30 saved — a different behaviour</span>
+    <span class="k">Exclude</span><span class="v">Bought from the wishlist this week — their decision loop already works</span>
+    <span class="k">Aim for</span><span class="v">A spread of ages and both women's and men's shopping, so the finding isn't one demographic</span>
+  </div>
+  <p class="note">This segment was chosen because it tests the hardest half of the thesis — that a
+  list which only grows converts worse per item — and because it is the group most likely to
+  contradict us by revealing that many saves were never purchase intent at all. That answer is worth
+  having before Part 6 sets a target.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Screener</div>
+  <h2>Four questions, asked before you book</h2>
+  <ol class="n">
+    <li><span class="q2">Do you shop on Myntra? How often, roughly?</span>
+      <span class="d">Looking for at least monthly. Anyone who has drifted off the platform will be reconstructing from memory.</span></li>
+    <li><span class="q2">Open your wishlist — roughly how many things are in there?</span>
+      <span class="d">Make them look. Estimates are wildly wrong in both directions. Need 30+.</span></li>
+    <li><span class="q2">When did you last buy something that had been sitting in there?</span>
+      <span class="d">Want "a while ago" or "can't remember". Bought this week means their loop is working.</span></li>
+    <li><span class="q2">Have you added anything in the last two weeks?</span>
+      <span class="d">Confirms the list is live. A dormant list produces archaeology, not decisions.</span></li>
+  </ol>
+</section>
+
+<section>
+  <div class="eyebrow">The guide · about 40 minutes</div>
+  <h2>Five blocks</h2>
+
+  <div class="blk">
+    <div class="hd"><span class="t">Setting up</span><span class="time">2 min</span></div>
+    <div class="bd">
+      <p class="note">Say: I'm not selling anything and I didn't build this, so being blunt helps me.
+      There are no right answers. Can I record? Then — please open your Myntra wishlist and keep it
+      in front of you; we're going to go through it together.</p>
+    </div>
+  </div>
+
+  <div class="blk">
+    <div class="hd"><span class="t">1 · The list as a whole</span><span class="time">5 min</span></div>
+    <div class="bd">
+      <div class="q"><span class="dot"></span><span class="txt">Tell me about your wishlist. What's in there?
+        <span class="why">Open. Let them characterise it before you impose any frame.</span></span></div>
+      <div class="q"><span class="dot"></span><span class="txt">What do you actually use it for?
+        <span class="why">Tests Intent. Listen for "to keep track", "to decide later", "so I don't lose it".</span></span></div>
+      <div class="q"><span class="dot"></span><span class="txt">How long have things been sitting in there?</span></div>
+      <div class="q"><span class="dot"></span><span class="txt">When did you last buy something out of it? What made that one happen?
+        <span class="why">The one resolution they can remember. Often the most useful minute of the interview.</span></span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Do you ever clear it out? What happens to things that don't get bought?
+        <span class="why">Tests whether any elimination mechanism exists at all.</span></span></div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <div class="hd"><span class="t">2 · Item walkthrough — the core</span><span class="time">20 min</span></div>
+    <div class="bd">
+      <p class="note">Pick <strong>8 items</strong>: the 3 most recent, the 3 oldest, and 2 they
+      point at. Ask all seven questions per item, in this order. Capture verbatim.</p>
+      <div class="q"><span class="dot"></span><span class="txt">Why did you save this one?
+        <span class="why">Open, and asked first for a reason. This single answer codes the item.</span></span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Do you still want it?</span></div>
+      <div class="q"><span class="dot"></span><span class="txt">What's stopping you buying it right now?</span></div>
+      <div class="q"><span class="dot"></span><span class="txt">What would have to happen for you to buy it?</span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Is there anything you still need to know about it?
+        <span class="why">Separates an information gap from a choice gap. Critical distinction for Part 4.</span></span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Is there anything else in your list that's a bit like this one?
+        <span class="why">Only now. Let them scroll and find it themselves — don't point.</span></span></div>
+      <div class="q"><span class="dot"></span><span class="txt">If yes — how would you pick between them? Have you tried?
+        <span class="why">The heart of it. Listen for whether they have ever attempted the comparison, and what stopped them.</span></span></div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <div class="hd"><span class="t">3 · Outside the app</span><span class="time">6 min</span></div>
+    <div class="bd">
+      <div class="q"><span class="dot"></span><span class="txt">Between saving something and buying it, do you ever go and look somewhere else?</span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Where do you go, and what are you trying to find out?</span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Has that ever changed your mind about something in here?
+        <span class="why">Resolution happening off-platform, which Myntra never sees.</span></span></div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <div class="hd"><span class="t">4 · What they already do about it</span><span class="time">5 min</span></div>
+    <div class="bd">
+      <div class="q"><span class="dot"></span><span class="txt">Have you ever made a collection, or a list, or grouped things?
+        <span class="why">Myntra ships collections. Adoption and reasons for non-adoption both matter.</span></span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Did it help? What did you do with it after making it?
+        <span class="why">Testing the "filing is not deciding" claim directly. Do not lead them to it.</span></span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Any other way you keep track — screenshots, notes, sending things to someone?</span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Have you ever bought two things meaning to return one?</span></div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <div class="hd"><span class="t">5 · Closing</span><span class="time">3 min</span></div>
+    <div class="bd">
+      <div class="q"><span class="dot"></span><span class="txt">If your wishlist could do one thing it doesn't do today, what would you pick?</span></div>
+      <div class="q"><span class="dot"></span><span class="txt">Is there anything I should have asked and didn't?</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Capture</div>
+  <h2>One row per item, not per person</h2>
+  <p>Code as you transcribe. The point of coding is to be able to count — a claim like "choice, not
+  information, was the blocker on 40% of live items" needs rows behind it.</p>
+
+  <h3 style="margin-top:8px">Why it was saved</h3>
+  <div class="codes">
+    <span class="code">comparing</span><span class="code">waiting-price</span><span class="code">waiting-stock</span>
+    <span class="code">waiting-occasion</span><span class="code">unsure-item</span><span class="code">bookmark</span>
+    <span class="code">forgot</span>
+  </div>
+  <h3 style="margin-top:10px">What is blocking it</h3>
+  <div class="codes">
+    <span class="code">choice</span><span class="code">fit-doubt</span><span class="code">quality-doubt</span>
+    <span class="code">price</span><span class="code">stock</span><span class="code">delivery-trust</span>
+    <span class="code">no-longer-wanted</span><span class="code">never-intended</span>
+  </div>
+
+  <div class="tablewrap" style="margin-top:10px">
+  <table>
+    <thead><tr><th>Ref</th><th>Item</th><th>Days saved</th><th>Why saved</th><th>Still wants</th>
+      <th>Blocker</th><th>Alternatives in list</th><th>Ever tried to choose</th></tr></thead>
+    <tbody>
+      <tr class="example"><td>R1·04</td><td>Black anarkali, ₹2.1k</td><td>34</td><td>comparing</td>
+        <td>yes</td><td>choice</td><td>4</td><td>no — "I just keep scrolling past them"</td></tr>
+      <tr><td>R1·05</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>R2·01</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note"><strong>The first row is a placeholder</strong> showing the shape — replace it with
+  real responses. Per respondent, also record: wishlist size, age of the oldest item, last wishlist
+  purchase, and whether they use collections.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Analysis</div>
+  <h2>Six numbers, and the one that kills it</h2>
+  <ol class="n">
+    <li><span class="q2">Share of walked items whose stated reason was comparing</span>
+      <span class="d">The headline. Coded from their own words, before alternatives were mentioned.</span></li>
+    <li><span class="q2">Share of items sitting in a self-identified alternative set</span>
+      <span class="d">They found the alternatives themselves. Stronger than any clustering algorithm.</span></li>
+    <li><span class="q2">Share of respondents with at least one such set</span>
+      <span class="d">Maps to the user-level metric — coverage of the intervention.</span></li>
+    <li><span class="q2">Choice versus information as the blocker</span>
+      <span class="d">If information dominates, the opportunity is Confidence, not Resolution, and Part 4 changes.</span></li>
+    <li><span class="q2">How many have ever resolved a set on their own</span>
+      <span class="d">The counterfactual. If they resolve unaided, the feature buys speed, not conversion.</span></li>
+    <li><span class="q2">Share of saves that were never purchase intent</span>
+      <span class="d">The realistic ceiling on the business metric, and an honest input to Part 6.</span></li>
+  </ol>
+
+  <div class="callout sig">
+    <p><strong>Kill criterion, set in advance.</strong> If fewer than roughly a third of live saved
+    items sit in a set the person is choosing between, and choice is not among the leading blockers,
+    then Resolution is not the gap — and Part 4 should follow the evidence to quality and fabric
+    doubt, or to intent that was never really there. Deciding this before the interviews is what
+    stops the analysis becoming a search for agreement.</p>
+  </div>
+</section>
+
+<footer>
+  Part 3 of a product management case study on wishlist-to-purchase conversion at Myntra.
+  Companion to the Part 2 metric decomposition. Not affiliated with Myntra.
+</footer>
+</div>
+
+</body>
+</html>

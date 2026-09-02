@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where Wishlists Stall</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#fbfbfd; --surface:#f2f3f7; --raised:#ffffff;
+  --ink:#171c2e; --body:#3b415a; --muted:#6b7189;
+  --rule:#dfe2ec; --rule-soft:#eceef4;
+  --signal:#d81e5b; --signal-bg:#fdeef3; --signal-rule:#f6c3d4;
+  --ok:#1f7a68; --ok-bg:#e9f4f1;
+  --warn:#b06a1c;
+  --shadow:0 1px 2px rgba(23,28,46,.05), 0 8px 24px -12px rgba(23,28,46,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+    --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+    --rule:#2a3047; --rule-soft:#212637;
+    --signal:#ff6b96; --signal-bg:#2b1725; --signal-rule:#5c2a41;
+    --ok:#5ec4ac; --ok-bg:#12251f;
+    --warn:#d8a05a;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+  --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+  --rule:#2a3047; --rule-soft:#212637;
+  --signal:#ff6b96; --signal-bg:#2b1725; --signal-rule:#5c2a41;
+  --ok:#5ec4ac; --ok-bg:#12251f;
+  --warn:#d8a05a;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--body);
+  font-family:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
+  font-size:16px; line-height:1.65; margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px; margin:0 auto; padding:64px 26px 96px}
+h1,h2,h3{font-family:'IBM Plex Serif',Georgia,serif; color:var(--ink); text-wrap:balance; margin:0}
+h1{font-size:40px; line-height:1.15; font-weight:600; letter-spacing:-.02em}
+h2{font-size:25px; line-height:1.25; font-weight:600; margin:0 0 6px}
+h3{font-size:17px; font-weight:600; margin:0 0 4px}
+p{margin:0}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+}
+.lede{font-size:18.5px; line-height:1.6; color:var(--body); margin-top:18px}
+header{border-bottom:1px solid var(--rule); padding-bottom:38px; margin-bottom:14px}
+section{padding:44px 0; border-bottom:1px solid var(--rule-soft); display:flex; flex-direction:column; gap:18px}
+section:last-of-type{border-bottom:0}
+.stack{display:flex; flex-direction:column; gap:14px}
+
+/* the metric, stated */
+.statement{
+  background:var(--surface); border-left:3px solid var(--ink);
+  padding:20px 22px; display:flex; flex-direction:column; gap:8px;
+}
+.statement .m{font-family:'IBM Plex Mono',monospace; font-size:15px; color:var(--ink); font-weight:500; line-height:1.55}
+
+/* the spine */
+.spine{display:flex; flex-wrap:wrap; align-items:stretch; gap:8px; margin:6px 0}
+.term{
+  flex:1 1 132px; min-width:132px; background:var(--raised); border:1px solid var(--rule);
+  border-radius:3px; padding:13px 14px; display:flex; flex-direction:column; gap:7px;
+  box-shadow:var(--shadow);
+}
+.term .n{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; color:var(--muted)}
+.term .name{font-weight:700; font-size:14.5px; color:var(--ink); line-height:1.25}
+.term .who{font-size:11.5px; line-height:1.45; color:var(--muted)}
+.term .state{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+  padding:2px 6px; border-radius:2px; align-self:flex-start; font-weight:500;
+  background:var(--ok-bg); color:var(--ok);
+}
+.term.gap{border-color:var(--signal-rule); background:var(--signal-bg)}
+.term.gap .name{color:var(--signal)}
+.term.gap .state{background:var(--signal); color:#fff}
+.term.gap .who{color:var(--signal)}
+.times{
+  align-self:center; font-family:'IBM Plex Mono',monospace; color:var(--muted);
+  font-size:15px; padding:0 1px;
+}
+
+/* table */
+.tablewrap{overflow-x:auto; margin:4px 0}
+table{border-collapse:collapse; width:100%; min-width:560px; font-size:14px}
+th,td{text-align:left; padding:12px 14px 12px 0; border-bottom:1px solid var(--rule-soft); vertical-align:top}
+th{
+  font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--muted); font-weight:500; border-bottom:1px solid var(--rule);
+}
+td:first-child{font-weight:600; color:var(--ink); white-space:nowrap; padding-right:20px}
+tr.gap td{background:var(--signal-bg)}
+tr.gap td:first-child{color:var(--signal)}
+tr.gap td{padding-left:10px}
+tr.gap td:first-child{padding-left:12px}
+
+/* the arithmetic block */
+.proof{
+  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+  padding:24px 24px; display:flex; flex-direction:column; gap:16px;
+}
+.eq{
+  font-family:'IBM Plex Mono',monospace; font-size:14.5px; line-height:1.9; color:var(--ink);
+  overflow-x:auto; padding-bottom:2px;
+}
+.eq .hl{color:var(--signal); font-weight:600}
+.eq .dim{color:var(--muted)}
+.punch{
+  border-left:3px solid var(--signal); padding:4px 0 4px 18px;
+  font-size:17px; line-height:1.55; color:var(--ink); font-family:'IBM Plex Serif',Georgia,serif;
+}
+
+/* behaviour list */
+.behaviours{display:flex; flex-direction:column; gap:0}
+.beh{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:6px 26px;
+  padding:14px 0; border-bottom:1px solid var(--rule-soft)}
+.beh:last-child{border-bottom:0}
+.beh .b{color:var(--ink); font-weight:600; font-size:14.5px; line-height:1.45}
+.beh .o{font-size:13.5px; color:var(--muted); line-height:1.5}
+@media (max-width:620px){ .beh{grid-template-columns:1fr; gap:3px} }
+
+/* measure list */
+ol.measure{list-style:none; counter-reset:m; padding:0; margin:0; display:flex; flex-direction:column; gap:16px}
+ol.measure li{counter-increment:m; display:grid; grid-template-columns:26px 1fr; gap:14px}
+ol.measure li::before{
+  content:counter(m,decimal-leading-zero);
+  font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); padding-top:3px;
+}
+ol.measure .q{color:var(--ink); font-weight:600; font-size:14.5px; display:block; margin-bottom:3px}
+ol.measure .d{font-size:13.5px; color:var(--muted); line-height:1.55}
+.note{font-size:13px; color:var(--muted); line-height:1.6}
+footer{margin-top:44px; padding-top:22px; border-top:1px solid var(--rule); font-size:12.5px; color:var(--muted)}
+a{color:var(--signal)}
+</style>
+</head>
+<body>
+<nav style="max-width:790px;margin:0 auto;padding:18px 26px 0;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.06em">
+  <a href="./" style="color:#6b7189;text-decoration:none">&larr; ALL SUPPORTING DOCUMENTS</a>
+</nav>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Part 2 · Metric decomposition</div>
+  <h1 style="margin-top:14px">Where wishlists stall</h1>
+  <p class="lede">Breaking wishlist-to-purchase into the terms that actually move it — and finding
+  that the one nobody owns is the one that decides the outcome.</p>
+</header>
+
+<section>
+  <div class="eyebrow">The metric</div>
+  <div class="statement">
+    <p class="m">M = share of wishlisting users who purchase ≥ 1 saved item<br>within 30 days of adding it</p>
+    <p class="note">Three properties of that sentence do most of the work below: it is measured
+    <strong>per user</strong>, not per item; it asks for <strong>at least one</strong>, not a rate;
+    and the 30-day clock starts <strong>per item, at save</strong>.</p>
+  </div>
+  <p>Those properties decide which interventions can possibly work. A user with forty saved items
+  counts exactly once, whether they buy one thing or six. Which item they buy is irrelevant. So the
+  metric does not reward converting more items — it rewards <em>converting more people</em>, and
+  every person needs only one unblocked purchase to cross the line.</p>
+</section>
+
+<section>
+  <div class="eyebrow">The decomposition</div>
+  <h2>Six terms, multiplied</h2>
+  <p>For any saved item to be bought inside its 30-day window, six things must all hold. They
+  multiply, so the smallest term caps the result — and one of them has no owner at all.</p>
+
+  <div class="spine">
+    <div class="term"><span class="n">01</span><span class="name">Intent</span>
+      <span class="who">The save was purchase intent, not a bookmark</span>
+      <span class="state">unowned</span></div>
+    <span class="times">×</span>
+    <div class="term"><span class="n">02</span><span class="name">Recall</span>
+      <span class="who">They meet it again while intent is alive</span>
+      <span class="state">partial</span></div>
+    <span class="times">×</span>
+    <div class="term"><span class="n">03</span><span class="name">Availability</span>
+      <span class="who">Still in stock, in their size, at a price they accept</span>
+      <span class="state">partial</span></div>
+    <span class="times">×</span>
+    <div class="term"><span class="n">04</span><span class="name">Confidence</span>
+      <span class="who">Doubt about the item itself resolves</span>
+      <span class="state">owned</span></div>
+    <span class="times">×</span>
+    <div class="term gap"><span class="n">05</span><span class="name">Resolution</span>
+      <span class="who">If it competes with other saves, one of them wins</span>
+      <span class="state">nobody</span></div>
+    <span class="times">×</span>
+    <div class="term"><span class="n">06</span><span class="name">Checkout</span>
+      <span class="who">The order is actually placed</span>
+      <span class="state">owned</span></div>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Term</th><th>What raises it</th><th>Who owns it at Myntra today</th></tr></thead>
+    <tbody>
+      <tr><td>Intent</td><td>Capturing <em>why</em> something was saved</td>
+        <td>Nothing. Every save looks identical to the system.</td></tr>
+      <tr><td>Recall</td><td>Resurfacing a save while it still matters</td>
+        <td>Generic push. Undifferentiated, so it is wrong for most saves.</td></tr>
+      <tr><td>Availability</td><td>Stock and price movement, surfaced in time</td>
+        <td>Partly Myntra — and a whole third-party industry filling the rest.</td></tr>
+      <tr><td>Confidence</td><td>Answering doubt about the garment</td>
+        <td><strong>Fit Assist</strong>, for fit. Fabric and quality remain open.</td></tr>
+      <tr class="gap"><td>Resolution</td><td>Comparison, then elimination</td>
+        <td>Nobody. Collections group saved items but cannot resolve them.</td></tr>
+      <tr><td>Checkout</td><td>Payment, delivery promise, friction removal</td>
+        <td>Heavily optimised for years. Little headroom left.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Confidence and Checkout are where the platform has invested. Resolution is the term
+  no team has ever been asked to move — and, as the next section shows, it is structurally the
+  smallest one for exactly the users who save the most.</p>
+</section>
+
+<section>
+  <div class="eyebrow">The arithmetic</div>
+  <h2>Why competing saves cap themselves</h2>
+  <p>Saved items are not independent. When someone saves six comparable kurtas, they are substitutes:
+  at most one will be bought. That places a ceiling on each item's conversion <em>by construction</em>,
+  before any question of fit, price or delivery arises.</p>
+
+  <div class="proof">
+    <div class="eq">
+For a set <span class="hl">C</span> of <span class="hl">k</span> substitutable saves:<br><br>
+<span class="dim">per item &nbsp;</span> c<sub>i</sub> &nbsp;≤&nbsp; 1 / k<br>
+<span class="dim">per user &nbsp;</span> P(buys ≥1 from <span class="hl">C</span>) &nbsp;=&nbsp;
+  P(<span class="hl">decision resolves</span>) × P(checkout | resolved)
+    </div>
+    <p><strong class="mono">k</strong> disappears from the second line. Which item wins does not
+    matter to the metric — only <em>that</em> one wins.</p>
+  </div>
+
+  <div class="punch">At the item level, resolving a six-way shortlist looks like destroying five
+  sales. At the user level, it is the difference between one and zero.</div>
+
+  <p>This is, I think, why the feature has never been built. Item-level thinking makes comparison
+  look value-destroying, and a merchandising team measured on items would be right to refuse it. The
+  metric we have been handed is measured per user, which inverts the conclusion.</p>
+
+  <p>It also produces a testable prediction, and an uncomfortable one: <strong>conversion per saved
+  item should fall as a wishlist grows</strong>, because each addition both divides attention and
+  raises <span class="mono">k</span>. Saving more should help a user — more chances at "at least
+  one" — but only if the extra saves are independent. When they are substitutes, they compete with
+  each other rather than adding to each other.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Underneath the metric</div>
+  <h2>The behaviours doing the damage</h2>
+  <p>Every term above is a product outcome. Each is driven by something a person actually does,
+  observed in the discovery corpus:</p>
+  <div class="behaviours">
+    <div class="beh"><span class="b">Saving several near-identical items in order to choose between them later</span>
+      <span class="o">Depresses <strong>Resolution</strong>. The defining behaviour: one decision stored as many intents.</span></div>
+    <div class="beh"><span class="b">Grouping saved items into collections by hand</span>
+      <span class="o">The existing workaround. Proves the need, and stops at filing.</span></div>
+    <div class="beh"><span class="b">Deferring until a trigger — a sale, a restock, an occasion</span>
+      <span class="o">Depresses <strong>Availability</strong> and <strong>Recall</strong>. Deliberate waiting, not lost interest.</span></div>
+    <div class="beh"><span class="b">Leaving the platform to resolve doubt</span>
+      <span class="o">Depresses <strong>Confidence</strong>, and hides the resolution from Myntra entirely.</span></div>
+    <div class="beh"><span class="b">Never revisiting older saves once the list is long</span>
+      <span class="o">Depresses <strong>Recall</strong>. The list grows monotonically; attention does not.</span></div>
+    <div class="beh"><span class="b">Using the wishlist as an inspiration board</span>
+      <span class="o">Caps <strong>Intent</strong>. These saves are in the denominator and were never going to convert.</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Where the opportunity is</div>
+  <h2>Resolution, and only resolution</h2>
+  <p>Checkout is optimised. Confidence has a live feature. Availability has a functioning
+  third-party market, which is its own evidence of demand. Intent and Recall are real gaps but
+  diffuse — hard to attribute, hard to move in one release.</p>
+  <p><strong>Resolution is unowned, structurally small, and concentrated.</strong> It bites hardest
+  on the heaviest wishlist users, who are the platform's most engaged shoppers, and it is the one
+  term where a single successful intervention flips a user from zero to one — which is exactly what
+  the metric counts.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Before building anything</div>
+  <h2>Five queries that would size this</h2>
+  <p>None of the above needs a model to verify — it needs five days with the wishlist tables.</p>
+  <ol class="measure">
+    <li><span class="q">How much of the wishlist is competing with itself?</span>
+      <span class="d">Share of saved items sitting in a comparable set — same subcategory, prices
+      within roughly 2×, three or more items — and the share of users with at least one such set.
+      If that number is small, this whole thesis is wrong and should be abandoned.</span></li>
+    <li><span class="q">Do clustered saves convert worse than lone ones?</span>
+      <span class="d">30-day per-item conversion for clustered versus singleton saves, stratified by
+      wishlist size so the two effects are separated. The prediction: clustered converts worse, and
+      the gap widens with cluster size.</span></li>
+    <li><span class="q">Do these decisions ever resolve on their own?</span>
+      <span class="d">For users holding a cluster, the share who eventually buy exactly one from it,
+      and the time-to-purchase distribution. This is the counterfactual any experiment is measured
+      against.</span></li>
+    <li><span class="q">Does filing already help?</span>
+      <span class="d">Myntra is running this experiment already. Compare conversion of items inside a
+      user-made collection against that same user's unfiled saves. If organising alone lifts
+      conversion, deciding should lift it further.</span></li>
+    <li><span class="q">What share of saves were ever purchase intent?</span>
+      <span class="d">Proxied by revisit rate and add-to-bag rate within 30 days. This sets the
+      realistic ceiling on M, and stops the target being set against saves that were never going to
+      convert.</span></li>
+  </ol>
+</section>
+
+<footer>
+  Part 2 of a product management case study on wishlist-to-purchase conversion at Myntra.
+  Evidence drawn from a discovery engine over 5,000+ rows of public user feedback; figures from that
+  corpus are readings at a point in time, not fixed results. Not affiliated with Myntra.
+</footer>
+</div>
+
+</body>
+</html>

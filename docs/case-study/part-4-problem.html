@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Shortlist That Never Ends</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#fbfbfd; --surface:#f2f3f7; --raised:#ffffff;
+  --ink:#171c2e; --body:#3b415a; --muted:#6b7189;
+  --rule:#dfe2ec; --rule-soft:#eceef4;
+  --signal:#d81e5b; --signal-bg:#fdeef3; --signal-rule:#f6c3d4;
+  --ok:#1f7a68; --ok-bg:#e9f4f1;
+  --warn:#b06a1c; --warn-bg:#fdf3e6;
+  --dead:#9aa0b4;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+  --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+  --rule:#2a3047; --rule-soft:#212637;
+  --signal:#ff6b96; --signal-bg:#2b1725; --signal-rule:#5c2a41;
+  --ok:#5ec4ac; --ok-bg:#12251f;
+  --warn:#d8a05a; --warn-bg:#2a2115;
+  --dead:#5b6280;
+}}
+:root[data-theme="dark"]{
+  --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+  --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+  --rule:#2a3047; --rule-soft:#212637;
+  --signal:#ff6b96; --signal-bg:#2b1725; --signal-rule:#5c2a41;
+  --ok:#5ec4ac; --ok-bg:#12251f;
+  --warn:#d8a05a; --warn-bg:#2a2115;
+  --dead:#5b6280;
+}
+*{box-sizing:border-box}
+body{background:var(--paper); color:var(--body); margin:0;
+  font-family:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif; font-size:16px; line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:770px; margin:0 auto; padding:60px 26px 96px}
+h1,h2,h3{font-family:'IBM Plex Serif',Georgia,serif; color:var(--ink); text-wrap:balance; margin:0}
+h1{font-size:40px; line-height:1.13; font-weight:600; letter-spacing:-.022em}
+h2{font-size:24px; font-weight:600; line-height:1.3}
+p{margin:0}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+.lede{font-size:18px; line-height:1.6; margin-top:16px}
+header{border-bottom:1px solid var(--rule); padding-bottom:34px}
+section{padding:44px 0; border-bottom:1px solid var(--rule-soft); display:flex; flex-direction:column; gap:18px}
+section:last-of-type{border-bottom:0}
+
+/* evolution rail */
+.rail{display:flex; flex-direction:column; gap:0; margin:6px 0}
+.beat{display:grid; grid-template-columns:120px 1fr; gap:22px; padding:16px 0; position:relative}
+.beat + .beat{border-top:1px solid var(--rule-soft)}
+.beat .stage{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); padding-top:4px; line-height:1.5}
+.beat .what{color:var(--ink); font-weight:600; font-size:16px; line-height:1.45; display:block; margin-bottom:5px}
+.beat .how{font-size:14px; color:var(--body); line-height:1.6}
+.beat.branch{background:var(--surface); border-radius:3px; padding:16px 16px; margin:2px 0;
+  border-left:3px solid var(--dead)}
+.beat.branch .what{color:var(--dead); text-decoration:line-through; text-decoration-thickness:1px}
+.beat.branch .stage{color:var(--dead)}
+.beat.now .what{color:var(--signal)}
+.beat.pending{background:var(--warn-bg); border-radius:3px; padding:16px; border-left:3px solid var(--warn)}
+.beat.pending .stage{color:var(--warn)}
+@media (max-width:620px){ .beat{grid-template-columns:1fr; gap:6px} }
+
+.card{background:var(--surface); border-left:3px solid var(--ink); padding:20px 22px;
+  display:flex; flex-direction:column; gap:10px}
+.card.sig{border-left-color:var(--signal); background:var(--signal-bg)}
+.card.warn{border-left-color:var(--warn); background:var(--warn-bg)}
+.card .h{font-weight:700; color:var(--ink); font-size:15px}
+.card p{font-size:14.5px; line-height:1.62}
+.pull{border-left:3px solid var(--signal); padding:6px 0 6px 18px; font-size:18px; line-height:1.5;
+  color:var(--ink); font-family:'IBM Plex Serif',Georgia,serif}
+.crit{display:grid; grid-template-columns:auto 1fr; gap:10px 18px; font-size:14.5px; align-items:baseline}
+.crit .k{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--muted); white-space:nowrap; padding-top:3px}
+.crit .v{color:var(--ink)}
+.wk{display:grid; grid-template-columns:1fr 1fr; gap:4px 26px; padding:14px 0; border-bottom:1px solid var(--rule-soft)}
+.wk:last-child{border-bottom:0}
+.wk .a{color:var(--ink); font-weight:600; font-size:14.5px; line-height:1.45}
+.wk .b{font-size:13.5px; color:var(--muted); line-height:1.55}
+@media (max-width:620px){ .wk{grid-template-columns:1fr} }
+.slot{font-family:'IBM Plex Mono',monospace; font-size:12px; background:var(--warn-bg);
+  border:1px dashed var(--warn); color:var(--warn); padding:2px 7px; border-radius:2px; white-space:nowrap}
+.note{font-size:13px; color:var(--muted); line-height:1.6}
+ul.plain{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px; font-size:14.5px}
+ul.plain li::marker{color:var(--muted)}
+footer{margin-top:44px; padding-top:20px; border-top:1px solid var(--rule); font-size:12.5px; color:var(--muted)}
+</style>
+</head>
+<body>
+<nav style="max-width:790px;margin:0 auto;padding:18px 26px 0;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.06em">
+  <a href="./" style="color:#6b7189;text-decoration:none">&larr; ALL SUPPORTING DOCUMENTS</a>
+</nav>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Part 4 · Problem definition</div>
+  <h1 style="margin-top:13px">The shortlist that never ends</h1>
+  <p class="lede">Myntra's wishlist stores items. Its users are holding decisions. Nothing in the
+  product can close one, so they stay open — and open decisions do not convert.</p>
+</header>
+
+<section>
+  <div class="eyebrow">How the thinking moved</div>
+  <h2>Six beats, one of them a dead end</h2>
+
+  <div class="rail">
+    <div class="beat">
+      <span class="stage">Business metric</span>
+      <span><span class="what">Buy ≥1 saved item within 30 days — measured per user</span>
+      <span class="how">Read closely, the wording decides everything downstream. It counts
+      <em>people</em>, not items, and asks for <em>at least one</em>. A user with forty saves counts
+      exactly once, and which item they buy is irrelevant.</span></span>
+    </div>
+
+    <div class="beat">
+      <span class="stage">Product outcomes</span>
+      <span><span class="what">Six multiplicative terms, and one with no owner</span>
+      <span class="how">Intent × Recall × Availability × Confidence × <strong>Resolution</strong> ×
+      Checkout. Checkout is optimised, Confidence has a live feature, Availability has a third-party
+      industry filling the gap. Resolution is unowned.</span></span>
+    </div>
+
+    <div class="beat">
+      <span class="stage">AI discovery</span>
+      <span><span class="what">The gap is deliberate waiting, not lost interest</span>
+      <span class="how">Across 5,000+ rows of public feedback, people describe saving <em>in order to
+      compare before choosing</em> — one complains the wishlist size cap gets in the way of exactly
+      that. Intent is intact and parked on a condition, which makes every "complete your purchase"
+      nudge an answer to a question nobody asked.</span></span>
+    </div>
+
+    <div class="beat branch">
+      <span class="stage">Abandoned</span>
+      <span><span class="what">Fit confidence for non-standard bodies</span>
+      <span class="how">Six interviews pointed here, and a full MVP was built and deployed against
+      it. Then Myntra Fit Assist turned out to already recommend sizes from order history. The work
+      was thrown away rather than defended. Checking what already ships is now the first question,
+      not the last.</span></span>
+    </div>
+
+    <div class="beat">
+      <span class="stage">Primary research</span>
+      <span><span class="what">Seven heavy wishlisters — 49 to 89 saved items each</span>
+      <span class="how"><strong>7 of 7</strong> save several of the same thing rather than one.
+      <strong>5 of 7</strong> said "compare" unprompted when asked what they do after saving — a
+      question that never mentions comparing. <strong>6 of 7</strong> have never made a collection.
+      But the most common stated blocker was <strong>price, not choice</strong>, and
+      <strong>0 of 7</strong> were bothered by the size of their list.</span></span>
+    </div>
+
+    <div class="beat now">
+      <span class="stage">Problem</span>
+      <span><span class="what">The wishlist has no way to end a decision</span>
+      <span class="how">Its only two exits assume the choice is already made.</span></span>
+    </div>
+  </div>
+  <p class="note">The abandoned branch stays on the page deliberately. A reviewer who opens the
+  Myntra app will find Fit Assist in a minute; better they see it was found and acted on.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Target segment</div>
+  <h2>Heavy wishlisters</h2>
+  <div class="crit">
+    <span class="k">Who</span><span class="v">30+ items currently saved, added to in the last fortnight, no wishlist purchase in the last month</span>
+    <span class="k">Why them</span><span class="v">They hold the most deferred intent, and every unit of it is already qualified — these are not cold prospects</span>
+    <span class="k">Why it pays</span><span class="v">The metric is per user, so one resolved decision converts the whole person</span>
+    <span class="k">Risk</span><span class="v">The segment most likely to reveal that many saves were never purchase intent. That ceiling is worth knowing early</span>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Product outcome</div>
+  <h2>Decision resolution rate</h2>
+  <p>The share of competing saved sets that reach a decision — bought, or deliberately released —
+  within 30 days of the set forming.</p>
+  <p>It is not measured today, because the product has no concept of a set. That is the first thing
+  to fix: you cannot move a number nobody computes.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Root cause</div>
+  <h2>Only two exits, and both assume you have already chosen</h2>
+  <p>Shortlisting is an <em>elimination</em> process. You add candidates in order to remove them
+  until one is left. Myntra's wishlist offers exactly two ways out — <strong>buy</strong> and
+  <strong>delete</strong> — and both require the decision to have been made somewhere else, in the
+  user's head, unaided.</p>
+  <p>Delete is the only elimination the product provides, and it reads as discarding something you
+  did work to find. So nobody uses it for that. The list only grows.</p>
+
+  <div class="card sig">
+    <span class="h">The mismatch underneath</span>
+    <p>The product's unit is the <strong>item</strong>. The user's unit is the
+    <strong>decision</strong>. Six saved kurtas are one deferred choice stored as six independent
+    intents — so the system sees six things it can nudge, when there is really one thing that has to
+    resolve. Until it does, none of the six converts, and every nudge is aimed at the wrong object.</p>
+  </div>
+
+  <p>This is a cause, not a symptom, because fixing anything else leaves it intact. Perfect size
+  guidance on all six kurtas does not tell you which one to buy. Neither does a price drop on three
+  of them, or faster delivery on all of them.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Existing workarounds</div>
+  <h2>What people already do about it</h2>
+  <p>Every one of these is a cost users absorb because the product will not.</p>
+  <div>
+    <div class="wk"><span class="a">Grouping saved items into collections by hand</span>
+      <span class="b">Shipped by Myntra and adopted — which proves the need. But filing is not
+      deciding: a "Wedding" folder with six kurtas in it is no closer to one purchase.</span></div>
+    <div class="wk"><span class="a">Installing third-party wishlist trackers</span>
+      <span class="b">Flipshope, GlassIt, PriceHistory and others exist to watch Myntra wishlists.
+      People install external software to make the feature work.</span></div>
+    <div class="wk"><span class="a">Leaving the platform to resolve doubt</span>
+      <span class="b">Instagram, forums, competitor sites. The resolution happens where Myntra
+      cannot see it, and sometimes ends in someone else's checkout.</span></div>
+    <div class="wk"><span class="a">Buying two and returning one — <strong>5 of 7</strong></span>
+      <span class="b">Four did it for size. One did it purely to compare: <em>"when I like two items
+      very much I buy them and compare which looks better on me."</em> Paying in money and reverse
+      logistics for a comparison the product would not host.</span></div>
+    <div class="wk"><span class="a">Asking someone else to decide</span>
+      <span class="b"><em>"Sometimes I also ask my friends about the product I should
+      purchase."</em> The decision leaves the platform entirely.</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Why it matters to the user</div>
+  <h2>A list that can finish</h2>
+  <p>The value is not "shop more", and it is not tidiness either — the research was clear that a
+  long list bothers nobody. <strong>0 of 7</strong> minded having 49 to 89 things saved, and several
+  said they liked having the options. What they cannot do is <em>finish</em>. Every workaround above
+  costs real time, and the most common one costs money and a courier.</p>
+  <div class="pull">The point is not to help someone buy six things, nor to tidy the list. It is to
+  let one unmade decision actually end.</div>
+</section>
+
+<section>
+  <div class="eyebrow">Why it makes business sense</div>
+  <h2>The case, including the objection</h2>
+  <ul class="plain">
+    <li><strong>The metric rewards it directly.</strong> Per user, at least one purchase — so
+    breaking a single logjam converts the whole person, regardless of which item wins.</li>
+    <li><strong>It costs no margin.</strong> Pure decision support. Nothing here touches price,
+    which is the constraint the brief imposed.</li>
+    <li><strong>It completes an asset Myntra already owns.</strong> Collections did the hard half —
+    getting people to group things. The missing half is cheap by comparison.</li>
+    <li><strong>It should reduce returns.</strong> Every buy-two-return-one is a comparison the
+    product refused to host, paid for twice in reverse logistics.</li>
+    <li><strong>It concentrates on the most engaged users</strong>, where retention value is highest
+    and acquisition cost is already sunk.</li>
+  </ul>
+
+  <div class="card warn">
+    <span class="h">The objection this has to survive</span>
+    <p>Helping someone collapse six saved items into one purchase looks like destroying five sales,
+    and a team measured on items would be right to refuse it. But six <em>unresolved</em> items
+    convert at approximately zero, and the metric asks only whether the person bought
+    <em>something</em>. At item level this reads as value-destroying. At user level it is the
+    difference between one and nil — and that is almost certainly why it has never been built.</p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Falsification</div>
+  <h2>What would make me drop this</h2>
+  <ul class="plain">
+    <li>If under roughly a third of live saved items sit in a set the person is choosing between,
+    the problem is not big enough to be the answer.</li>
+    <li>If <em>information</em> rather than <em>choice</em> is the dominant blocker, the opportunity
+    is Confidence — quality and fabric doubt, which the corpus ranks highest of all decision
+    factors — and this document should be rewritten around that.</li>
+    <li>If people resolve their sets unaided within the window, the feature buys speed rather than
+    conversion, and the business case shrinks to something much smaller.</li>
+    <li>If most saves turn out never to have been purchase intent, the ceiling on the metric is low
+    and Part 6 must be honest about it rather than setting a target that cannot be hit.</li>
+  </ul>
+  <p class="note"><strong>Resolved against the interviews, which were run after these were
+  written.</strong> The first did not trip: every participant saves competing sets deliberately. The
+  second half-tripped — information is not the dominant blocker, but <em>price</em> is, ahead of
+  choice, so a comparison feature alone cannot convert this segment and Part 6 caps the promise
+  accordingly. The fourth is the one to watch: most saves here were real intent, but the wishlist is
+  also being used as a waiting room for sales, which no non-monetary feature resolves.</p>
+</section>
+
+<footer>
+  Part 4 of a product management case study on wishlist-to-purchase conversion at Myntra.
+  Follows the Part 2 metric decomposition and the Part 3 interview protocol. Slots marked
+  <em>pending</em> await primary research. Not affiliated with Myntra.
+</footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why This Might Fail</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#fbfbfd; --surface:#f2f3f7; --raised:#ffffff;
+  --ink:#171c2e; --body:#3b415a; --muted:#6b7189;
+  --rule:#dfe2ec; --rule-soft:#eceef4;
+  --signal:#d81e5b; --signal-bg:#fdeef3; --signal-rule:#f6c3d4;
+  --ok:#1f7a68; --ok-bg:#e9f4f1;
+  --warn:#b06a1c; --warn-bg:#fdf3e6; --warn-rule:#e8c99b;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+  --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+  --rule:#2a3047; --rule-soft:#212637;
+  --signal:#ff6b96; --signal-bg:#2b1725; --signal-rule:#5c2a41;
+  --ok:#5ec4ac; --ok-bg:#12251f;
+  --warn:#d8a05a; --warn-bg:#2a2115; --warn-rule:#5a4526;
+}}
+:root[data-theme="dark"]{
+  --paper:#101321; --surface:#171b2b; --raised:#1b2032;
+  --ink:#eef0f7; --body:#c2c7da; --muted:#8990a8;
+  --rule:#2a3047; --rule-soft:#212637;
+  --signal:#ff6b96; --signal-bg:#2b1725; --signal-rule:#5c2a41;
+  --ok:#5ec4ac; --ok-bg:#12251f;
+  --warn:#d8a05a; --warn-bg:#2a2115; --warn-rule:#5a4526;
+}
+*{box-sizing:border-box}
+body{background:var(--paper); color:var(--body); margin:0;
+  font-family:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif; font-size:16px; line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:780px; margin:0 auto; padding:60px 26px 96px}
+h1,h2{font-family:'IBM Plex Serif',Georgia,serif; color:var(--ink); text-wrap:balance; margin:0}
+h1{font-size:40px; line-height:1.13; font-weight:600; letter-spacing:-.022em}
+h2{font-size:24px; font-weight:600; line-height:1.3}
+p{margin:0}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+.lede{font-size:18px; line-height:1.6; margin-top:16px}
+header{border-bottom:1px solid var(--rule); padding-bottom:34px}
+section{padding:44px 0; border-bottom:1px solid var(--rule-soft); display:flex; flex-direction:column; gap:20px}
+section:last-of-type{border-bottom:0}
+
+.risk{border:1px solid var(--rule); border-radius:3px; overflow:hidden; background:var(--raised)}
+.risk .hd{padding:14px 18px; border-bottom:1px solid var(--rule-soft); background:var(--surface);
+  display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.risk .hd .no{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted)}
+.risk .hd .nm{font-weight:700; color:var(--ink); font-size:16px; flex:1; min-width:200px}
+.sev{font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.09em; text-transform:uppercase;
+  padding:3px 8px; border-radius:2px; white-space:nowrap; font-weight:500}
+.sev.kill{background:var(--signal); color:#fff}
+.sev.shrink{background:var(--warn-bg); color:var(--warn); border:1px solid var(--warn-rule)}
+.sev.slow{background:var(--surface); color:var(--muted); border:1px solid var(--rule)}
+.risk .bd{padding:16px 18px; display:grid; grid-template-columns:104px 1fr; gap:12px 16px; font-size:14.5px}
+.risk .bd dt{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--muted); padding-top:4px}
+.risk .bd dd{margin:0; line-height:1.62}
+.risk .bd dd strong{color:var(--ink)}
+.risk.own .hd{background:var(--signal-bg)}
+.risk.own .hd .nm{color:var(--signal)}
+@media (max-width:620px){ .risk .bd{grid-template-columns:1fr; gap:3px 0} .risk .bd dt{padding-top:11px} }
+
+.phase{display:grid; grid-template-columns:132px 1fr; gap:20px; padding:16px 0; border-bottom:1px solid var(--rule-soft)}
+.phase:last-child{border-bottom:0}
+.phase .p{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--muted); padding-top:3px; line-height:1.6}
+.phase .t{color:var(--ink); font-weight:600; font-size:15.5px; display:block; margin-bottom:4px}
+.phase .d{font-size:14px; line-height:1.6}
+@media (max-width:620px){ .phase{grid-template-columns:1fr; gap:5px} }
+
+.card{background:var(--surface); border-left:3px solid var(--ink); padding:19px 21px;
+  display:flex; flex-direction:column; gap:9px; font-size:14.5px; line-height:1.62}
+.card.sig{border-left-color:var(--signal); background:var(--signal-bg)}
+.card .h{font-weight:700; color:var(--ink); font-size:15px}
+.card.sig .h{color:var(--signal)}
+.note{font-size:13px; color:var(--muted); line-height:1.6}
+ul.plain{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px; font-size:14.5px}
+ul.plain li::marker{color:var(--muted)}
+.legend{display:flex; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--muted); align-items:center}
+footer{margin-top:44px; padding-top:20px; border-top:1px solid var(--rule); font-size:12.5px; color:var(--muted)}
+</style>
+</head>
+<body>
+<nav style="max-width:790px;margin:0 auto;padding:18px 26px 0;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.06em">
+  <a href="./" style="color:#6b7189;text-decoration:none">&larr; ALL SUPPORTING DOCUMENTS</a>
+</nav>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Part 7 · Risks and mitigation</div>
+  <h1 style="margin-top:13px">Why this might fail</h1>
+  <p class="lede">Seven ways a wishlist comparison feature goes wrong — two of them created by our
+  own design, one of them organisational rather than technical — and what we would do about each.</p>
+</header>
+
+<section>
+  <div class="eyebrow">Reading this</div>
+  <div class="legend">
+    <span><span class="sev kill">would kill it</span> the thesis or the feature is wrong</span>
+    <span><span class="sev shrink">would shrink it</span> it works, but for less than promised</span>
+    <span><span class="sev slow">would slow it</span> solvable, but it costs time</span>
+  </div>
+  <p class="note">Ordered by how likely each is to end the project, not by how uncomfortable they are
+  to write down.</p>
+</section>
+
+<section>
+  <div class="eyebrow">The register</div>
+
+  <div class="risk">
+    <div class="hd"><span class="no">01</span><span class="nm">Clustering is wrong, and a wrong group is worse than none</span><span class="sev kill">would kill it</span></div>
+    <dl class="bd">
+      <dt>The failure</dt><dd>We suggest grouping six things the person was never choosing between —
+        a work kurta and a wedding kurta, say. It doesn't just fail to help; it says <em>this system
+        does not understand me</em>, and people stop reading the surface entirely.</dd>
+      <dt>Why likely</dt><dd>Subcategory and price are crude proxies for "substitutable". Occasion,
+        formality and intent are what actually make two items rivals, and none of them is reliably
+        in the catalog.</dd>
+      <dt>Early signal</dt><dd><strong>Suggestion acceptance rate</strong>, visible within days. It
+        is the first number to read and the cheapest to act on.</dd>
+      <dt>Mitigation</dt><dd>Tune for <strong>precision over recall</strong> — miss half the real
+        sets rather than surface one absurd one. Let people add and remove items from a set, which
+        both fixes the immediate error and generates labelled training data. And sequence it: ship
+        against <strong>collections a human already made</strong> before auto-detecting anything.</dd>
+    </dl>
+  </div>
+
+  <div class="risk">
+    <div class="hd"><span class="no">02</span><span class="nm">Too few wishlists actually contain a decision</span><span class="sev kill">would kill it</span></div>
+    <dl class="bd">
+      <dt>The failure</dt><dd>If most saved items are unrelated one-offs, the addressable population
+        is small and the ceiling on the business metric is low however good the feature is.</dd>
+      <dt>Why likely</dt><dd>Heavy wishlisters may be hoarding inspiration rather than shortlisting.
+        Both behaviours look identical in the data until you define a set and count.</dd>
+      <dt>Early signal</dt><dd>Knowable <strong>before writing any code</strong> — the coverage query
+        in Part 6 runs against existing wishlist tables.</dd>
+      <dt>Mitigation</dt><dd>Run that query first and let it decide. This is not really a mitigation
+        so much as a gate: if coverage is small, do not build this, and say so.</dd>
+    </dl>
+  </div>
+
+  <div class="risk">
+    <div class="hd"><span class="no">03</span><span class="nm">The decision was never the blocker</span><span class="sev kill">would kill it</span></div>
+    <dl class="bd">
+      <dt>The failure</dt><dd>People happily use the comparison, pick a winner, and still don't buy
+        — because what was really stopping them was price, or trust in returns, or doubt about the
+        fabric. We resolved the decision and moved nothing.</dd>
+      <dt>Why likely</dt><dd>Quality and fabric doubt ranks highest of all decision factors in the
+        discovery corpus. It is entirely possible that choice is a visible symptom of an
+        information problem.</dd>
+      <dt>Early signal</dt><dd>High compare completion with flat conversion — the pattern named as
+        the stop condition in Part 6.</dd>
+      <dt>Mitigation</dt><dd>None, and that is the point. This one is not engineered around: it
+        sends you back to the decomposition to pick a different term. Building the instrumentation
+        so you can <em>tell</em> is the mitigation.</dd>
+    </dl>
+  </div>
+
+  <div class="risk own">
+    <div class="hd"><span class="no">04</span><span class="nm">We steer people cheap</span><span class="sev shrink">would shrink it</span></div>
+    <dl class="bd">
+      <dt>The failure</dt><dd>The comparison ticks the lowest price. Repeated across millions of
+        decisions that is a systematic nudge toward the cheapest option — conversion rises, revenue
+        per user falls, and we have optimised our own metric at the company's expense.</dd>
+      <dt>Why likely</dt><dd><strong>We built it.</strong> A green tick next to the lowest number is
+        read as an endorsement whatever the caption says.</dd>
+      <dt>Early signal</dt><dd>Order value on wishlist-sourced purchases, against control.</dd>
+      <dt>Mitigation</dt><dd>Test a variant with <strong>no tick on price</strong> — it is stated
+        plainly in the row already. Better still, let the shopper choose which attribute leads the
+        comparison, so the weighting is theirs rather than ours. Hard stop threshold on order value,
+        agreed before launch.</dd>
+    </dl>
+  </div>
+
+  <div class="risk own">
+    <div class="hd"><span class="no">05</span><span class="nm">We talk someone out of their second purchase</span><span class="sev shrink">would shrink it</span></div>
+    <dl class="bd">
+      <dt>The failure</dt><dd>Collapsing six saved items to one is only a win if they were never
+        going to buy two. Where they would have, we have converted a person and lost a unit.</dd>
+      <dt>Why likely</dt><dd>The whole mechanic is elimination. Pressing "pick one" is a fairly
+        direct instruction not to buy the others.</dd>
+      <dt>Early signal</dt><dd>Items per order, against control. This is the single guardrail most
+        likely to trip.</dd>
+      <dt>Mitigation</dt><dd>Never frame it as discarding. The copy is <em>"pick one to buy
+        now"</em>, and parked items stay one tap away rather than being deleted. Allow
+        <strong>keeping two</strong> as a legitimate resolution rather than forcing a single winner.</dd>
+    </dl>
+  </div>
+
+  <div class="risk">
+    <div class="hd"><span class="no">06</span><span class="nm">Brands object to being visibly beaten</span><span class="sev slow">would slow it</span></div>
+    <dl class="bd">
+      <dt>The failure</dt><dd>A side-by-side comparison that ticks a winner puts one brand partner
+        visibly ahead of another inside Myntra's own interface. Marketplace and brand-relations
+        teams have legitimate standing to block that, and this is the sort of objection that
+        surfaces late and stops launches.</dd>
+      <dt>Why likely</dt><dd>Brands pay for placement and prominence. A feature that ranks them on
+        delivery speed and rating cuts directly across that commercial relationship.</dd>
+      <dt>Early signal</dt><dd>Not a metric. Take it to those teams in design review, not after a
+        successful test.</dd>
+      <dt>Mitigation</dt><dd>The defensible line is already in the design: we <strong>only ever
+        compare items the shopper saved themselves</strong>. We never inject a competitor, never
+        recommend, and never tick anything subjective — no ticks on fabric, colour or pattern. This
+        is the user's own shortlist organised, not Myntra picking sides. That distinction is worth
+        holding even where it costs us a useful feature.</dd>
+    </dl>
+  </div>
+
+  <div class="risk">
+    <div class="hd"><span class="no">07</span><span class="nm">The catalog can't support a comparison</span><span class="sev slow">would slow it</span></div>
+    <dl class="bd">
+      <dt>The failure</dt><dd>Comparison needs structured attributes that are present, consistent
+        and comparable. Real catalogs have gaps, free-text variants and disagreement between
+        sellers. A table full of blanks is worse than no table.</dd>
+      <dt>Why likely</dt><dd>Marketplace listings are supplied by thousands of sellers. Our own
+        prototype had to confront this — the honest answer there was to show a dash rather than
+        estimate.</dd>
+      <dt>Early signal</dt><dd>Attribute completeness by category, measurable today.</dd>
+      <dt>Mitigation</dt><dd>Only render rows where every item in the set has a value — degrade to
+        fewer, better rows rather than showing holes. Launch in the categories with the most
+        complete data. And the aggregated gaps become real leverage on sellers to fill them in,
+        which is a second-order win.</dd>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">The master mitigation</div>
+  <h2>Sequence it so the riskiest part ships last</h2>
+  <p>Most of the register above is really one risk wearing different clothes: <em>we do not yet know
+  what a real decision set looks like.</em> The sequencing answers several at once by learning that
+  before betting on it.</p>
+  <div>
+    <div class="phase"><span class="p">Phase 0 · a week</span>
+      <span><span class="t">Query, don't build</span><span class="d">Run the coverage and baseline
+      queries from Part 6 against historical wishlist data. This alone resolves risk 02, produces the
+      counterfactual, and sets an honest ceiling. If coverage is thin, the project stops here having
+      cost a week.</span></span></div>
+    <div class="phase"><span class="p">Phase 1</span>
+      <span><span class="t">Compare inside existing collections only</span><span class="d">Every set
+      is one a human already declared. Clustering risk is zero, the population is small but real,
+      and we learn what people actually compare on before automating anything.</span></span></div>
+    <div class="phase"><span class="p">Phase 2</span>
+      <span><span class="t">Suggest groupings, measured on acceptance</span><span class="d">Now
+      auto-detection ships, tuned on what Phase 1 taught us and gated on acceptance rate rather than
+      on conversion. Wrong groups get caught cheaply and early.</span></span></div>
+    <div class="phase"><span class="p">Phase 3</span>
+      <span><span class="t">Full experiment on the business metric</span><span class="d">Only once
+      the mechanism is known to work do we spend eight weeks measuring whether it
+      pays.</span></span></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Honesty</div>
+  <h2>The risk in this document itself</h2>
+  <div class="card sig">
+    <span class="h">The problem definition rests on research not yet done</span>
+    <p>Parts 2 and 4 argue that Resolution is the binding term, on the strength of a discovery corpus
+    and an argument. The primary research that would confirm or refute it is still outstanding, and
+    a kill criterion was set in advance precisely because writing the conclusion first is the
+    failure mode of every case study.</p>
+    <p>This project has already abandoned one fully built MVP after discovering Myntra Fit Assist
+    shipped. That was expensive, and it is the reason risks 02 and 03 are written as gates rather
+    than as things to manage around.</p>
+  </div>
+  <ul class="plain">
+    <li><strong>If the interviews contradict the thesis</strong>, Part 4 gets rewritten around
+    quality and fabric doubt — the largest decision factor in the corpus, and the one with no live
+    feature against it.</li>
+    <li><strong>If coverage is thin</strong>, the honest recommendation is not to build this, and
+    the case study should say so rather than shipping a feature to justify the work.</li>
+  </ul>
+</section>
+
+<footer>
+  Part 7 of a product management case study on wishlist-to-purchase conversion at Myntra.
+  Companion to the Part 6 success metrics. Not affiliated with Myntra.
+</footer>
+</div>
+
+</body>
+</html>

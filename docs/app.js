@@ -85,8 +85,8 @@ function card(id, cls = "pc", menu = false) {
     <div class="shot"><img src="${photo(id, 360, 480)}" alt="${esc(p.name)}" loading="lazy">
       ${menu ? `<button class="cardmenu" data-more="${id}" aria-label="More options">
         <span class="ms">more_horiz</span></button>` : ""}
-      <button class="heart" data-heart="${id}" aria-label="${saved(id) ? "Remove from" : "Add to"} wishlist">
-        <span class="ms${saved(id) ? " fill" : ""}" style="color:${saved(id) ? "var(--pink)" : "var(--sec)"}">favorite</span></button>
+      <button class="heart${saved(id) ? " on" : ""}" data-heart="${id}" aria-label="${saved(id) ? "Remove from" : "Add to"} wishlist">
+        <span class="ms${saved(id) ? " fill" : ""}">favorite</span></button>
       ${outOfStock(id) ? '<div class="oostag">OUT OF STOCK</div>' : ""}</div>
     <div class="brand">${esc(p.brand)}</div>
     <div class="pname">${esc(p.name)}</div>
@@ -306,7 +306,7 @@ function wishlistScreen() {
     </div>`).join("");
 
   const bar = state.selecting ? "" : `<div class="wbar">
-      <button data-act="startsel"><span class="ms">library_add_check</span>Compare items</button>
+      <button class="primary" data-act="startsel"><span class="ms">library_add_check</span>Compare items</button>
       <button data-act="newcol"><span class="ms">create_new_folder</span>New collection</button>
     </div>`;
 
